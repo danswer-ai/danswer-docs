@@ -1,0 +1,38 @@
+---
+title: BookStack Connector
+description: 'Access knowledge from your own BookStack instance'
+---
+
+## How it works
+
+The BookStack connector fetches all shelves, books, chapters and pages from the connected instance
+upon connector setup. From that point on, the connector will pull in everything updated since last sync every **10** minutes.
+
+## Setting up
+
+### Authorization
+
+You will need API credentials for a user in your BookStack instance. To do this:
+
+    1. Find or create a user you'd want to use as the connection user.
+        - Visibility of BookStack contents will depend on this user's permissions.
+        - This user must have a role assigned that has the "Access system API" system permission.
+    2. Edit that user using an admin account, and find the "API Tokens" section at the bottom of the view.
+
+![BookStack API Tokens List View](/images/connectors/bookstack/BookstackApiTokenList.png)
+
+    3. Click the "Create Token" button, then enter a name and (optionally) an expiry date for the token. Then press save.
+    4. Copy the shown "Token ID" and "Token Secret" values for the "Indexing" section below.
+
+![BookStack API Token View](/images/connectors/bookstack/BookstackApiToken.png)
+
+### Indexing
+    1. Navigate to the Admin Dashboard and select the **BookStack** connector.
+    2. In **Step 1**, provide the base URL of your BookStack instance, along with the API **Token ID**
+     and the API **Token Secret** you obtained in the "Authorization" steps above:
+
+![BookStack connector step 1 view](/images/connectors/bookstack/BookstackAuth.png)
+
+    3. Click the `Connect` button! Your content will then be pulled into Danswer every **10** minutes.
+
+![BookStack connector step 2 view](/images/connectors/bookstack/BookstackIndex.png)
