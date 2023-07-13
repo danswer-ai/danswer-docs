@@ -3,7 +3,7 @@
 </h2>
 
 # Danswer Docs
-This repo generates the setup guide for Danswer found at [https://docs.danswer.dev/](https://docs.danswer.dev/).
+This repo generates the docs and setup guide for [Danswer](https://github.com/danswer-ai/danswer) found at [https://docs.danswer.dev/](https://docs.danswer.dev/).
 
 It uses Mintlify which is a no-code documentation generation tool.
 Instructions on setting up local preview are included below.
