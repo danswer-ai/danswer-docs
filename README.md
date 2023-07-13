@@ -10,6 +10,8 @@ Instructions on setting up local preview are included below.
 
 More info on Mintlify found [here](https://mintlify.com/).
 
+To make changes, check out `mint.json`, it should be fairly straightforward hopefully!
+
 ### Set up Mintlify
 Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally.
 
