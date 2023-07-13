@@ -1,0 +1,39 @@
+---
+title: File Connector
+description: 'Access knowledge from Local Files'
+---
+
+## How it works
+The File Connector indexes user uploaded files.
+    - Currently supports `.txt` files or `.zip` files containing `.txt` files.
+    - Optional metadata line supports linking to other internal tools by URL
+
+The metadata line takes the format of:
+`#DANSWER_METADATA={"link": "<LINK>"}` where `<LINK>` is replaced with a URL.
+
+This may be something like `https://internaltool.yourcompany.com`
+
+Example:
+```
+#DANSWER_METADATA={"link": "https://www.danswereng.com/captcha"}
+How to set up captcha
+Follow the example below to set up a captcha
+like you saw when you visited this page!
+By including a captcha, this page is able to
+prevent web scrapers from reading it.
+```
+As we can see, there are many web pages or internal tools that aren't directly scrape-able.
+In addition to handling local file uploads, the file connector is offered as an option for these tools which may have APIs for accessing the contents.
+
+## Setting up
+### Authorization
+    - No external auth flows required.
+    - Admins can upload files and make them available to everyone
+    - [WIP] Admins or normal users will be able to upload files via personal connectors and make them accessible for just themselves.
+
+### Indexing
+    1. Navigate to the Admin Dashboard and select the **File** Connector.
+    2. Select a `.txt` file or a `.zip` file and click
+
+![WebConnector](/images/connectors/file/FileConnector.png)
+

@@ -1,0 +1,25 @@
+---
+title: Confluence Connector
+description: 'Access knowledge from your company Wiki'
+---
+
+## How it works
+The Confluence connector pulls in all pages and comments from the specified spaces every **10** minutes..
+- Depending on demand, Danswer may support indexing specific Confluence pages or directories in the future.
+
+## Setting up
+### Authorization
+    1. Follow the guide described [here](https://docs.searchunify.com/Content/Content-Sources/Atlassian-Jira-Confluence-Authentication-Create-API-Token.htm) to get an access token.
+
+### Indexing
+    1. Navigate to the Admin Dashboard and select the **Confluence** Connector
+    2. In **Step 1**, provide the **Access Token** and the **Username** it belongs to:
+
+![ConfluenceConnector](/images/connectors/confluence/ConfluenceAuth.png)
+
+    3. For each space to index, provide a single URL to any page in the space. For
+    example, it might look like the following:
+
+![ConfluenceConnector](/images/connectors/confluence/ConfluenceIndex.png)
+
+    4. Click the `Connect` button! All your Confluence pages in that space will now be pulled into Danswer every **10** minutes.

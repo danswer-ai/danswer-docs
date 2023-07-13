@@ -1,0 +1,60 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Danswer Documentation",
+  "logo": {
+    "dark": "/logo/dark.png",
+    "light": "/logo/light.png"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#0069ED",
+    "light": "#4D9CFF",
+    "dark": "#0050B4"
+  },
+  "topbarCtaButton": {
+    "type": "github",
+    "url": "https://github.com/danswer-ai/danswer"
+  },
+  "anchors": [
+    {
+      "name": "Slack",
+      "icon": "slack",
+      "url": "https://join.slack.com/t/danswer/shared_invite/zt-1u3h3ke3b-VGh1idW19R8oiNRiKBYv2w"
+    },
+    {
+      "name": "Discord",
+      "icon": "discord",
+      "url": "https://discord.gg/TDJ59cGV2X"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Welcome to Danswer",
+      "pages": [
+        "introduction",
+        "quickstart",
+        "advanced_setup",
+        "slack_bot_setup",
+        "contact_us"
+      ]
+    },
+    {
+      "group": "Connectors",
+      "pages": [
+        "connectors/overview",
+        "connectors/web",
+        "connectors/slack",
+        "connectors/github",
+        "connectors/google_drive",
+        "connectors/confluence",
+        "connectors/jira",
+        "connectors/file"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/danswer-ai/danswer",
+    "twitter": "https://twitter.com/DanswerAI",
+    "linkedin": "https://linkedin.com/company/danswerai"
+  }
+}

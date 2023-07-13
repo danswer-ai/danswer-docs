@@ -1,0 +1,70 @@
+---
+title: Google Drive Connector
+description: 'Access knowledge from your Files'
+---
+
+## How it works
+The Google Drive connector ingests your drive documents.
+    - Currently supports Google Docs, Sheets, and PDF files.
+
+## Setting up
+Note: This Connector is relatively involved to set up.
+
+- This guide is for users to try it locally for personal accounts.
+
+- If you are using this for an organization, the steps differ slightly.
+    - Please reach out to [danswer.dev@gmail.com](mailto:danswer.dev@gmail.com) OR `@Yuhong Sun` / `@Chris Weaver` in [Slack](https://join.slack.com/t/danswer/shared_invite/zt-1w76msxmd-HJHLe3KNFIAIzk_0dSOKaQ) if you need help.
+
+### Authorization
+    1. Create a **Google Cloud Project**
+        - [https://console.cloud.google.com/projectcreate](https://console.cloud.google.com/projectcreate)
+
+    2. Enable the **Google Drive API**
+        - On the left panel, open **APIs & services**
+        - Go to **Enabled APIs and services**
+        - On the top click **+ENABLE APIS AND SERVICES**
+        - Search for **Google Drive API** and click **ENABLE**
+        - Alternatively visit this [link](https://console.cloud.google.com/flows/enableapi?apiid=drive.googleapis.com),
+        select your project and enable the **Google Drive API**
+
+![GoogleDriveEnableAPI](/images/connectors/google_drive/GoogleDriveEnableAPI.png)
+
+    3. Set up the OAuth consent screen
+        - Under **APIs & services**, select the **OAuth consent screen** tab
+        - If you don't have a **Google Organization** select **External** for **User Type**
+        - Call the app Danswer (or whatever you want)
+        - For the required emails, use any email of your choice or danswer.dev@gmail.com
+        if you wish for the Danswer team to help handle issues.
+        - Click **SAVE AND CONTINUE**
+
+    4. Set up Scopes
+        - Add the scope `.../auth/drive.readonly` for `Google Drive API`
+![GoogleDriveScopes](/images/connectors/google_drive/GoogleDriveScopes.png)
+
+    5. Set up Test users
+        - This is only applicable for users without a Google Organization.
+            - Typically for a company, Danswer would be set up as an internal app so this step would not apply.
+        - Add at least one test user email. Only the email accounts added here will be allowed to run the OAuth
+        flow to index new documents.
+        - Click **SAVE AND CONTINUE**, review the changes and click **BACK TO DASHBOARD**
+
+    6. Create Credentials
+        - Go to the **Credentials** tab and select **+ CREATE CREDENTIALS** -> **OAuth client ID**
+![GoogleDriveCredential](/images/connectors/google_drive/GoogleDriveCredential.png)
+        - Choose **Web application** and give it some name like `DanswerConnector`
+        - Add a **Authorized JavaScript origins** for `http://localhost:3000` (or `https://<INTERNAL_DEPLOYMENT_URL>` if you have setup Danswer for production use)
+        - Add a **Authorized redirect URIs** for `http://localhost:3000/admin/connectors/google-drive/auth/callback` (or `https://<INTERNAL_DEPLOYMENT_URL>/admin/connectors/google-drive/auth/callback` if you have setup Danswer for production use)
+![GoogleDriveScopes](/images/connectors/google_drive/DriveCredentials.png)
+
+        - Click create and on the right hand side next to **Client secret**, there is an option to download the
+        credentials as a JSON. Download the JSON for use in the next step.
+![GoogleDriveScopes](/images/connectors/google_drive/DriveDownloadCredentials.png)
+
+### Indexing
+    1. Navigate to the Admin Dashboard and select the **Google Drive** Connector.
+    2. Select the credentials JSON from **step 6** above as shown in image below, then click the **Upload** button to save your credentials into Danswer. 
+    3. Click on **Authenticate with Google Drive**
+        - Completing the OAuth flow will allow Danswer to index the docs that the user has read access to.
+    4. Click the `Add` button! All Google Drive documents accessible by the user who completed step (3) will now be pulled into Danswer every **10** minutes.
+
+![GoogleDriveConnectorPage](/images/connectors/google_drive/GoogleDriveConnectorPage.png)

@@ -1,0 +1,24 @@
+---
+title: Jira Connector
+description: 'Access the latest issue and project updates from Jira'
+---
+
+## How it works
+The Jira connector pulls in all tickets from the specified projects every **10** minutes. 
+
+## Setting up
+### Authorization
+    1. Follow the guide described [here](https://docs.searchunify.com/Content/Content-Sources/Atlassian-Jira-Confluence-Authentication-Create-API-Token.htm) to get an access token.
+
+### Indexing
+    1. Navigate to the Admin Dashboard and select the **Jira** Connector
+    2. In **Step 1**, provide the **Access Token** and the **Username** it belongs to:
+
+![JiraConnectorAuth](/images/connectors/jira/JiraAuth.png)
+
+    3. For each project you want to index, provide a single URL to any page in the project. For
+    example, it might look like the following:
+
+![ConfluenceConnector](/images/connectors/jira/JiraIndex.png)
+
+    4. Click the `Connect` button! All your Jira tickets in that space will now be pulled into Danswer every **10** minutes.
