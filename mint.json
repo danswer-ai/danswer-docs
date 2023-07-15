@@ -48,7 +48,8 @@
         "connectors/google_drive",
         "connectors/confluence",
         "connectors/jira",
-        "connectors/file"
+        "connectors/file",
+        "connectors/bookstack"
       ]
     }
   ],
