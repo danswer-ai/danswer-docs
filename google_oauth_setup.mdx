@@ -64,18 +64,17 @@ OAuth is controlled by 4 environment variables, regardless of deployment choice
 - `GOOGLE_OAUTH_CLIENT_SECRET=<your client secret from above>`
 
 
-### Non Dockerized
+### Non Containerized
 Simply set the above environment variables when running the different Danswer processes.
+- The backend api server requires all of them
+- The frontend just requires `DISABLE_AUTH=False`
 
 
 ### Docker Compose
-If using **docker-compose.dev.yaml**, `DISABLE_AUTH` is set to `True` by default in the yaml file which has higher
-priority than the **.env** file. Make sure to delete `DISABLE_AUTH` from the dev yaml.
-
-If using the **docker-compose.prod.yaml**, `DISABLE_AUTH` is not set so no need to edit the yaml.
-
-Then set the 4 environment variables in a file called **.env** under **danswer/deployment/docker_compose**.
+Simply set the 4 environment variables in a file called **.env** under **danswer/deployment/docker_compose**.
 
 
 ### Kubernetes
-Simply replace the `REPLACE-THIS` values in secrets.yaml with thebase64 encoded client ID and client secret from above.
+Kubernetes deployment was designed for production use and assumes that user Auth is a required feature therefore it is
+on by default. To set up the required values, replace the `REPLACE-THIS` values in secrets.yaml with thebase64 encoded
+client ID and client secret from above.
