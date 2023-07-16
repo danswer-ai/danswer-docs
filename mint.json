@@ -33,6 +33,7 @@
       "pages": [
         "introduction",
         "quickstart",
+        "google_oauth_setup",
         "advanced_setup",
         "slack_bot_setup",
         "contact_us"
