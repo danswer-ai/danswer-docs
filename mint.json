@@ -50,7 +50,8 @@
         "connectors/confluence",
         "connectors/jira",
         "connectors/file",
-        "connectors/bookstack"
+        "connectors/bookstack",
+        "connectors/notion"
       ]
     }
   ],
