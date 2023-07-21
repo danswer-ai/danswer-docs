@@ -1,0 +1,63 @@
+---
+title: Notion Connector
+description: 'Access knowledge from your Notion workspace'
+---
+
+## How it works
+
+The Notion connector uses the Notion search API to fetch all pages that the connector has access to within a workspace.
+For follow up indexing runs, the connector only retrieves pages that have been updated since the last indexing attempt.
+Indexing is configured to run every **10 minutes**, so page updates should appear within 10 minutes.
+
+## Setting up
+
+### Authorization
+
+In order to authorize Danswer to connect to your Notion workspace, you'll need to create a new integration in 
+Notion, which will then provide you with a secret token.
+
+These steps are pulled from [this Notion guide](https://developers.notion.com/docs/create-a-notion-integration)
+which you can also follow.
+
+#### Step 1: Create an integration
+
+    1. Visit https://www.notion.com/my-integrations in your browser.
+    2. Click the + New integration button.
+    3. Name the integration (something like "Danswer" could work).
+    4. Select "Read content" as the only capability required for Danswer.
+    5. Click Submit to create the integration.
+
+On the next page, you’ll find your Notion integration token, also called an API key. You’ll need this
+token to configure Danswer to index Notion, so make a copy of it.
+
+The integration has been added to the workspace, so any member can share pages and databases with it.
+There’s no requirement to be an Admin to share information with an integration.
+
+![Notion create integration](/images/connectors/notion/NotionCreateIntegration.gif)
+
+#### Step 2: Share a database with your integration
+Now that you’ve created an integration, you need to grant it access to a Notion database.
+To keep your information secure, integrations don't have access to any pages or databases in the workspace at first.
+You must share specific pages with an integration in order for Danswer to access those pages.
+
+To share a database with your integration:
+
+    1. Go to the database page in your workspace.
+    2. Click the `•••` on the top right corner of the page.
+    3. Scroll to the bottom of the pop-up and click Add connections.
+    4. Search for and select the new integration in the `Search for connections...` menu.
+
+Once you've granted access to a database, you can start configuring Danswer to index those databases.
+
+### Indexing
+    1. Navigate to the Admin Dashboard and select the **Notion** connector.
+    2. In **Step 1**, provide the **Integration Token Secret** you obtained in the "Authorization" steps above:
+
+![Notion connector step 1 view](/images/connectors/notion/NotionAuth.png)
+
+    3. Click the `Connect` button! Your content will then be pulled into Danswer every **10** minutes.
+
+![Notion connector step 2 view](/images/connectors/notion/NotionIndex.png)
+
+Note - As mentioned, the Notion connector currently indexes everything it has access to. If you want to
+limit specific content being indexed, simply unshare the database from Notion with the integration.
