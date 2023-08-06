@@ -44,14 +44,15 @@
       "pages": [
         "connectors/overview",
         "connectors/web",
+        "connectors/file",
         "connectors/slack",
         "connectors/github",
-        "connectors/google_drive",
         "connectors/confluence",
         "connectors/jira",
-        "connectors/file",
+        "connectors/google_drive",
+        "connectors/notion",
         "connectors/bookstack",
-        "connectors/notion"
+        "connectors/guru"
       ]
     }
   ],
