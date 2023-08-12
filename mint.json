@@ -52,7 +52,8 @@
         "connectors/google_drive",
         "connectors/notion",
         "connectors/bookstack",
-        "connectors/guru"
+        "connectors/guru",
+        "connectors/productboard"
       ]
     }
   ],
