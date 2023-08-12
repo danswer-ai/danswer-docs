@@ -32,8 +32,9 @@ Modify your internal DNS to include entries which point to the private IPv4 addr
     `git clone https://github.com/danswer-ai/danswer.git`
 4. Navigate to **danswer/deployment/docker_compose**
 5. Bring up your docker engine and run:
+    - Run `./init-letsencrypt.sh` to get a SSL certificate.
     - To pull images from DockerHub and run Danswer:
-        - `docker compose -f docker-compose.dev.yml -p danswer-stack up -d --pull always --force-recreate`
+        - `docker compose -f docker-compose.prod.yml -p danswer-stack up -d --pull always`
     - Alternatively, to build the containers from source and start Danswer, run:
-        - `docker compose -f docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate`
+        - `docker compose -f docker-compose.prod.yml -p danswer-stack up -d --build --force-recreate`
     - This may take 15+ minutes depending on your internet speed.
