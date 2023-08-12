@@ -36,6 +36,12 @@
         "google_oauth_setup",
         "advanced_setup",
         "slack_bot_setup",
+        {
+          "group": "Gen AI Configs",
+          "pages": [
+            "gen_ai_configs/overview"
+          ]
+        },
         "contact_us"
       ]
     },
