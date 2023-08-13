@@ -1,0 +1,58 @@
+---
+title: Overview
+description: 'Overview of the Generative AI functionality in Danswer'
+---
+
+## What are Generative AI (LLM) models used for?
+The Large Language Models are used to interpret the contents from the most relevant documents retrieved via Search.
+These models extract out the useful knowledge from your documents and generates the **AI Answer**.
+
+## What is the default LLM?
+By default, Danswer uses `GPT-3.5-Turbo` from OpenAI. This is the most accessible model/hosting service since it does
+not require any access approval process like `GPT-4` or `Llama2` variants.
+OpenAI also hosts the models behind an API which makes it easy to use and much more cost efficient than hosting a model
+yourself on dedicated hardware.
+
+## Why would you want to use a different model
+- Use a more powerful model despite higher cost (such as GPT-4)
+- Use a hosting service with a different data retention policy
+    - Currently OpenAI and Azure OpenAI retain data for 30 days for monitoring against misuse
+- Host the model yourself for complete control and flexibility
+    - The Gen AI is the only feature in Danswer that reaches out to third party controlled service
+    - There are options (see below) to avoid this entirely but at the cost of performance
+- Use a different model perhaps finetuned or better suited for a particular domain of interest
+
+## What are the options
+- Other OpenAI models such as `gpt-4` or `text-davinci-003`
+- Azure OpenAI. The same models as OpenAI but via Azure Cloud for better security guarantees.
+    - As of Aug 2023, requires approval via this [form](https://customervoice.microsoft.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR7en2Ais5pxKtso_Pz4b1_xUOFA5Qk1UWDRBMjg0WFhPMkIzTzhKQ1dWNyQlQCN0PWcu)
+- GPT4All and all compatible models.
+    - This runs the compressed LLMs in memory within Danswer removing the dependency on an externally hosted model
+    - This approach requires a beefy system or a significant sacrifice in performance.
+- HuggingFace Hosted Inference API
+    - HuggingFace does not store prompts/tokens but does store logs.
+    - Requires a `Pro Account` subscription.
+- Any LLM interfaced via REST API
+    - Intended for self hosted models on-prem or in any cloud provider such as AWS, Azure, GCP, etc.
+    - May require minor extension/rebuilding of Danswer containers to conform to the expected API for the model.
+
+
+## Model configs
+All Danswer Gen AI configs are done through deployment environment variables. For `docker compose` this means
+overwriting the default values in the .env file during deployment. For `Kubernetes` this means updating the service
+deployment yaml files (specifically, the api_server and background services).
+
+The environment variables that impact the Gen AI models are as follows:
+- **INTERNAL_MODEL_VERSION**: controls which of the options mentioned above is being used
+- **GEN_AI_API_KEY**: If the Generative AI model requires an API key for access, otherwise can leave blank
+- **GEN_AI_MODEL_VERSION**: Which model version to use.
+    - _Only relevant for OpenAI and GPT4All_
+- **GEN_AI_ENDPOINT**: What is the endpoint for hitting the model server.
+    - _Only relevant for REST API LLM models_
+- **GEN_AI_HOST_TYPE**: What is the expected way to construct the request for the model endpoint.
+    - _Only relevant for REST API LLM models_
+
+See the next sections for specifics on how to configure the different options.
+
+As always, don't hesitate to reach out to the [Danswer team](https://docs.danswer.dev/contact_us) if you have any
+questions or issues.
