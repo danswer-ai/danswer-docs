@@ -20,9 +20,12 @@ Refer to the code [here](https://github.com/danswer-ai/danswer/blob/main/backend
 - [https://medium.com/@yuhongsun96/host-a-llama-2-api-on-gpu-for-free-a5311463c183](https://medium.com/@yuhongsun96/host-a-llama-2-api-on-gpu-for-free-a5311463c183)
 - This demo uses Google Colab to access a free GPU but this is not suitable for long term deployments
 
-## Set Danswer to use the LLM model server
+## Set Danswer to use an LLM behind a REST API
+There is an offering from HuggingFace called "Inference Endpoints" where users can rent dedicated hardware and host
+HuggingFace compatible models behind a REST API.
+Danswer works out of the box with any text-generation HuggingFace models hosted this way.
 - INTERNAL_MODEL_VERSION=request-completion
-- GEN_AI_HOST_TYPE=colab-demo
+- GEN_AI_HOST_TYPE=huggingface
     - or reference your custom class
-- GEN_AI_ENDPOINT=&lt;your-model-endpoint-url&gt;
+- GEN_AI_ENDPOINT=&lt;your-huggingface-inference-endpoint-url&gt;
 
