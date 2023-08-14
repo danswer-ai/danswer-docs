@@ -42,8 +42,10 @@
             "gen_ai_configs/overview",
             "gen_ai_configs/open_ai",
             "gen_ai_configs/azure",
+            "gen_ai_configs/rest_api",
+            "gen_ai_configs/gpt_4_all",
             "gen_ai_configs/huggingface",
-            "gen_ai_configs/rest_api"
+            "gen_ai_configs/transformers"
           ]
         },
         "contact_us"
