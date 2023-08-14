@@ -1,0 +1,26 @@
+---
+title: GPT4All
+description: 'Configure Danswer to use GPT4All models in memory'
+---
+
+Refer to [Model Configs](https://docs.danswer.dev/gen_ai_configs/overview#model-configs) for how to set the
+environment variables for your particular deployment.
+
+## What is GPT4All
+GPT4All provides a way to run the latest LLMs (closed and opensource) by calling APIs or running in memory.
+For self-hosted models, GPT4All offers models that are quantized or running with reduced float precision.
+Both of these are ways to compress models to run on weaker hardware at a slight cost in model capabilities.
+
+GPT4All provides a Python wrapper which Danswer uses to run the models in same container as the Danswer API Server.
+
+**Note**: Despite GPT4All offering quantized models, it is still significantly slower than models fully hosted on GPUs.
+If you're running the models purely on CPU, there may be significant delay to processing the context documents and in
+generating answers.
+
+## Set Danswer to use GPT4All via next-token generation prompting
+- INTERNAL_MODEL_VERSION=gpt4all-completion
+- GEN_AI_MODEL_VERSION=ggml-model-gpt4all-falcon-q4_0.bin  # Or any other GPT4All model
+
+## Set Danswer to use GPT4All  via chat (conversational) prompting
+- INTERNAL_MODEL_VERSION=gpt4all-chat-completion
+- GEN_AI_MODEL_VERSION=ggml-model-gpt4all-falcon-q4_0.bin  # Or any other GPT4All model
