@@ -1,7 +1,51 @@
 ---
-title: Azure OpenAI GPT
-description: 'Configure Danswer to use GPT models on Azure'
+title: Azure OpenAI
+description: 'Configure Danswer to use GPT models hosted on Azure'
 ---
 
-This is currently a work in progress tracked by:
-https://github.com/danswer-ai/danswer/issues/165
+Refer to [Model Configs](https://docs.danswer.dev/gen_ai_configs/overview#model-configs) for how to set the
+environment variables for your particular deployment.
+
+If you're already familiar with Azure OpenAI, feel free to skip to the
+[configuring Danswer](https://docs.danswer.dev/gen_ai_configs/azure#configuring-danswer-to-use-azure-openai-endpoint)
+section at the end
+
+## Why use Azure OpenAI
+By far the most requested model integration has been Azure OpenAI. As of Aug 2023, GPT-4 is the most capable LLM
+available. When combined with the Enterprise grade security and geographical deployment options of Azure, this
+becomes a very attractive option for using with Danswer.
+
+## Set up Azure OpenAI Endpoint
+As of Aug 2023, Azure OpenAI access is by
+[application](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/limited-access) only. This may change
+moving forward, please check online for the latest information.
+
+Start by creating the Azure OpenAI Resource
+- Search for `Azure OpenAI` service
+- Click on **+Create** to create a new Azure OpenAI resource
+
+![AzureResource](/images/gen_ai/AzureResource.png)
+
+## Getting the Model Endpoint Info
+Once the resource is created, visit it in **Azure OpenAI Studio**
+Select **Chat**
+
+![AzurePlayground](/images/gen_ai/AzurePlayground.png)
+
+Then click on **View Code** to see the connection info which we will configure for Danswer
+
+![AzureViewCode](/images/gen_ai/AzureViewCode.png)
+
+Note the values provided in the sample code (also feel free to try out the code to verify it works)
+
+![AzureSample](/images/gen_ai/AzureSample.png)
+
+## Configuring Danswer to use Azure OpenAI Endpoint
+Following the image above, you would configure Danswer with the following environment variables:
+```
+API_TYPE_OPENAI=azure
+API_BASE_OPENAI=https://danswer.openai.azure.com/
+API_VERSION_OPENAI=2023-03-15-preview
+AZURE_DEPLOYMENT_ID=Danswer
+GEN_AI_API_KEY=<your-azure-key> # found below the code section in the above image
+```
