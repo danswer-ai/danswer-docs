@@ -65,7 +65,8 @@
         "connectors/notion",
         "connectors/bookstack",
         "connectors/guru",
-        "connectors/productboard"
+        "connectors/productboard",
+        "connectors/zulip"
       ]
     }
   ],
