@@ -32,7 +32,16 @@ Modify your internal DNS to include entries which point to the private IPv4 addr
     `git clone https://github.com/danswer-ai/danswer.git`
 4. Navigate to **danswer/deployment/docker_compose**
 5. Bring up your docker engine and run:
-    - Run `./init-letsencrypt.sh` to get a SSL certificate.
+    - Setup your `.env` files
+        - Make a copy of `env.prod.template` called `.env` (`cp env.prod.template .env`)
+            - Fill in any relevant env variables to your setup, and delete the rest.
+        - Make a copy of `env.nginx.template` called `.env.nginx` (`cp env.nginx.template .env.nginx`)
+            - Fill in the `DOMAIN` variable with the domain that people will use internally to access the Danswer UI
+                - **NOTE:** this domain must be publicly accessible for this flow to work. If you're hosting it internally and 
+            not exposing it to the public internet then feel free to reach out to us to figure out the best way to set 
+            this up.
+            - `EMAIL` is optional
+    - Run `./init-letsencrypt.sh` to get a SSL certificate from LetsEncrypt. More info on how this works can be found [here](https://pentacent.medium.com/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71).
     - To pull images from DockerHub and run Danswer:
         - `docker compose -f docker-compose.prod.yml -p danswer-stack up -d --pull always`
     - Alternatively, to build the containers from source and start Danswer, run:
