@@ -61,6 +61,14 @@
         "connectors/github",
         "connectors/confluence",
         "connectors/jira",
+        {
+          "group": "Google Drive Connector",
+          "pages": [
+            "connectors/google_drive/overview",
+            "connectors/google_drive/oauth",
+            "connectors/google_drive/service_account"
+          ]
+        },
         "connectors/google_drive",
         "connectors/notion",
         "connectors/bookstack",
