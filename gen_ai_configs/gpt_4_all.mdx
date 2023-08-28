@@ -13,6 +13,10 @@ Both of these are ways to compress models to run on weaker hardware at a slight 
 
 GPT4All provides a Python wrapper which Danswer uses to run the models in same container as the Danswer API Server.
 
+Because GPT4All is not compatible with certain architectures, Danswer does not package it by default.
+You will have to install it in your container by uncommenting `gpt4all==1.0.5` in
+**danswer/backend/requirements/default.txt** and rebuilding an image with GPT4All installed.
+
 **Note**: Despite GPT4All offering quantized models, it is still significantly slower than models fully hosted on GPUs.
 If you're running the models purely on CPU, there may be significant delay to processing the context documents and in
 generating answers.
@@ -20,7 +24,9 @@ generating answers.
 ## Set Danswer to use GPT4All via next-token generation prompting
 - INTERNAL_MODEL_VERSION=gpt4all-completion
 - GEN_AI_MODEL_VERSION=ggml-model-gpt4all-falcon-q4_0.bin  # Or any other GPT4All model
+- QA_TIMEOUT=120  # Set a longer timeout, running models on CPU is quite slow
 
 ## Set Danswer to use GPT4All  via chat (conversational) prompting
 - INTERNAL_MODEL_VERSION=gpt4all-chat-completion
 - GEN_AI_MODEL_VERSION=ggml-model-gpt4all-falcon-q4_0.bin  # Or any other GPT4All model
+- QA_TIMEOUT=120  # Set a longer timeout, running models on CPU is quite slow
