@@ -33,7 +33,6 @@
       "pages": [
         "introduction",
         "quickstart",
-        "system_overview",
         "google_oauth_setup",
         "enterprise_setup",
         "slack_bot_setup",
@@ -49,6 +48,7 @@
             "gen_ai_configs/transformers"
           ]
         },
+        "system_overview",
         "contact_us"
       ]
     },
