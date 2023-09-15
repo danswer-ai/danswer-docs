@@ -33,8 +33,9 @@
       "pages": [
         "introduction",
         "quickstart",
+        "system_overview",
         "google_oauth_setup",
-        "advanced_setup",
+        "enterprise_setup",
         "slack_bot_setup",
         {
           "group": "Gen AI Configs",
