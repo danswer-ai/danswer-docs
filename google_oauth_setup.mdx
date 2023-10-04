@@ -56,18 +56,17 @@ Click **CREATE** and save the Client ID and Client Secret for use in the next se
 
 
 ## Turning on OAuth in Danswer
-OAuth is controlled by 4 environment variables, regardless of deployment choice
+OAuth is controlled by 3 environment variables, regardless of deployment choice
 (non-containerized, docker compose, kubernetes). To turn the feature on set:
-- `DISABLE_AUTH=False`
-- `ENABLE_OAUTH=True`
-- `GOOGLE_OAUTH_CLIENT_ID=<your client id from above>`
-- `GOOGLE_OAUTH_CLIENT_SECRET=<your client secret from above>`
+- `AUTH_TYPE=google_oauth`
+- `OAUTH_CLIENT_ID=<your client id from above>`
+- `OAUTH_CLIENT_SECRET=<your client secret from above>`
 
 
 ### Non Containerized
 Simply set the above environment variables when running the different Danswer processes.
-- The backend api server requires all of them
-- The frontend just requires `DISABLE_AUTH=False`
+- The backend api server uses the 3 environment variables
+- The frontend hits the api server to determine what user authentication setting is configured and serves the relevant pages.
 
 
 ### Docker Compose
