@@ -75,7 +75,8 @@
         "connectors/bookstack",
         "connectors/guru",
         "connectors/productboard",
-        "connectors/zulip"
+        "connectors/zulip",
+        "connectors/google_sites"
       ]
     }
   ],
