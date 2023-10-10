@@ -73,6 +73,7 @@
         "connectors/google_drive",
         "connectors/notion",
         "connectors/bookstack",
+        "connectors/document360",
         "connectors/guru",
         "connectors/productboard",
         "connectors/zulip"

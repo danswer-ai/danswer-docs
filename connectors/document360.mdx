@@ -1,0 +1,27 @@
+---
+title: Document360
+description: 'Access wiki articles from Document360'
+---
+
+## How it works
+The Documen360 connector will pull in all the articles given the workspace and categories that the user specifies.
+Articles in Document360 can be saved in either HTML or Markdown format. Currently the implementation only handles
+Markdown format. If HTML format is desired, please submit an issue [here](https://github.com/danswer-ai/danswer/issues)
+
+Articles are updated every **10** minutes.
+
+
+## Setting up
+### Authorization
+    1. How to get portal ID
+    2. How to get API key Mention read only permission for the key
+
+### Indexing
+    1. Navigate to the Admin Dashboard and select the **Guru** Connector
+    2. In **Step 1**, provide your **Username** (most likely your email) and the **Access Token** from above.
+
+![GuruConnectorAuth](/images/connectors/guru/GuruAuth.png)
+
+Provide the relevant images to help the user along (refer to image line above for how to insert images)
+
+    3. Click `Connect` to begin indexing
