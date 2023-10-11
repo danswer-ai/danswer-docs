@@ -70,6 +70,7 @@ oauth_config:
       - groups:history
       - groups:read
       - im:history
+      - mpim:history
       - reactions:write
 settings:
   event_subscriptions:
@@ -78,6 +79,7 @@ settings:
       - message.channels
       - message.groups
       - message.im
+      - message.mpim
   interactivity:
     is_enabled: true
   org_deploy_enabled: false
@@ -106,5 +108,5 @@ Provide your Slack Tokens and Danswer will start to respond to your slack channe
 
 There are also a set of less often used / more advanced configuration options available via environment
 variables that can set things like how many "Reference Documents" to show per answer, etc.
-Refer to the available configs at the bottom of the file
-[here](https://github.com/danswer-ai/danswer/blob/main/backend/danswer/configs/app_configs.py)
+Refer to the available configs
+[here](https://github.com/danswer-ai/danswer/blob/main/backend/danswer/configs/danswerbot_configs.py)
