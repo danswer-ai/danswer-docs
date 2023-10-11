@@ -70,7 +70,6 @@
             "connectors/google_drive/service_account"
           ]
         },
-        "connectors/google_drive",
         "connectors/notion",
         "connectors/bookstack",
         "connectors/guru",
