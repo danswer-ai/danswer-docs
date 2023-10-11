@@ -3,16 +3,24 @@ title: Slack Bot Setup
 description: "How to set up a Slack bot to automatically answer questions"
 ---
 
-## How it works
+## DanswerBot Introduction
 
-Danswer will connect to your Slack instance via Web Sockets, and listen for relevant messages. 
+Danswer will connect to your Slack and listen for messages to answer.
 
-Slack will only send us messages for channels where DanswerBot has been manually added to. For all
-channel messages (not messages inside a thread), Danswer will consider the question, search through
-all available documents, and try to come up with an answer. If it finds an answer, it will respond to
-the message in the **thread** as follows:
+You can easily configure rules for what channels Danswer should respond in, what knowledge sets should back each
+configured channel, and set filters to respond or not respond to different types of messages.
+
+When Danswer identifies valid questions, it will respond in the message thread with:
+- An LLM generated answer
+- Quotes of the most relevant excerpts
+- Sources with highlighted keywords
 
 ![SlackBot](/images/slack_bot/SlackBot.png)
+
+Danswer also provides a configuration page so you can create custom settings for each slack channel
+(or you can just use the default settings for all your channels).
+
+![SlackBotConfig](/images/slack_bot/SlackBotConfig.png)
 
 Since we are using Web Sockets, Danswer is able to initiate the connection. This means that this is able
 to work even if you are running Danswer inside a firewall protected VPC.
@@ -38,6 +46,10 @@ display_information:
   name: DanswerBot
   description: I help answer questions!
 features:
+  app_home:
+    home_tab_enabled: false
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false
   bot_user:
     display_name: DanswerBot
     always_online: true
@@ -49,21 +61,23 @@ features:
 oauth_config:
   scopes:
     bot:
-      - channels:history
-      - channels:read
-      - groups:read
-      - groups:history
-      - channels:join
       - app_mentions:read
+      - channels:history
+      - channels:join
+      - channels:read
       - chat:write
-      - reactions:write
       - commands
+      - groups:history
+      - groups:read
+      - im:history
+      - reactions:write
 settings:
   event_subscriptions:
     bot_events:
       - app_mention
       - message.channels
       - message.groups
+      - message.im
   interactivity:
     is_enabled: true
   org_deploy_enabled: false
@@ -80,26 +94,17 @@ Copy this somewhere safe for now, as you will need this later to initiate the We
 ![DanswerBotInstall](/images/slack_bot/DanswerBotInstall.png)
 9. Copy the **Bot User OAuth Token**, this will be needed later to enable us to respond to messages as DanswerBot.
 
-### Setting Env variables
+### Setting Danswer to use it
 
-**Note:** Currently, Slack bot setup is only suppported out of the box for the docker compose based deployment.
-Please contact us if you are deploying Danswer in some other way, we'd be happy to help you set up the Slack bot!
+Start by finding the admin page in the top right of the Danswer web UI.
+![DanswerAdminButton](/images/slack_bot/DanswerAdminButton.png)
 
-1. [OPTIONAL] SSH into the box where you are hosting Danswer. If running locally, ignore this step.
-2. Navigate to `danswer/deployment/docker_compose.
-3. Open up the `.env` file using your favorite editor and add the following two lines:
-```
-DANSWER_BOT_SLACK_APP_TOKEN=<APP_TOKEN_HERE>
-DANSWER_BOT_SLACK_BOT_TOKEN=<BOT_TOKEN_HERE>
-```
-4. Restart the background service with one of the following: 
-```
-# if running locally
-docker compose -f docker-compose.dev.yml -p danswer-stack up background -d --force-recreate
+On the left hand menu of the admin page, navigate to the bottom to **Bots**.
 
-# if running on a machine in the cloud for production use
-docker compose -f docker-compose.prod.yml -p danswer-stack up background -d --build --force-recreate
-```
-5. Wait a few minutes for the background component to restart, and voila you're done! 
-You should be able to add DanswerBot to a channel of your choosing, 
-ask a question, and get a response!
+Provide your Slack Tokens and Danswer will start to respond to your slack channels after a short startup delay.
+![SlackBotTokens](/images/slack_bot/SlackBotTokens.png)
+
+There are also a set of less often used / more advanced configuration options available via environment
+variables that can set things like how many "Reference Documents" to show per answer, etc.
+Refer to the available configs at the bottom of the file
+[here](https://github.com/danswer-ai/danswer/blob/main/backend/danswer/configs/app_configs.py)
