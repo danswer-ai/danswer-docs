@@ -1,0 +1,31 @@
+---
+title: Document360
+description: 'Access wiki articles from Document360'
+---
+
+## How it works
+The Documen360 connector will pull in all the articles given the workspace and categories that the user specifies.
+Articles in Document360 can be saved in either HTML or Markdown format. Currently the implementation only handles
+HTML format. If HTML format is desired, please submit an issue [here](https://github.com/danswer-ai/danswer/issues)
+
+Articles are updated every **10** minutes.
+
+
+## Setting up
+### Authorization
+    1. Go to Settings > Knowledge base portal > API tokens.
+    2. Click Generate button.
+    3. Enter a Token name and select the Request methods that you want to allow for the API key.
+    4. Click Generate.
+    5. Your portal ID and API key will be displayed on the page.
+
+### Indexing
+    1. Navigate to the Admin Dashboard and select the **Document360** Connector
+    2. In **Step 1**, provide your **Portal ID** and the **API Key** from above.
+
+![Documen360ConnectorAuth](/images/connectors/document360/Document360Auth.png)
+
+    3. Set the **Workspace ID** (see below) and **Categories**.
+    4. Click `Connect` to begin indexing
+
+![Document360 Connector](/images/connectors/document360/Document360.png)
