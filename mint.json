@@ -71,6 +71,7 @@
           ]
         },
         "connectors/notion",
+        "connectors/gong",
         "connectors/bookstack",
         "connectors/document360",
         "connectors/guru",
