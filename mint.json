@@ -72,6 +72,7 @@
         },
         "connectors/notion",
         "connectors/gong",
+        "connectors/linear",
         "connectors/bookstack",
         "connectors/document360",
         "connectors/guru",
