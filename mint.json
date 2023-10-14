@@ -76,6 +76,7 @@
         "connectors/document360",
         "connectors/guru",
         "connectors/productboard",
+        "connectors/hubspot",
         "connectors/zulip",
         "connectors/google_sites"
       ]
