@@ -75,6 +75,7 @@
         "connectors/linear",
         "connectors/bookstack",
         "connectors/document360",
+        "connectors/requesttracker",
         "connectors/slab",
         "connectors/guru",
         "connectors/productboard",
