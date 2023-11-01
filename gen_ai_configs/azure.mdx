@@ -43,9 +43,10 @@ Note the values provided in the sample code (also feel free to try out the code 
 ## Configuring Danswer to use Azure OpenAI Endpoint
 Following the image above, you would configure Danswer with the following environment variables:
 ```
-API_TYPE_OPENAI=azure
-API_BASE_OPENAI=https://danswer.openai.azure.com/
-API_VERSION_OPENAI=2023-03-15-preview
-AZURE_DEPLOYMENT_ID=Danswer
-GEN_AI_API_KEY=<your-azure-key> # found below the code section in the above image
+GEN_AI_MODEL_PROVIDER=azure
+GEN_AI_MODEL_VERSION=Danswer  # Note that this is the Azure Deployment ID
+GEN_AI_API_ENDPOINT=https://danswer.openai.azure.com/
+GEN_AI_API_VERSION=2023-03-15-preview
+GEN_AI_API_KEY=<your-azure-key>  # found below the code section in the above image
 ```
+You can also leave the `GEN_AI_API_KEY` unset and set it later via the UI

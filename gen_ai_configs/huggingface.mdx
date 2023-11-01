@@ -15,26 +15,16 @@ To use the HuggingFace Inference APIs, you must sign up for a `Pro Account` to g
 
 ![HFAccessToken](/images/gen_ai/HFAccessToken.png)
 
-## Terminology Disambiguation
-In Danswer, a "chat" model refers to using a series of messages with attached roles such as "system", "assistant", or
-"user". This is consistent with the OpenAI terminology.
-
-HuggingFace uses "chat" in reference to a model that is finetuned to follow instructions.
-They use "conversational" to mean the equivalent of OpenAI's "chat".
-
 
 ## Set Danswer to use `Llama-2-70B` via next-token generation prompting
-- INTERNAL_MODEL_VERSION=huggingface-client-completion
-- GEN_AI_MODEL_VERSION=meta-llama/Llama-2-70b-chat-hf
-    - Note, "chat" in the above refers to instruction-fine-tuning
-    - As of Aug 2023, this model does not support conversational prompting
-- GEN_AI_API_KEY=&lt;your-huggingface-access-token&gt;
-    - You can also leave this unset and set it later via the UI
+```
+GEN_AI_MODEL_PROVIDER=huggingface
+GEN_AI_MODEL_VERSION=https://api-inference.huggingface.co/models/meta-llama/Llama-2-70b-chat-hf
+GEN_AI_API_KEY=&lt;your-huggingface-access-token&gt;
+```
+**Note** that the endpoint URL is assigned to `GEN_AI_MODEL_VERSION` (not `GEN_AI_API_ENDPOINT`),
+this is a quirk from the LiteLLM library.
 
-
-## Set Danswer to use `Llama-2-70B` via chat (conversational) prompting
-- INTERNAL_MODEL_VERSION=huggingface-client-chat-completion
-- GEN_AI_MODEL_VERSION=meta-llama/Llama-2-70b-hf
-    - As of Aug 2023, only the non-instruction-finetuned model support conversational prompting
-- GEN_AI_API_KEY=&lt;your-huggingface-access-token&gt;
-    - You can also leave this unset and set it later via the UI
+**Update (November 2023)**: HuggingFace has stopped supporting very large models (>10GB) via the *Pro Plan*.
+The latest options are to rent dedicated hardware from them via Inference Endpoint or get an Enterprise Plan.
+The *Pro Plan* still supports smaller models but these produce worse results for Danswer.
