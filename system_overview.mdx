@@ -17,12 +17,13 @@ Whether deploying Danswer on a single instance or a container orchestration plat
 Documents are pulled and processed via connectors and then persisted in Vespa/Postgres which run in containers within
 your system.
 
-Danswer has no call-home features so we never have access to your data. We don't receive any communications at all,
-including even telemetry. So if you're using Danswer, please tell us as we have no way of knowing!
+The only time sensitive data leaves your Danswer setup is when it makes a call to an LLM to generate an answer.
+The communications to the LLM are encrypted. The data persistence at the LLM API depends on the terms of the
+LLM hosting service you are using.
 
-The only time any data leaves your Danswer setup is when it makes a call to an LLM to generate an answer.
-The data persistence there depends on which LLM hosting service you are using. Some users have even opted to host
-Llama2 70B on-prem, in which case Danswer is fully airgapped and data is never sent outside the deployment.
+We also note that Danswer has some very limited and anonymous telemetry to help us improve the system by identifying
+bottlenecks and flaky data connectors.
+You can turn off the telemetry with by setting the DISABLE_TELEMETRY env variable to True.
 
 
 ## Embedding Flow
