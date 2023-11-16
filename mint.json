@@ -82,6 +82,12 @@
         "connectors/zulip",
         "connectors/google_sites"
       ]
+    },
+    {
+      "group": "More",
+      "pages": [
+        "more/telemetry"
+      ]
     }
   ],
   "footerSocials": {
