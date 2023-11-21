@@ -5,17 +5,20 @@ description: 'Access knowledge from Local Files'
 
 ## How it works
 The File Connector indexes user uploaded files.
-    - Currently supports `.txt` files or `.zip` files containing `.txt` files.
+    - Currently supports `.txt`, `.pdf`, `.md` and `.mdx` files
+    - Can also upload a `.zip` containing these files
+        - If there are other file types in the zip, the other file types are ignored
     - Optional metadata line supports linking to other internal tools by URL
 
-The metadata line takes the format of:
-`#DANSWER_METADATA={"link": "<LINK>"}` where `<LINK>` is replaced with a URL.
+The metadata line can take one of two formats:
+- `#DANSWER_METADATA={"link": "<LINK>"}`
+- `<!-- DANSWER_METADATA={"link": "<LINK>"} -->`
 
-This may be something like `https://internaltool.yourcompany.com`
+Where `<LINK>` is replaced with a URL (this may be something like `https://internaltool.yourcompany.com`)
 
 Example:
 ```
-#DANSWER_METADATA={"link": "https://www.danswereng.com/captcha"}
+#DANSWER_METADATA={"link": "https://www.danswer.com/captcha"}
 How to set up captcha
 Follow the example below to set up a captcha
 like you saw when you visited this page!
@@ -35,5 +38,5 @@ In addition to handling local file uploads, the file connector is offered as an 
     1. Navigate to the Admin Dashboard and select the **File** Connector.
     2. Select a `.txt` file or a `.zip` file and click
 
-![WebConnector](/images/connectors/file/FileConnector.png)
+![FileConnector](/images/connectors/file/FileConnector.png)
 
