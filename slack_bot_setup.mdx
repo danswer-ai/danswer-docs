@@ -45,7 +45,6 @@ to work even if you are running Danswer inside a firewall protected VPC.
 display_information:
   name: DanswerBot
   description: I help answer questions!
-  background_color: "#e85207"
 features:
   app_home:
     home_tab_enabled: false
@@ -71,9 +70,11 @@ oauth_config:
       - groups:history
       - groups:read
       - im:history
+      - im:read
       - mpim:history
       - reactions:write
-      - im:read
+      - users:read.email
+      - users:read
 settings:
   event_subscriptions:
     bot_events:
