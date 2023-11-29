@@ -44,6 +44,7 @@
             "gen_ai_configs/azure",
             "gen_ai_configs/huggingface",
             "gen_ai_configs/gpt_4_all",
+            "gen_ai_configs/fastchat",
             "gen_ai_configs/custom_server"
           ]
         },
