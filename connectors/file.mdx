@@ -8,15 +8,26 @@ The File Connector indexes user uploaded files.
     - Currently supports `.txt`, `.pdf`, `.md` and `.mdx` files
     - Can also upload a `.zip` containing these files
         - If there are other file types in the zip, the other file types are ignored
-    - Optional metadata line supports linking to other internal tools by URL
+    - Optional metadata line that supports links, document owners, and time updated as metadata for Danswer's
+    retrieval and AI Answer
 
 The metadata line can take one of two formats:
 - `#DANSWER_METADATA={"link": "<LINK>"}`
 - `<!-- DANSWER_METADATA={"link": "<LINK>"} -->`
 
-Where `<LINK>` is replaced with a URL (this may be something like `https://internaltool.yourcompany.com`)
+Where DANSWER_METADATA= is followed by a json.
+The valid json keys are:
+- link
+- primary_owners
+- secondary_owners
+- doc_updated_at
 
-Example:
+For example:
+```
+#DANSWER_METADATA={"link": "https://github.com/danswer-ai/danswer/blob/main/CONTRIBUTING.md", "primary_owners": ["yuhong@danswer.ai", "chris@danswer.ai"], "secondary_owners": ["founders@danswer.ai"], "doc_updated_at": "2023-11-30T13:06:08.589616-08:00"}
+```
+
+Full file example:
 ```
 #DANSWER_METADATA={"link": "https://www.danswer.com/captcha"}
 How to set up captcha
