@@ -1,0 +1,41 @@
+---
+title: Ollama
+description: 'Configure Danswer to use Ollama'
+---
+
+Refer to [Model Configs](https://docs.danswer.dev/gen_ai_configs/overview#model-configs) for how to set the
+environment variables for your particular deployment.
+
+**Note**: While we support self hosted LLMs, you will get significantly better responses with a more powerful
+model like GPT-4.
+
+## What is Ollama
+Ollama provides an easy way to host LLMs locally and to provide a REST API for the model.
+Refer to the following resources to get started:
+- https://ollama.ai/
+- https://github.com/jmorganca/ollama
+
+Once you start a model with a command like `ollama run llama2`, you can verify that the API works with a curl request:
+```
+curl http://localhost:11434/api/generate -d '{
+  "model": "llama2",
+  "prompt":"Why is the sky blue?"
+}'
+```
+
+## Set Danswer to use Ollama
+```
+GEN_AI_MODEL_PROVIDER=ollama
+# Model of your choice
+GEN_AI_MODEL_VERSION=llama2
+# Wherever Ollama is running
+# Hint: To point Docker containers to http://localhost:11434, use host.docker.internal instead of localhost
+GEN_AI_API_ENDPOINT=http://host.docker.internal:11434
+
+# Let's also make some changes to accommodate the weaker locally hosted LLM
+QA_TIMEOUT=120  # Set a longer timeout, running models on CPU can be slow
+DISABLE_LLM_FILTER_EXTRACTION=True
+DISABLE_LLM_CHUNK_FILTER=True
+# Use only 1 section from the documents and do not require quotes
+QA_PROMPT_OVERRIDE=weak
+```

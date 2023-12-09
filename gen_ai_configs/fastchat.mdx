@@ -6,6 +6,9 @@ description: 'Configure Danswer to use FastChat model servers'
 Refer to [Model Configs](https://docs.danswer.dev/gen_ai_configs/overview#model-configs) for how to set the
 environment variables for your particular deployment.
 
+**Note**: While we support self hosted LLMs, you will get significantly better responses with a more powerful
+model like GPT-4.
+
 ## What is FastChat
 FastChat is a way to easily host LLMs on cli, using their web client, or as an API server. For the Danswer use
 case we will focus on interfacing with the model through the API server. See here for more information:
@@ -16,13 +19,15 @@ https://litellm.vercel.app/docs/providers/custom_openai_proxy
 
 ## Set Danswer to use FastChat Server
 ```
-GEN_AI_MODEL_VERSION=vicuna-7b-v1.5  # Or whatever model is served by FastChat
+# Pick any model served by FastChat
+GEN_AI_MODEL_VERSION=vicuna-7b-v1.5
+# Hint: To point Docker containers to http://localhost, use http://host.docker.internal
 # Don't forget to include the /v1 below
 GEN_AI_API_ENDPOINT=http://<your-FastChat-server>/v1
 GEN_AI_LLM_PROVIDER_TYPE=openai  # Since it's an OpenAI compatible API
 
-# Let's also make some changes to accommodate the weaker LLM
-QA_TIMEOUT=120  # Set a longer timeout, running models on CPU is quite slow
+# Let's also make some changes to accommodate the weaker locally hosted LLM
+QA_TIMEOUT=120  # Set a longer timeout, running models on CPU can be slow
 DISABLE_LLM_FILTER_EXTRACTION=True
 DISABLE_LLM_CHUNK_FILTER=True
 # Use only 1 section from the documents and do not require quotes
