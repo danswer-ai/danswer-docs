@@ -6,8 +6,11 @@ description: 'Configure Danswer to use GPT4All models in memory'
 Refer to [Model Configs](https://docs.danswer.dev/gen_ai_configs/overview#model-configs) for how to set the
 environment variables for your particular deployment.
 
+**Note**: While we support local LLMs, you will get significantly better responses with a more powerful
+model like GPT-4.
+
 ## What is GPT4All
-GPT4All provides a way to run the latest LLMs (closed and opensource) by calling APIs or running in memory.
+GPT4All provides a way to run LLMs (closed and opensource) by calling APIs or running in memory.
 For self-hosted models, GPT4All offers models that are quantized or running with reduced float precision.
 Both of these are ways to compress models to run on weaker hardware at a slight cost in model capabilities.
 
@@ -25,5 +28,11 @@ generating answers.
 ```
 GEN_AI_MODEL_PROVIDER=gpt4all
 GEN_AI_MODEL_VERSION=mistral-7b-openorca.Q4_0.gguf  # Or any other GPT4All model
-QA_TIMEOUT=120  # Set a longer timeout, running models on CPU is quite slow
+
+# Let's also make some changes to accommodate the weaker locally hosted LLM
+QA_TIMEOUT=120  # Set a longer timeout, running models on CPU can be slow
+DISABLE_LLM_FILTER_EXTRACTION=True
+DISABLE_LLM_CHUNK_FILTER=True
+# Use only 1 section from the documents and do not require quotes
+QA_PROMPT_OVERRIDE=weak
 ```
