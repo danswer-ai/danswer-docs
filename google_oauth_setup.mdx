@@ -4,16 +4,17 @@ description: "How to set up user login via Google OAuth"
 ---
 
 ## Setting up the Google Cloud App
+
 Create a google project: https://console.cloud.google.com/projectcreate
 
-
 ## Enabling the People API
+
 Enable the **Google People API** here: https://console.cloud.google.com/apis/library/people.googleapis.com
 
 Be sure to have the right project selected.
 
-
 ## Setting up the OAuth Consent Screen
+
 Go to **APIs & Services** on the left hand tab (see image below).
 
 Then select **OAuth Consent screen** page.
@@ -21,10 +22,12 @@ Then select **OAuth Consent screen** page.
 ![GoogleOAuthConsentMenu](/images/google_oauth_setup/GoogleOAuthConsentMenu.png)
 
 Under OAuth Consent screen select either Internal or External
+
 - Companies with a **Google Workspace** should choose `Internal`
 - Otherwise choose `External`
 
 On the next page:
+
 - Provide an app name (can go with `Danswer`)
 - Provide any email you own (or founders@danswer.ai if you want us to handle questions from your Danswer users)
 - Upload the Danswer logo (or leave blank)
@@ -38,8 +41,8 @@ Click **SAVE AND CONTINUE**
 
 Leave the next two pages for **Scopes** and **Test users** blank.
 
-
 ## Setting up Credentials
+
 Still under **APIs & Services**, go to **Credentials** on the left hand bar
 
 Click on **+CREATE CREDENTIALS** and choose `OAuth client ID`
@@ -47,34 +50,39 @@ Click on **+CREATE CREDENTIALS** and choose `OAuth client ID`
 Select `Web application` then call it `Danswer`
 
 Add a `Authorized JavaScript origins` as:
-- `http://localhost:3000` for local or replace with `WEB_DOMAIN` if setting up for prod.
+
+- `http://localhost:3000` for local or replace with `https://<WEB_DOMAIN>` (e.g. `https://www.danswer.ai`) if setting up for prod.
 
 Add a `Authorized redirect URIs` as:
-- `http://localhost:3000/auth/oauth/callback` for local setup or your `WEB_DOMAIN` if setting up for prod.
+
+- `http://localhost:3000/auth/oauth/callback` for local setup or `https://<WEB_DOMAIN>/auth/oauth/callback` if setting up for prod.
 
 Click **CREATE** and save the Client ID and Client Secret for use in the next section
 
-
 ## Turning on OAuth in Danswer
+
 OAuth is controlled by 3 environment variables, regardless of deployment choice
 (non-containerized, docker compose, kubernetes). To turn the feature on set:
+
 - `AUTH_TYPE=google_oauth`
 - `OAUTH_CLIENT_ID=<your client id from above>`
 - `OAUTH_CLIENT_SECRET=<your client secret from above>`
-- `WEB_DOMAIN`=<your domain including protocol, i.e. `https://`>
-
+- If setting up in production, then: 
+  - `WEB_DOMAIN=<your domain including protocol e.g. https://www.danswer.ai>`
 
 ### Non Containerized
+
 Simply set the above environment variables when running the different Danswer processes.
+
 - The backend api server uses the 3 environment variables
 - The frontend hits the api server to determine what user authentication setting is configured and serves the relevant pages.
 
-
 ### Docker Compose
+
 Simply set the 4 environment variables in a file called **.env** under **danswer/deployment/docker_compose**.
 
-
 ### Kubernetes
+
 Kubernetes deployment was designed for production use and assumes that user Auth is a required feature therefore it is
 on by default. To set up the required values, replace the `REPLACE-THIS` values in secrets.yaml with thebase64 encoded
 client ID and client secret from above.
