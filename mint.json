@@ -73,6 +73,7 @@
           ]
         },
         "connectors/notion",
+        "connectors/zendesk",
         "connectors/gong",
         "connectors/linear",
         "connectors/bookstack",
