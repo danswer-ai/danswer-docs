@@ -1,0 +1,29 @@
+---
+title: Zendesk Connector
+description: 'Access knowledge from Zendesk Articles'
+---
+
+## How it works
+The Zendesk Connector syncs all of the Articles in your company's subdomain.
+
+Some current limitations (a contributor is currently working on extending these):
+- It does not pick up Zendesk Tickets
+- It does not include comments.
+- It pulls all of the articles, does not allow selection by Category etc.
+
+
+## Setting up
+### Authorization
+    1. The Zendesk Connector requires 3 things to connect:
+       - Subdomain of the tenant (ex. your-company.zendesk.com)
+       - Email address of the user to impersonate (owner of the API Token)
+       - API Token
+    3. See below for instructions on getting the API token
+
+![ZendeskAPI](/images/connectors/zendesk/ZendeskAPI.gif)
+
+
+### Indexing
+    1. Navigate to the **Admin Dashboard** and select `Add Connector` followed by the Zendesk tile.
+    2. Provide the information from the section above
+    3. Click connect to start pulling Articles from Zendesk. These are sync-ed every 10 minutes.
