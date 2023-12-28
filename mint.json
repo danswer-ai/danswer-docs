@@ -33,8 +33,8 @@
       "pages": [
         "introduction",
         "quickstart",
-        "google_oauth_setup",
-        "enterprise_setup",
+        "production_setup",
+        "resourcing",
         "slack_bot_setup",
         {
           "group": "Gen AI Configs",
@@ -52,6 +52,14 @@
         "multilingual_setup",
         "system_overview",
         "contact_us"
+      ]
+    },
+    {
+      "group": "Auth",
+      "pages": [
+        "basic_auth",
+        "google_oauth_setup",
+        "oidc_saml"
       ]
     },
     {
