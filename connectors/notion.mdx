@@ -35,19 +35,23 @@ There’s no requirement to be an Admin to share information with an integration
 
 ![Notion create integration](/images/connectors/notion/NotionCreateIntegration.gif)
 
-#### Step 2: Share a database with your integration
-Now that you’ve created an integration, you need to grant it access to a Notion database.
+#### Step 2: Share pages/databases with your integration
+Now that you’ve created an integration, you need to grant it access to Notion pages/databases.
 To keep your information secure, integrations don't have access to any pages or databases in the workspace at first.
 You must share specific pages with an integration in order for Danswer to access those pages.
 
-To share a database with your integration:
+To share a page/database with your integration:
 
-    1. Go to the database page in your workspace.
+    1. Go to the page/database in your workspace.
     2. Click the `•••` on the top right corner of the page.
     3. Scroll to the bottom of the pop-up and click Add connections.
     4. Search for and select the new integration in the `Search for connections...` menu.
+    5. If you've added a page, all child pages also become accesssible to Danswer. 
+    If you've added a database, all rows (and their children) become accessible to Danswer.
 
-Once you've granted access to a database, you can start configuring Danswer to index those databases.
+![Notion add connection](/images/connectors/notion/NotionAddConnector.png)
+
+Once you've granted access to a page/database, you can start configuring Danswer to index those databases.
 
 ### Indexing
     1. Navigate to the Admin Dashboard and select the **Notion** connector.
