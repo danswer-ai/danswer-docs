@@ -38,6 +38,7 @@
         "slack_bot_setup",
         {
           "group": "Gen AI Configs",
+          "icon": "stars",
           "pages": [
             "gen_ai_configs/overview",
             "gen_ai_configs/open_ai",
@@ -64,6 +65,7 @@
     },
     {
       "group": "Connectors",
+      "icon": "plug",
       "pages": [
         "connectors/overview",
         "connectors/web",
