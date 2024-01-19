@@ -1,0 +1,25 @@
+---
+title: Sharepoint Connector
+description: 'Access knowledge from your Sharepoint Sites'
+---
+
+## How it works
+The Sharepoint connector will go through all requested sites belonging to an organization and index all the files available to that site.
+
+## Setting up
+### Authorization
+    1. Log in to azure portal for your organization.
+        - [This page](https://portal.azure.com/#home).
+    2. Navigate to “app registrations” using the search bar.
+    3. Click **New Registration**.
+    4. Name it something like “Danswer Connector”, leave everything else as default, and click **Register**.
+    5. Under “Essentials” in the overview tab, you will find the client ID and Directory ID, copy paste those into the danswer connector.
+
+
+    6. Navigate to the “Certificates & secrets” tab in Azure Portal and click **New client secret**.
+    7. Fill out he description, set the expiration to 24 months, and click **Add**.
+    8. Copy the secret value in the **Value** column and paste it into the Danswer connector.
+    9. Navigate to the "Api Permissions" tab in the azure portal and click **add a permission**.
+    10. Click **Microsoft Graph**, then click on **Application permissions**.
+    11. Navigate to the “sites” permission group and select the checkbox for **Sites.FullControl.All** and click **Add permissions** at the bottom.
+    12. Finally, click **Grant admin consent for <Organization name>** (located next to **Add a permission**) and click **Confirm**.
