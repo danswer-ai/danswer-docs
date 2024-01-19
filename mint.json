@@ -72,6 +72,7 @@
         "connectors/file",
         "connectors/slack",
         "connectors/github",
+        "connectors/gitlab",
         "connectors/confluence",
         "connectors/jira",
         {
