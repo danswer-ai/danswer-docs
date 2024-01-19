@@ -85,6 +85,7 @@
         },
         "connectors/notion",
         "connectors/zendesk",
+        "connectors/sharepoint",
         "connectors/gong",
         "connectors/linear",
         "connectors/bookstack",
