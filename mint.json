@@ -83,6 +83,13 @@
             "connectors/google_drive/service_account"
           ]
         },
+        {
+          "group": "Gmail Connector",
+          "pages": [
+            "connectors/gmail/overview",
+            "connectors/gmail/oauth"
+          ]
+        },
         "connectors/notion",
         "connectors/zendesk",
         "connectors/sharepoint",
