@@ -6,11 +6,13 @@ icon: "bolt"
 
 ## Requirements
     - git
-    - docker with compose (docker version >= 1.13.0)
+    - Docker with compose (docker version >= 1.13.0)
+    - System requirements found [here](https://docs.danswer.dev/resourcing)
 
 
 ## Setup
 **This quickstart guide covers setting up Danswer for local execution**
+<Warning>The most common source of issues is under-resourcing. See section above.</Warning>
 
     1. Clone the [Danswer](https://github.com/danswer-ai/danswer) repo:
     ```bash
@@ -36,27 +38,29 @@ icon: "bolt"
     5. Danswer will now be running on http://localhost:3000.
 
 
-## OpenAI API Key
+## Gen-AI API Key
 **Note:** On the initial visit, Danswer will prompt for an OpenAI API key.
-Without this Danswer will be able to provide search functionalities but not direct Question Answering.
 
 You can get an OpenAI API key at:
 [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys)
+
+<Info>You can also replace OpenAI with a model provider of your choice, see
+[here](https://docs.danswer.dev/gen_ai_configs/overview) for more info</Info>
 
 
 ## Indexing Documents
 **This quickstart guide will index a publicly accessible website as this requires no additional authorization setup**
     1. Navigate to the top right of Danswer's home screen and select **Admin Panel**
-   <Frame caption="Connectors"><img src="/images/quickstart/DanswerConnectors.png" /> </Frame>
+![AdminPanel](/images/quickstart/AdminPanel.png)
 
     2. In the Web Connector dashboard, pick any base URL to index.
         - This will index all pages under that base URL that is reachable from hyperlinks.
         - You can check the indexing status page to monitor the progress.
-    <Frame caption="WebConnector"><img src="/images/quickstart/DanswerWebConnector.png" /> </Frame>
+![DanswerWebConnector](/images/quickstart/DanswerWebConnector.png)
 
     3. After the pages are indexed, you can now navigate back to the homepage and start asking questions and getting
     answers! 🥳
-    <Frame caption="SampleQA"><img src="/images/quickstart/DanswerSampleQA.png" /> </Frame>
+![DanswerSampleQA](/images/quickstart/DanswerSampleQA.png)
 
 
 ## Shutting Down
