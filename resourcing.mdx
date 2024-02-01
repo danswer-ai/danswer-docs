@@ -22,16 +22,20 @@ without issue.
 If you go with this approach, we recommend:
 
 - **CPU:** >= 4 vCPU cores (we recommend 8 vCPU cores if possible)
-- **Memory:** >= 8 GB of RAM (for best performance, 16 is recommended)
+- **Memory:** >= 9 GB of RAM (for best performance, 16 is recommended)
+    - Note: If you are switching embedding models, you will need >= 11 GB RAM as both sets of models need
+    to be loaded in simultaneously
 - **Disk:** >= 50 GB + ~2.5x the size of the indexed documents. Disk is generally very cheap, so
   we would recommend getting extra disk beyond this recommendation to be safe.
   - Note: Vespa does not allow writes when disk usage is >75%, so make sure to always have some headroom here
-  - Note: old, unused docker images often take up a bunch of space when performing frequent upgrades of Danswer. To clean up these unused images, run: `docker system prune --all`.
+  - Note: old, unused docker images often take up a bunch of space when performing frequent upgrades of Danswer.
+  To clean up these unused images, run: `docker system prune --all`.
 
-For reference, we have chosen to give each Danswer Cloud customer a `m7g.xlarge` 
-instance by default, which has 4vCPU cores + 16GB of RAM + 200GB of disk space. We're comfortable
-using 4vCPU cores in a production setting since we have dedicated GPU instances that run the embedding / cross-encoder models. 
-If you do not plan on setting that up, we would recommend going with 8vCPU cores (if possible) for a production deployment.
+For reference, we have chosen to give each Danswer Cloud customer a `m7g.xlarge` instance by default,
+which has 4vCPU cores + 16GB of RAM + 200GB of disk space. We're comfortable using 4vCPU cores in a
+production setting since we have dedicated GPU instances that run the embedding / cross-encoder models.
+If you do not plan on setting that up, we would recommend going with 8vCPU cores (if possible) for a
+production deployment.
 
 ## Kubernetes / AWS ECS
 
