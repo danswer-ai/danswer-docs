@@ -33,7 +33,6 @@
       "pages": [
         "introduction",
         "quickstart",
-        "production_setup",
         "resourcing",
         "slack_bot_setup",
         {
@@ -53,6 +52,22 @@
         "configuration_guide",
         "system_overview",
         "contact_us"
+      ]
+    },
+    {
+      "group": "Deploy Danswer",
+      "pages": [
+        {
+          "group": "Deploy with AWS",
+          "icon": "aws",
+          "pages": [
+            "production/aws/ec2",
+            "production/aws/ecs",
+            "production/aws/eks"
+          ]
+        },
+        "production/gcp",
+        "production/azure"
       ]
     },
     {
