@@ -1,0 +1,141 @@
+---
+title: "[Recommended] EC2"
+description: "Setup Danswer on AWS EC2"
+---
+
+Using EC2 (or an EC2 equivalent in your Cloud of choice) is the recommended way of deploying Danswer.
+It is simple and should meet the performance needs of 90% of organizations looking to use Danswer.
+
+While this guide is specifically for AWS EC2, the vast majority should apply to
+GCP Google Compute Engines, Azure Virtual Machines, DigitalOcean Droplets, etc.
+
+With all that said, we know that every company does things differently, and we'd love to help you figure out
+the ideal setup for your enterprise! Feel free to reach out to us via the links on our
+[Contact Us](https://docs.danswer.dev/contact_us) page for more individual help.
+
+## Getting an Instance
+
+The first step is to start up an EC2 instance with the appropriate resources. We recommend at least 16GB of RAM,
+4-8vCPU cores, and 500GB of disk for a small-mid sized organization (< 5000 users). For reference, in our Cloud offering we use a `m7g.xlarge`
+with 500GB of EBS storage.
+
+For the below guide, we will assume that you've chosen to use AWS Linux with the recommended `m7g.xlarge` instance.
+
+![Instance](/images/setup_guides/aws/Instance.png)
+
+When setting up the security group for the new instance, make sure that you allow for HTTPS traffic.
+
+![Instance](/images/setup_guides/aws/InstanceNetworking.png)
+
+## Pointing your Domain to the Instance
+
+Next, we should point your domain to the EC2 instance we just created. To do this, we need to go to your DNS and add two records.
+For this guide, I'll be assuming your DNS provider is GoDaddy, but it should be almost exactly the same for any DNS provider.
+
+<Info>
+  If you don't have a domain to use yet, then you can either buy one from a DNS
+  provider like [GoDaddy](https://www.godaddy.com/) or just skip HTTPS for now.
+</Info>
+
+First, we need to grab the public IP address of the instance. You can do that in the page for your instance in the
+AWS Console.
+
+![Instance](/images/setup_guides/aws/InstanceIp.png)
+
+Finally, we need to head to the DNS provider and add two entries into the DNS:
+
+![Instance](/images/setup_guides/aws/ARecord.png)
+![Instance](/images/setup_guides/aws/CnameRecord.png)
+
+The first record directs traffic to that domain to your EC2 instance. The second record will handle
+`www.<YOUR_DOMAIN>` and ensure that this also takes the user to your EC2 instance.
+
+## Installing Dependencies
+
+Next, we need to preprare the instance so we can actually get Danswer up and running. To do this, you'll
+need three things: `git`, `docker`, and `docker compose`. For Amazon Linux 2023, this can be done with the following:
+
+```bash
+sudo yum update -y
+
+sudo yum install docker -y
+sudo service docker start
+
+sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+sudo yum install git
+```
+
+## Starting up Danswer
+
+Now that we have everything we need we can startup Danswer.
+
+First, let's clone the repo:
+
+```bash
+git clone https://github.com/danswer-ai/danswer.git
+```
+
+Next, let's set the necessary env variables:
+
+```bash
+cd danswer/deployment/docker_compose
+touch .env
+touch .env.nginx
+```
+
+In the `.env` file, you can copy past the following (filling in the missing fields as needed):
+
+```
+WEB_DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+
+# if your email is something like "chris@danswer.ai", then this should be "danswer.ai"
+# this prevents people outside your company from creating an account
+VALID_EMAIL_DOMAINS=<YOUR_COMPANIES_EMAIL_DOMAIN>  
+
+AUTH_TYPE=basic
+# if you want to enable email verification, uncomment the following
+# REQUIRE_EMAIL_VERIFICATION=true
+# SMTP_USER=<GMAIL_ACCOUNT_EMAIL_YOU_WANT_TO_SEND_VERIFICATION_EMAILS_WITH>
+# SMTP_PASS=<GMAIL_ACCOUNT_PW_YOU_WANT_TO_SEND_VERIFICATION_EMAILS_WITH>
+
+# if you've gone through the Google OAuth setup guide, then comment out
+# the above and uncomment the following
+# AUTH_TYPE=google_oauth
+# GOOGLE_OAUTH_CLIENT_ID=
+# GOOGLE_OAUTH_CLIENT_SECRET=
+# SECRET=<RANDOMLY_GENERATED_UUID>
+
+GEN_AI_MODEL_PROVIDER=openai
+GEN_AI_MODEL_VERSION=gpt-4  # if it's an option, we recommend using gpt-4
+
+# Default values here are what Postgres uses by default, feel free to change.
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=password
+```
+
+In the `.env.nginx` file, put the following:
+
+```
+DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+```
+
+Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/). To do this, we can simply run:
+
+```bash
+./init-letsencrypt.sh
+```
+
+<Info>
+  If are skipping the HTTPS setup, you should start things up with: 
+  `docker-compose -f docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate`
+  instead of the above. You can then access Danswer from the IP address from earlier or from the 
+  instance `Public IPv4 DNS` provided on the instance's page in the AWS console.
+</Info>
+
+Voila, you're all done! 🎉
+
+After waiting a few minutes (you can monitor the progress with 
+`docker logs danswer-stack-api_server-1 -f`; once you see a log for 
+`INFO:     Application startup complete.` then everything should be good to go).

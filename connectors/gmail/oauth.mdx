@@ -1,0 +1,61 @@
+---
+title: OAuth Setup
+---
+
+This section walks through setting up the Gmail connector using a OAuth-enabled Google App.
+Anyone can do this (even without a paid Google Workspace)!
+
+If you're an organization with a Google Workspace, and you'd rather use a Service Account to access Gmail, 
+it will be available soon! 
+
+### Authorization
+    1. Create a **Google Cloud Project**
+        - [https://console.cloud.google.com/projectcreate](https://console.cloud.google.com/projectcreate)
+
+    2. Enable the **Gmail API**
+        - On the left panel, open **APIs & services**
+        - Go to **Enabled APIs and services**
+        - On the top click **+ENABLE APIS AND SERVICES**
+        - Search for **Gmail API** and click **ENABLE**
+        - Alternatively visit this [link](https://console.cloud.google.com/apis/enableflow?apiid=gmail.googleapis.com),
+        select your project and enable the **Gmail API**
+
+    3. Set up the OAuth consent screen
+        - Under **APIs & services**, select the **OAuth consent screen** tab
+        - If you don't have a **Google Organization** select **External** for **User Type**
+        - Call the app Danswer (or whatever you want)
+        - For the required emails, use any email of your choice or `founders@danswer.ai`
+        if you wish for the Danswer team to help handle issues.
+        - Click **SAVE AND CONTINUE**
+
+    4. Set up Scopes
+        - Add the scope `.../auth/gmail.readonly` for `Gmail API`
+![GmailScopes](/images/connectors/gmail/GmailScopes.png)
+
+    5. Set up Test users
+        - This is only applicable for users without a Google Organization.
+            - Typically for a company, Danswer would be set up as an internal app so this step would not apply.
+        - Add at least one test user email. Only the email accounts added here will be allowed to run the OAuth
+        flow to index new emails.
+        - Click **SAVE AND CONTINUE**, review the changes and click **BACK TO DASHBOARD**
+
+    6. Create Credentials
+        - Go to the **Credentials** tab and select **+ CREATE CREDENTIALS** -> **OAuth client ID**
+![GmailCredential](/images/connectors/google_drive/GoogleDriveCredential.png)
+        - Choose **Web application** and give it some name like `DanswerConnector`
+        - Add a **Authorized JavaScript origins** for `http://localhost:3000` (or `https://<INTERNAL_DEPLOYMENT_URL>` if you have setup Danswer for production use)
+        - Add a **Authorized redirect URIs** for `http://localhost:3000/admin/connectors/gmail/auth/callback` (or `https://<INTERNAL_DEPLOYMENT_URL>/admin/connectors/gmail/auth/callback` if you have setup Danswer for production use)
+![GmailScopes](/images/connectors/gmail/GmailCredentials.png)
+
+        - Click create and on the right hand side next to **Client secret**, there is an option to download the
+        credentials as a JSON. Download the JSON for use in the next step.
+![GmailScopes](/images/connectors/google_drive/DriveDownloadCredentials.png)
+
+### Indexing
+    1. Navigate to the Admin Dashboard and select the **Gmail** Connector.
+    2. Select the credentials JSON from **step 6** above as shown in image below, then click the **Upload** button to save your credentials into Danswer. 
+    3. Click on **Authenticate with Gmail**
+        - Completing the OAuth flow will allow Danswer to index the emails that the user has read access to.
+    4. Enter a Connector name and click the `Connect` button! All Gmail emails accessible by the user who completed step (3) will now be pulled into Danswer every **10** minutes.
+
+![GmailConnectorPage](/images/connectors/gmail/GmailConnectorPage.png)

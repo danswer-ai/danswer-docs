@@ -1,53 +1,99 @@
 ---
 title: File Connector
-description: 'Access knowledge from Local Files'
+description: "Access knowledge from Local Files"
 ---
 
 ## How it works
-The File Connector indexes user uploaded files.
-    - Currently supports `.txt`, `.pdf`, `.md` and `.mdx` files
-    - Can also upload a `.zip` containing these files
-        - If there are other file types in the zip, the other file types are ignored
-    - Optional metadata line that supports links, document owners, and time updated as metadata for Danswer's
-    retrieval and AI Answer
 
-The metadata line can take one of two formats:
+The File Connector indexes user uploaded files. - Currently supports `.txt`, `.pdf`, `.md` and `.mdx` files - Can also upload a `.zip` containing these files - If there are other file types in the zip, the other file types are ignored - Optional metadata line that supports links, document owners, and time updated as metadata for Danswer's
+retrieval and AI Answer
+
+## Adding Metadata
+
+The metadata line should be placed at the very top of the file and can take one of two formats:
+
 - `#DANSWER_METADATA={"link": "<LINK>"}`
 - `<!-- DANSWER_METADATA={"link": "<LINK>"} -->`
 
 Where DANSWER_METADATA= is followed by a json.
 The valid json keys are:
+
 - link
 - primary_owners
 - secondary_owners
 - doc_updated_at
+- file_display_name
+
+You can also include arbitrary key/value pairs which will be understood as "tags". These tags can then be used in the UI as 
+a filter if you want to constrain your search / conversation to only documents with certain tag(s) attached
 
 For example:
+
 ```
-#DANSWER_METADATA={"link": "https://github.com/danswer-ai/danswer/blob/main/CONTRIBUTING.md", "primary_owners": ["yuhong@danswer.ai", "chris@danswer.ai"], "secondary_owners": ["founders@danswer.ai"], "doc_updated_at": "2023-11-30T13:06:08.589616-08:00"}
+#DANSWER_METADATA={"link": "https://github.com/danswer-ai/danswer/blob/main/CONTRIBUTING.md", "primary_owners": ["yuhong@danswer.ai", "chris@danswer.ai"], "secondary_owners": ["founders@danswer.ai"], "doc_updated_at": "2023-11-30T13:06:08.589616-08:00", "file_display_name": "Desired File Name!", "tag_of_your_choice": "tag_value"}
 ```
 
 Full file example:
+
 ```
-#DANSWER_METADATA={"link": "https://www.danswer.com/captcha"}
+#DANSWER_METADATA={"link": "https://www.danswer.com/captcha", "file_display_name": "Captcha Setup"}
 How to set up captcha
 Follow the example below to set up a captcha
 like you saw when you visited this page!
 By including a captcha, this page is able to
 prevent web scrapers from reading it.
 ```
+
 As we can see, there are many web pages or internal tools that aren't directly scrape-able.
 In addition to handling local file uploads, the file connector is offered as an option for these tools which may have APIs for accessing the contents.
 
+Alternatively, if you are uploading a `.zip` filled with files, you can define a `.danswer_metadata.json` file and include that in the root of the zip file. 
+If your zip file structure looks like: 
+
+```
+| file1.txt
+| file2.txt
+| .danswer_metadata.json
+```
+
+then your `.danswer_metadata.json` file might look like:
+
+```json
+[
+    {
+        "filename": "file1.txt", 
+        "link": "<LINK_TO_FILE1>", 
+        "file_display_name": "<WHAT_YOU_WANT_THE_NAME_OF_FILE1_TO_BE_IN_THE_UI>"},
+        "primary_owners": ["<FILE1_OWNER>"],
+        // this is an arbitrary tag, can be any key/value pair and can be used in the UI as 
+        // a filter if you want to constrain your search / conversation to only documents with
+        // this tag attached
+        "status": "<SOME_STATUS>"
+    },
+    {
+        "filename": "file2.txt", 
+        "link": "<LINK_TO_FILE2>", 
+        "file_display_name": "<WHAT_YOU_WANT_THE_NAME_OF_FILE2_TO_BE_IN_THE_UI>"},
+        "primary_owners": ["<FILE2_OWNER>"],
+        // this is an arbitrary tag, can be any key/value pair and can be used in the UI as 
+        // a filter if you want to constrain your search / conversation to only documents with
+        // this tag attached
+        "status": "<SOME_OTHER_STATUS>"
+    }
+]
+```
+
 ## Setting up
+
 ### Authorization
+
     - No external auth flows required.
     - Admins can upload files and make them available to everyone
     - [WIP] Admins or normal users will be able to upload files via personal connectors and make them accessible for just themselves.
 
 ### Indexing
+
     1. Navigate to the Admin Dashboard and select the **File** Connector.
     2. Select a `.txt` file or a `.zip` file and click
 
 ![FileConnector](/images/connectors/file/FileConnector.png)
-

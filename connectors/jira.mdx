@@ -8,13 +8,21 @@ The Jira connector pulls in all tickets from the specified projects every **10**
 
 ## Setting up
 ### Authorization
-    1. Follow the guide described [here](https://docs.searchunify.com/Content/Content-Sources/Atlassian-Jira-Confluence-Authentication-Create-API-Token.htm) to get an access token.
+    1. **Jira Cloud**: follow the guide described [here](https://docs.searchunify.com/Content/Content-Sources/Atlassian-Jira-Confluence-Authentication-Create-API-Token.htm) to get an access token.
+    2. **Jira Server**: follow the guide described [here](https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html) to get a personal access token.
 
 ### Indexing
     1. Navigate to the Admin Dashboard and select the **Jira** Connector
-    2. In **Step 1**, provide the **Access Token** and the **Username** it belongs to:
+    2. Provide credentials
 
-![JiraConnectorAuth](/images/connectors/jira/JiraAuth.png)
+    >#### Cloud 
+    >Provide the **Access Token** and the **Username** it belongs to:
+    >![JiraConnectorAuth](/images/connectors/jira/JiraCloudAuth.png)
+
+    >#### Server
+    >Provide the **Personal Access Token**:
+    >![JiraConnectorAuth](/images/connectors/jira/JiraServerAuth.png)
+
 
     3. For each project you want to index, provide a single URL to any page in the project. For
     example, it might look like the following:
