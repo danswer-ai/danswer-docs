@@ -1,0 +1,149 @@
+---
+title: "Deploy on Digital Ocean"
+description: "Setup Danswer on Digital Ocean"
+icon: Digital-Ocean
+---
+
+You can use a [DigitalOcean Droplet](https://www.digitalocean.com/products/droplets) to deploy Danswer.
+This is a simple and cost effective way to deploy Danswer and should meet the performance needs of smaller organizations looking to use Danswer.
+
+Feel free to reach out to us via the links on our [Contact Us](https://docs.danswer.dev/contact_us) page for more individual help.
+
+## Getting an Instance
+
+Create a new Droplet in the Digital Ocean console.
+
+1. Open the [Digital Ocean Console](https://cloud.digitalocean.com/droplets) and select **Create Droplet**.
+2. Select a region close to your users and a datacenter.
+3. Select a **Docker** image from the **Marketplace** tab.
+4. Choose the size of the Droplet. We recommend at least 16GB of RAM, 4-8vCPU cores, and 500GB of disk for a small-mid sized organization (< 5000 users).
+5. Select additional options as needed and assign your Droplet to a Project.
+6. Select **Create Droplet**.
+
+## Create a Domain record
+
+Use @ to create the record at the root of the domain or enter a hostname to create it elsewhere.
+A records are for IPv4 addresses only and tell a request where your domain should direct to.
+
+1. Go to the [Networking](https://cloud.digitalocean.com/networking/domains) section of the Digital Ocean console.
+2. Click **Add Domain**.
+3. Enter your domain name and click **Add Domain**.
+4. Click **Add Record** and select **A**.
+5. Enter the hostname (usually @) and the IP address of your Droplet.
+6. Click **Create Record**.
+
+## Pointing your Domain to the Instance
+
+Next, point your domain to the Droplet. To do this, you'll need to add two records to your DNS and set your Nameservers to Digital Ocean's.
+Nameservers control how your website is located based on your domain name.
+
+<Info>
+  If you don't have a domain to use yet, then you can either buy one from a DNS
+  provider like [GoDaddy](https://www.godaddy.com/) or just skip HTTPS for now.
+</Info>
+
+**Adding DNS Records**
+
+First, we need to grab the public IP address of the instance.
+You can do that in the page for your instance in the Digital Ocean Droplet Console.
+
+![Instance](/images/setup_guides/do/InstanceIp.png)
+
+Finally, we need to head to the DNS provider and add two entries into the DNS:
+
+![Instance](/images/setup_guides/do/ARecord.png)
+![Instance](/images/setup_guides/do/CnameRecord.png)
+
+The first record directs traffic to that domain to your Droplet.
+The second record will handle `www.<YOUR_DOMAIN>` and ensure that this also takes the user to your container running on your Droplet.
+
+**Setting Nameservers**
+
+Next, we need to set the nameservers to Digital Ocean's.
+
+Digital Ocean's nameservers are:
+
+- `ns1.digitalocean.com`
+- `ns2.digitalocean.com`
+- `ns3.digitalocean.com`
+
+These need to be set in the DNS provider's console.
+
+## Starting up Danswer
+
+Because your Droplet is running Docker, we can use Docker Compose to start up Danswer.
+
+Once the Droplet agent is installed (and configured if necessary), you can access the Droplet Console from the DigitalOcean Control Panel.
+First, click the name of the Droplet you want to access to expand its detail window, then click the name again to go to its detail page. From the detail page, click the Access tab in the left menu.
+
+In the Droplet Console section, enter the user you want to log in as in the Log in as… field. By default, this is set to root. Once you choose a user, click Launch Droplet Console to open the Droplet console.
+When the console loads, you can use the command line to run commands on your Droplet.
+
+Clone the repo:
+
+```bash
+git clone https://github.com/danswer-ai/danswer.git
+```
+
+Next, let's set the necessary env variables:
+
+```bash
+cd danswer/deployment/docker_compose
+touch .env
+touch .env.nginx
+```
+
+In the `.env` file, you can copy past the following (filling in the missing fields as needed):
+
+```
+WEB_DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+
+# if your email is something like "chris@danswer.ai", then this should be "danswer.ai"
+# this prevents people outside your company from creating an account
+VALID_EMAIL_DOMAINS=<YOUR_COMPANIES_EMAIL_DOMAIN>
+
+AUTH_TYPE=basic
+# if you want to enable email verification, uncomment the following
+# REQUIRE_EMAIL_VERIFICATION=true
+# SMTP_USER=<GMAIL_ACCOUNT_EMAIL_YOU_WANT_TO_SEND_VERIFICATION_EMAILS_WITH>
+# SMTP_PASS=<GMAIL_ACCOUNT_PW_YOU_WANT_TO_SEND_VERIFICATION_EMAILS_WITH>
+
+# if you've gone through the Google OAuth setup guide, then comment out
+# the above and uncomment the following
+# AUTH_TYPE=google_oauth
+# GOOGLE_OAUTH_CLIENT_ID=
+# GOOGLE_OAUTH_CLIENT_SECRET=
+# SECRET=<RANDOMLY_GENERATED_UUID>
+
+GEN_AI_MODEL_PROVIDER=openai
+GEN_AI_MODEL_VERSION=gpt-4  # if it's an option, we recommend using gpt-4
+
+# Default values here are what Postgres uses by default, feel free to change.
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=password
+```
+
+In the `.env.nginx` file, put the following:
+
+```
+DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+```
+
+Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/). To do this, we can simply run:
+
+```bash
+./init-letsencrypt.sh
+```
+
+<Info>
+  If are skipping the HTTPS setup, you should start things up with:
+  `docker-compose -f docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate`
+  instead of the above. You can then access Danswer from the IP address from earlier or from the
+  instance `Public IPv4 DNS` provided on the instance's page in the DigitalOcean console.
+</Info>
+
+Voila, you're all done! 🎉
+
+After waiting a few minutes (you can monitor the progress with
+`docker logs danswer-stack-api_server-1 -f`; once you see a log for
+`INFO:     Application startup complete.` then everything should be good to go).
