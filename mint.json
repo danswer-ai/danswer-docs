@@ -68,7 +68,8 @@
           ]
         },
         "production/gcp",
-        "production/azure"
+        "production/azure",
+        "production/digitalocean"
       ]
     },
     {
