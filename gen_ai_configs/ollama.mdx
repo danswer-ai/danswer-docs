@@ -25,7 +25,7 @@ curl http://localhost:11434/api/generate -d '{
 
 ## Set Danswer to use Ollama
 ```
-GEN_AI_MODEL_PROVIDER=ollama
+GEN_AI_MODEL_PROVIDER=ollama_chat
 # Model of your choice
 GEN_AI_MODEL_VERSION=llama2
 # Wherever Ollama is running
@@ -34,8 +34,15 @@ GEN_AI_API_ENDPOINT=http://host.docker.internal:11434
 
 # Let's also make some changes to accommodate the weaker locally hosted LLM
 QA_TIMEOUT=120  # Set a longer timeout, running models on CPU can be slow
-DISABLE_LLM_FILTER_EXTRACTION=True
+# Always run search, never skip
+DISABLE_LLM_CHOOSE_SEARCH=True
+# Don't use LLM for reranking, the prompts aren't properly tuned for these models
 DISABLE_LLM_CHUNK_FILTER=True
+# Don't try to rephrase the user query, the prompts aren't properly tuned for these models
+DISABLE_LLM_QUERY_REPHRASE=True
+# Don't use LLM to automatically discover time/source filters
+DISABLE_LLM_FILTER_EXTRACTION=True
+# Uncomment this one if you find that the model is struggling (slow or distracted by too many docs)
 # Use only 1 section from the documents and do not require quotes
-QA_PROMPT_OVERRIDE=weak
+# QA_PROMPT_OVERRIDE=weak
 ```
