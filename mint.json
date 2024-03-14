@@ -27,7 +27,7 @@
       "url": "https://discord.gg/TDJ59cGV2X"
     }
   ],
-  "openapi": ["/api/openapi.json"],  
+  "openapi": ["/apis/openapi.json"],  
   "navigation": [
     {
       "group": "Welcome to Danswer",
@@ -125,8 +125,8 @@
     {
       "group": "Cloud APIs",
       "pages": [
-        "api/answer_with_quote",
-        "api/send_message_simple_api"
+        "apis/answer_with_quote",
+        "apis/send_message_simple_api"
       ]
     },
     {
