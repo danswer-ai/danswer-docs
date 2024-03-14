@@ -27,7 +27,7 @@
       "url": "https://discord.gg/TDJ59cGV2X"
     }
   ],
-  "openapi": "https://danswer.danswer.ai/api/openapi.json",  
+  "openapi": ["/api/openapi.json"],  
   "navigation": [
     {
       "group": "Welcome to Danswer",
