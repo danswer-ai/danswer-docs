@@ -27,6 +27,7 @@
       "url": "https://discord.gg/TDJ59cGV2X"
     }
   ],
+  "openapi": "https://danswer.danswer.ai/api/openapi.json",  
   "navigation": [
     {
       "group": "Welcome to Danswer",
@@ -119,6 +120,13 @@
         "connectors/hubspot",
         "connectors/zulip",
         "connectors/google_sites"
+      ]
+    },
+    {
+      "group": "Cloud APIs",
+      "pages": [
+        "api/answer_with_quote",
+        "api/send_message_simple_api"
       ]
     },
     {
