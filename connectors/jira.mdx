@@ -6,6 +6,13 @@ description: 'Access the latest issue and project updates from Jira'
 ## How it works
 The Jira connector pulls in all tickets from the specified projects every **10** minutes. 
 
+For every jira issue this connector will pull:
+- Title
+- Description
+- Common fields (like assignee, reporter, status etc.)
+- Custom fields
+- Comments
+
 ## Setting up
 ### Authorization
     1. **Jira Cloud**: follow the guide described [here](https://docs.searchunify.com/Content/Content-Sources/Atlassian-Jira-Confluence-Authentication-Create-API-Token.htm) to get an access token.
@@ -24,8 +31,8 @@ The Jira connector pulls in all tickets from the specified projects every **10**
     >![JiraConnectorAuth](/images/connectors/jira/JiraServerAuth.png)
 
 
-    3. For each project you want to index, provide a single URL to any page in the project. For
-    example, it might look like the following:
+    3. For each project you want to index, provide a single URL to any page in the project. Also you can specify
+    which users comments not to index (this is generally useful to ignore certain bots). For example, it might look like the following:
 
 ![JiraIndex](/images/connectors/jira/JiraIndex.png)
 
