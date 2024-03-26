@@ -120,7 +120,8 @@
         "connectors/productboard",
         "connectors/hubspot",
         "connectors/zulip",
-        "connectors/google_sites"
+        "connectors/google_sites",
+        "connectors/dropbox"
       ]
     },
     {
