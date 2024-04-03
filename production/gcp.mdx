@@ -4,7 +4,129 @@ description: "Setup Danswer on GCP"
 icon: "google"
 ---
 
+You can use GCP Google Compute Engines (VM Instance) to deploy Danswer. The steps are very similar to deploying on AWS EC2.
+Before we get started, make sure you have an account with Google Cloud Platform and have the necessary permissions to create a VM instance.
+Feel free to reach out to us via the links on our [Contact Us](https://docs.danswer.dev/contact_us) page for more individual help.
+
+## Getting an Instance
+Steps to create a VM instance from Google Cloud Console:
+1. Go to the [Google Cloud Console Dashboard](https://console.cloud.google.com/) to create a VM Instance ![Create VM INstance](/images/setup_guides/gcp/CreateVmInstance.png)
+2. Select an existing project or create a new one under your organization.
+3. For instance configuration for DANSWER, we recommend at least 16GB of RAM, 4-8vCPU cores, and 500GB of disk for a small-mid sized organization (< 5000 users). You can choose the machine type as per your requirements.
+For reference, in our Cloud offering we use a `e2-standard-4` with 500GB of EBS storage. For more details on GCP instances, you can refer to the [GCP documentation](https://cloud.google.com/compute/docs/instances).
+![Instance](/images/setup_guides/gcp/Instance.png)
+4. Make sure to allow HTTPS traffic in the firewall settings and valid scopes for the instance. ![Firewall](/images/setup_guides/gcp/Firewall.png)
+
+For the below guide, we will assume that you’ve chosen to use GCP Debian GNU/Linux machine with the recommended `e2-standard-4` instance.
+For more details, you can follow the steps in the [GCP documentation](https://cloud.google.com/compute/docs/quickstart) to create a [VM instance](https://cloud.google.com/compute/docs/instances/create-start-instance).
+
+## Pointing your Domain to the Instance
+
+Next, we should point your domain to the VM instance we just created. To do this, we need to go to your DNS and add two records.
+For this guide, I'll be assuming your DNS provider is GoDaddy, but it should be almost exactly the same for any DNS provider.
+
 <Info>
-  GCP guide coming soon! For now, checkout our [AWS EC2 guide](https://docs.danswer.dev/production/aws/ec2). The steps
-  to deploy on Google Compute Engine are very similar.
+  If you don't have a domain to use yet, then you can either buy one from a DNS
+  provider like [GoDaddy](https://www.godaddy.com/) or just skip HTTPS for now.
 </Info>
+
+First, we need to grab the External IP address of the instance. You can get that from the VM Instance list page on GCP Console.
+![Instance](/images/setup_guides/gcp/InstanceIp.png)
+
+Finally, we need to head to the DNS provider and add two entries into the DNS:
+
+![Instance](/images/setup_guides/gcp/ARecord.png)
+![Instance](/images/setup_guides/gcp/CnameRecord.png)
+
+The first record directs traffic to that domain to your GCP VM instance. The second record will handle
+`www.<YOUR_DOMAIN>` and ensure that this also takes the user to your VM instance.
+
+## Installing Dependencies
+
+Next, we need to prepare the instance so we can actually get Danswer up and running. To do this, you'll
+need three things: `git`, `docker`, and `docker compose`. For Debian Linux 12, this can be done with the following:
+
+```bash
+sudo yum update -y
+
+sudo yum install docker -y
+sudo service docker start
+
+sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+sudo yum install git
+```
+
+## Starting up Danswer
+
+Now that we have everything we need we can startup Danswer.
+
+First, let's clone the repo:
+
+```bash
+git clone https://github.com/danswer-ai/danswer.git
+```
+
+Next, let's set the necessary env variables:
+
+```bash
+cd danswer/deployment/docker_compose
+touch .env
+touch .env.nginx
+```
+
+In the `.env` file, you can copy past the following (filling in the missing fields as needed):
+
+```
+WEB_DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+
+# if your email is something like "chris@danswer.ai", then this should be "danswer.ai"
+# this prevents people outside your company from creating an account
+VALID_EMAIL_DOMAINS=<YOUR_COMPANIES_EMAIL_DOMAIN>
+
+AUTH_TYPE=basic
+# if you want to enable email verification, uncomment the following
+# REQUIRE_EMAIL_VERIFICATION=true
+# SMTP_USER=<GMAIL_ACCOUNT_EMAIL_YOU_WANT_TO_SEND_VERIFICATION_EMAILS_WITH>
+# SMTP_PASS=<GMAIL_ACCOUNT_PW_YOU_WANT_TO_SEND_VERIFICATION_EMAILS_WITH>
+
+# if you've gone through the Google OAuth setup guide, then comment out
+# the above and uncomment the following
+# AUTH_TYPE=google_oauth
+# GOOGLE_OAUTH_CLIENT_ID=
+# GOOGLE_OAUTH_CLIENT_SECRET=
+# SECRET=<RANDOMLY_GENERATED_UUID>
+
+GEN_AI_MODEL_PROVIDER=openai
+GEN_AI_MODEL_VERSION=gpt-4  # if it's an option, we recommend using gpt-4
+
+# Default values here are what Postgres uses by default, feel free to change.
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=password
+```
+
+In the `.env.nginx` file, put the following:
+
+```
+DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+```
+
+Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/). To do this, we can simply run:
+
+```bash
+./init-letsencrypt.sh
+```
+
+<Info>
+  If are skipping the HTTPS setup, you should start things up with:
+  `docker-compose -f docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate`
+  instead of the above. You can then access Danswer from the IP address from earlier or from the
+  instance `External IP` provided on the instance's page in the GCP VM console.
+</Info>
+
+Voila, you're all done! 🎉
+
+After waiting a few minutes (you can monitor the progress with
+`docker logs danswer-stack-api_server-1 -f`; once you see a log for
+`INFO:     Application startup complete.` then everything should be good to go).
