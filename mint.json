@@ -124,6 +124,12 @@
       ]
     },
     {
+      "group": "Backend APIs",
+      "pages": [
+        "backend_apis/ingestion"
+      ]
+    },
+    {
       "group": "Cloud APIs",
       "pages": [
         "apis/answer_with_quote",
