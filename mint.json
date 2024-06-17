@@ -110,6 +110,8 @@
         "connectors/notion",
         "connectors/zendesk",
         "connectors/sharepoint",
+        "connectors/salesforce",
+        "connectors/teams",
         "connectors/gong",
         "connectors/linear",
         "connectors/bookstack",

@@ -6520,6 +6520,7 @@
           "bookstack",
           "confluence",
           "slab",
+          "salesforce",
           "jira",
           "productboard",
           "file",
@@ -6532,7 +6533,8 @@
           "google_sites",
           "zendesk",
           "loopio",
-          "sharepoint"
+          "sharepoint",
+          "teams"
         ],
         "title": "DocumentSource",
         "description": "An enumeration."
