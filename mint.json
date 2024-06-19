@@ -124,6 +124,7 @@
         "connectors/zulip",
         "connectors/google_sites",
         "connectors/dropbox",
+        "connectors/discourse",
         "connectors/clickup"
       ]
     },
