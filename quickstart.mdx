@@ -4,6 +4,7 @@ description: "How to deploy Danswer on your local machine"
 icon: "bolt"
 ---
 
+
 ## Requirements
 
     - git
@@ -12,7 +13,6 @@ icon: "bolt"
 
 ## Setup
 
-This quickstart guide covers setting up Danswer for local execution
 
 <Warning>
   The most common source of issues is under-resourcing. Before beginning, check
@@ -29,6 +29,8 @@ This quickstart guide covers setting up Danswer for local execution
     cd danswer/deployment/docker_compose
     ```
 
+    3. (Optional) [configure Danswer](/configuration/configuration_guide)
+
     4. Bring up your docker engine and run:
         - To pull images from DockerHub and run Danswer:
         ```bash
@@ -38,7 +40,6 @@ This quickstart guide covers setting up Danswer for local execution
          ```bash
         docker compose -f docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate
         ```
-        - These commands are also used to redeploy if any **.env** variables are updated
         - This may take 15+ minutes depending on your internet speed.
             - Additionally, once the images have been pulled / built, the initial startup of the `api_server` 
             may take some time (we download embedding models from HuggingFace to power the search). If you see 
@@ -46,9 +47,15 @@ This quickstart guide covers setting up Danswer for local execution
             check the `api_server` logs and make sure you see `Application startup complete`. 
             - If you see `Killed` in the logs, you may need to increase the amount of memory given to Docker. 
             For recommendations, check the system requirements [here](https://docs.danswer.dev/resourcing).
+
+<Info>
+  These commands are also used to redeploy if any **.env** variables are updated
+</Info>
+
+
     5. Danswer will now be running on http://localhost:3000.
 
-## Gen-AI API Key
+## Generative AI API Key
 
 **Note:** On the initial visit, Danswer will prompt for an OpenAI API key.
 
@@ -60,9 +67,12 @@ You can get an OpenAI API key at:
   [here](https://docs.danswer.dev/gen_ai_configs/overview) for more info
 </Info>
 
+
 ## Indexing Documents
 
-**This quickstart guide will index a publicly accessible website as this requires no additional authorization setup** 1. Navigate to the top right of Danswer's home screen and select **Admin Panel**
+**This quickstart guide will index a publicly accessible website as this requires no additional authorization setup** 
+
+    1. Navigate to the top right of Danswer's home screen and select **Admin Panel**
 ![AdminPanel](/images/quickstart/AdminPanel.png)
 
     2. In the Web Connector dashboard, pick any base URL to index.
@@ -83,6 +93,6 @@ docker compose -f docker-compose.dev.yml -p danswer-stack down
 ```
 
 <Info>
-  add `-v` at the end to delete the volumes (containing users and indexed
+  add `-v` at the end to additionally delete the volumes (containing users and indexed
   documents){" "}
 </Info>

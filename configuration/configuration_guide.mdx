@@ -1,0 +1,42 @@
+---
+title: "Configuring Danswer"
+description: "How to customize your deployment environment."
+---
+
+## Environment Variables
+All of the global configuration options that are not built into the UI are set via environment variables.
+A fairly exhaustive list of all of the options can be found
+[here](https://github.com/danswer-ai/danswer/blob/main/deployment/docker_compose/docker-compose.dev.yml#L18) with documentation [here](/configuration/environment_variables).
+
+There are defaults set in the code so changing/settings these values is **not required** to use Danswer.
+A few notable settings that are more frequently changed however are the following:
+- AUTH_TYPE (default value is `disabled`)
+- MULTILINGUAL_QUERY_EXPANSION (you can provide a comma separated list of languages for query rephrasing such as `English,French`)
+- LOG_LEVEL (default is `info`)
+- WEB_DOMAIN (your full url in production, including the protocol- e.g. `https://www.danswer.ai`)
+
+## Docker Compose
+There are several ways to configure environment variables for the containers. For Docker Compose, there are many ways
+to pass environment variables to the container, any of the standard approaches will work. However
+**the preferred approach** for Danswer is to use the `.env` file. To do this, create a file called `.env` at
+`danswer/deployment/docker_compose/.env`. From there, populate it with the values you want to override:
+
+```
+# Configures basic email/password based login
+AUTH_TYPE="basic"
+
+# Rephrasing the query into different languages to improve search recall
+MULTILINGUAL_QUERY_EXPANSION="English,Spanish,German"
+
+# Set a cheaper/faster LLM for the flows that are easier (such as translating the query etc.)
+FAST_GEN_AI_MODEL_VERSION="gpt-3.5-turbo"
+
+# Setting more verbose logging
+LOG_LEVEL="debug"
+LOG_ALL_MODEL_INTERACTIONS="true"
+```
+
+
+# Kubernetes
+For Kubernetes, the deployment yaml files includes an Environment ConfigMap. Simply update the values in the file
+[here](https://github.com/danswer-ai/danswer/blob/main/deployment/kubernetes/env-configmap.yaml).
