@@ -19,7 +19,7 @@
     {
       "name": "Slack",
       "icon": "slack",
-      "url": "https://join.slack.com/t/danswer/shared_invite/zt-1w76msxmd-HJHLe3KNFIAIzk_0dSOKaQ"
+      "url": "https://join.slack.com/t/danswer/shared_invite/zt-2lcmqw703-071hBuZBfNEOGUsLa5PXvQ"
     },
     {
       "name": "Discord",
@@ -139,6 +139,12 @@
       "pages": [
         "apis/answer_with_quote",
         "apis/send_message_simple_api"
+      ]
+    },
+    {
+      "group": "Troubleshooting",
+      "pages": [
+        "troubleshooting/common"
       ]
     },
     {
