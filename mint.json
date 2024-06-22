@@ -159,7 +159,8 @@
     {
       "group": "More",
       "pages": [
-        "more/telemetry"
+        "more/telemetry",
+        "more/options"
       ]
     }
   ],
