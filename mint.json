@@ -151,12 +151,6 @@
       ]
     },
     {
-      "group": "Troubleshooting",
-      "pages": [
-        "troubleshooting/common"
-      ]
-    },
-    {
       "group": "More",
       "pages": [
         "more/telemetry",
