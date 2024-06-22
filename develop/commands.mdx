@@ -1,0 +1,70 @@
+---
+title: Useful commands
+description: 'Get grounded'
+---
+
+## Contributing should be easy!
+
+We want to make contributing to Danswer as seamless as possible, so we've included a list of common commands which you'll find yourself using quite often!
+I apologize for the confusion. You're absolutely right. I'll revise the documentation to focus solely on the commands and their explanations, without mentioning aliases until the final section. Here's the updated version:
+Certainly. I'll add that explanation to the documentation. Here's the updated version with the additional information about the formatting and checks:
+
+```markdown
+## Common Development Commands
+
+Here are some useful commands for developing on Danswer. These commands help streamline various tasks in your development workflow.
+
+[Previous sections remain unchanged]
+
+### Code Quality Commands
+
+- Format web code:
+  ```
+  npx prettier --write web
+  ```
+  Ensures consistent styling in the web codebase using Prettier.
+
+- Format Python and web code:
+  ```
+  black .; npx prettier --write web
+  ```
+  Runs both Black for Python formatting and Prettier for web code formatting.
+
+- Run linting and import sorting:
+  ```
+  mypy .; ruff .; find ./backend/danswer -name '*.py' | xargs reorder-python-imports --py311-plus
+  ```
+  Performs type checking, linting, and import sorting to maintain code quality.
+
+## Code Quality and Pull Request Checks
+
+At Danswer, we maintain high code quality standards through automated checks in our development process. These checks are crucial for maintaining consistency and preventing issues in our codebase.
+
+### Formatting and Linting
+
+We use a combination of tools to ensure our code is properly formatted and follows our coding standards:
+
+1. Black: For Python code formatting
+2. Prettier: For web code formatting
+3. mypy: For Python type checking
+4. ruff: For Python linting
+5. reorder-python-imports: For consistent import ordering in Python files
+
+These tools are run as part of our pre-commit hooks and GitHub Actions workflows. To ensure your code passes these checks, run the following command before committing:
+
+```
+mypy .; ruff .; find ./backend/danswer -name '*.py' | xargs reorder-python-imports --py311-plus
+```
+
+This command runs our full suite of linting and formatting checks. It's the same check that our GitHub Actions workflow performs on pull requests.
+
+### Pull Request Checks
+
+When you submit a pull request, our GitHub Actions workflow automatically runs these checks on your code. Your pull request will not be approved until it passes all these checks. This ensures that all code merged into our main branch meets our quality standards.
+
+To avoid delays in the PR process, we recommend running these checks locally before pushing your code. This way, you can catch and fix any issues early in your development process.
+
+## Setting Up Aliases
+
+[The aliases section remains unchanged]
+
