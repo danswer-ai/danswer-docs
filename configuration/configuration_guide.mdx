@@ -1,35 +1,19 @@
 ---
 title: "Configuring Danswer"
 description: "How to customize your deployment environment."
-icon: "wrench"
 ---
 
 ## Environment Variables
 All of the global configuration options that are not built into the UI are set via environment variables.
 A fairly exhaustive list of all of the options can be found
-[here](https://github.com/danswer-ai/danswer/blob/main/deployment/docker_compose/docker-compose.dev.yml#L18).
+[here](https://github.com/danswer-ai/danswer/blob/main/deployment/docker_compose/docker-compose.dev.yml#L18) with documentation [here](/configuration/environment_variables).
 
 There are defaults set in the code so changing/settings these values is **not required** to use Danswer.
 A few notable settings that are more frequently changed however are the following:
 - AUTH_TYPE (default value is `disabled`)
 - MULTILINGUAL_QUERY_EXPANSION (you can provide a comma separated list of languages for query rephrasing such as `English,French`)
 - LOG_LEVEL (default is `info`)
-- WEB_DOMAIN (your full url in production, including the protocol- e.g. https://www.danswer.ai)
-
-class LLMProviderUpsertRequest(LLMProvider):
-    # should only be used for a "custom" provider
-    # for default providers, the built-in model names are used
-    model_names: list[str] | None
-
-## Seeding
-If you want to start your instance of Danswer with pre-configured options, you can use environment variables to seed it 
-with pre-specified options. These will persist across restarts, shut-down of volumes, etc.
-
-- `llms`: a list of llm configurations 
-  - Each item in the list should contain: `name`, `provider`, `api_key`, `api_base`, `api_version`, `custom_config`, `default_model_name`, `fast_default_model_name` 
-- `admin_user_emails`: a list of email addresses which, upon signing up, should automatically be assigned admin roles. 
-- `seeded_name`: pre-set name for your company's Danswer instance (e.g. "Acme's Danswer").
-- `seeded_logo_path`: pre-set path to your logo (as seen from the perspective of the `backend` repository). This should point to a path within `assets` (e.g. `assets/logo.png`)
+- WEB_DOMAIN (your full url in production, including the protocol- e.g. `https://www.danswer.ai`)
 
 ## Docker Compose
 There are several ways to configure environment variables for the containers. For Docker Compose, there are many ways
