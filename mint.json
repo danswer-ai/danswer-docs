@@ -83,14 +83,6 @@
       ]
     },
     {
-      "group": "Contributing",
-      "pages": [
-        "develop/contributing",
-        "develop/setup",
-        "develop/commands"
-      ]
-    },
-    {
       "group": "Connectors",
       "icon": "plug",
       "pages": [
