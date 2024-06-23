@@ -83,6 +83,14 @@
       ]
     },
     {
+      "group": "Contributing",
+      "pages": [
+        "contributing/overview",
+        "contributing/setup",
+        "contributing/commands"
+      ]
+    },
+    {
       "group": "Connectors",
       "icon": "plug",
       "pages": [

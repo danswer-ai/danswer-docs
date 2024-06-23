@@ -1,0 +1,155 @@
+---
+title: Contributing Guide
+description: 'How to get set up on Danswer'
+icon: 'book'
+---
+
+# Getting Started with Danswer Development
+
+Danswer is a fully functional app that relies on external software components:
+- [Postgres](https://www.postgresql.org/) (Relational DB)
+- [Vespa](https://vespa.ai/) (Vector DB/Search Engine)
+
+This guide provides instructions for setting up Danswer services outside of Docker for easier development. However, you can also use containers and update with local changes by providing the `--build` flag.
+
+## Local Setup
+
+### Python Environment
+
+We recommend using Python version 3.11. Lower versions may require code modifications, while higher versions might face compatibility issues with our Tensorflow version.
+
+1. Create and activate a virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+> **Note**: Do not set up the virtual environment within the Danswer directory.
+
+For Windows users:
+- Command Prompt: `.venv\Scripts\activate`
+- PowerShell: `.venv\Scripts\Activate.ps1`
+
+2. Install Python dependencies:
+
+```bash
+pip install -r danswer/backend/requirements/default.txt
+pip install -r danswer/backend/requirements/dev.txt
+pip install -r danswer/backend/requirements/model_server.txt
+```
+
+### Frontend Setup
+
+1. Install [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+2. Navigate to `danswer/web` and run:
+
+```bash
+npm i
+```
+
+### Playwright Installation
+
+Playwright is required for the Web Connector:
+
+1. Open a new terminal and activate the Python virtual environment.
+2. Install Playwright:
+
+```bash
+playwright install
+```
+
+## Setting Up Dependent Docker Containers
+
+1. Navigate to `danswer/deployment/docker_compose`.
+2. Start Vespa and Postgres:
+
+```bash
+docker compose -f docker-compose.dev.yml -p danswer-stack up -d index relational_db
+```
+
+## Running Danswer
+
+### Frontend
+
+In `danswer/web`, run:
+
+```bash
+npm run dev
+```
+
+### Model Server
+
+In `danswer/backend`, run:
+
+```bash
+uvicorn model_server.main:app --reload --port 9000
+```
+
+For Windows:
+
+```bash
+powershell -Command "uvicorn model_server.main:app --reload --port 9000"
+```
+
+### Database Migrations
+
+For the first run or after DB model changes, in `danswer/backend`, run:
+
+```bash
+alembic upgrade head
+```
+
+### Task Queue
+
+In `danswer/backend`, run:
+
+```bash
+python ./scripts/dev_run_background_jobs.py
+```
+
+### Backend API Server
+
+In `danswer/backend`, run:
+
+```bash
+AUTH_TYPE=disabled uvicorn danswer.main:app --reload --port 8080
+```
+
+For Windows:
+
+```bash
+powershell -Command "$env:AUTH_TYPE='disabled'; uvicorn danswer.main:app --reload --port 8080"
+```
+
+> **Tip**: For detailed logging, add `LOG_LEVEL=DEBUG` to the relevant services.
+
+## Code Quality
+
+### Backend
+
+1. Set up pre-commit hooks:
+   - Install [pre-commit](https://pre-commit.com/#installation).
+   - In `danswer/backend`, run:
+
+     ```bash
+     pre-commit install
+     ```
+
+2. Run mypy for static type checking:
+
+```bash
+python -m mypy .
+```
+
+### Frontend
+
+Use prettier for formatting. In `danswer/web`, run:
+
+```bash
+npx prettier --write .
+```
+
+## Release Process
+
+Danswer follows the semver versioning standard. Docker containers are automatically pushed to [DockerHub](https://hub.docker.com/search?q=danswer%2F) with every tag.

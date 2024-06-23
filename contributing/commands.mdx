@@ -1,0 +1,149 @@
+---
+title: Useful commands
+description: 'Glossary of helpful commands'
+icon: 'toolbox'
+---
+
+
+## API and Server Commands
+### Start the main API server
+```bash
+uvicorn danswer.main:app --reload --port 8080
+```
+For Windows (PowerShell):
+```powershell
+$env:AUTH_TYPE='disabled'; uvicorn danswer.main:app --reload --port 8080
+```
+Launches the Danswer API server on port 8080 with authentication disabled and auto-reload enabled.
+
+### Run background jobs
+```bash
+python ./scripts/dev_run_background_jobs.py
+```
+Executes necessary background tasks during development.
+
+### Start the model server
+```bash
+uvicorn model_server.main:app --reload --port 9000
+```
+Launches the model server on port 9000 with auto-reload enabled.
+
+## Docker Commands
+
+### Build and start all Docker containers
+```bash
+docker compose -f ./deployment/docker_compose/docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate
+```
+
+### Start non-development Docker containers
+```bash
+docker compose -f ./deployment/docker_compose/docker-compose.dev.yml -p danswer-stack up -d index relational_db
+```
+
+### Stop and remove Docker containers
+```bash
+docker compose -f ./deployment/docker_compose/docker-compose.dev.yml down -v
+```
+
+## Database and Migration Commands
+
+### Connect to the development database
+```bash
+psql -h localhost -p 5432 -U postgres -d postgres
+```
+
+### Run database migrations
+```bash
+alembic upgrade head
+```
+
+## Frontend Development
+
+### Start the frontend development server
+In `danswer/web`, run:
+```bash
+npm run dev
+```
+
+## Formatting and Linting
+
+### Format web code
+```bash
+npx prettier --write web
+```
+
+### Format all code
+```bash
+black .; npx prettier --write web
+```
+
+### Run linting checks
+```bash
+mypy .; ruff .; find ./backend/danswer -name '*.py' | xargs reorder-python-imports --py311-plus
+```
+For Windows (PowerShell):
+```powershell
+mypy .; ruff .; Get-ChildItem -Recurse -Filter *.py | ForEach-Object { reorder-python-imports --py311-plus $_.FullName }
+```
+
+## (Optional) Setting Up Aliases
+
+To make these commands easier to use, you can set up aliases in your shell configuration.
+
+### macOS and Linux (Zsh)
+
+1. Open your `.zshrc` file:
+   ```bash
+   nano ~/.zshrc
+   ```
+
+2. Add the following at the end of the file:
+   ```zsh
+   # Danswer Development Aliases
+   alias danswer_api="AUTH_TYPE=disabled uvicorn danswer.main:app --reload --port 8080"
+   alias danswer_bg_jobs="python ./scripts/dev_run_background_jobs.py"
+   alias danswer_model_server="uvicorn model_server.main:app --reload --port 9000"
+   alias danswer_docker_full="docker compose -f ./deployment/docker_compose/docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate"
+   alias danswer_docker_core="docker compose -f ./deployment/docker_compose/docker-compose.dev.yml -p danswer-stack up -d index relational_db"
+   alias danswer_docker_cleanup="docker compose -f ./deployment/docker_compose/docker-compose.dev.yml down -v"
+   alias danswer_db_connect="psql -h localhost -p 5432 -U postgres -d postgres"
+   alias danswer_db_migrate="alembic upgrade head"
+   alias danswer_format_web="npx prettier --write web"
+   alias danswer_format_all="black .; npx prettier --write web"
+   alias danswer_lint="mypy .; ruff .; find ./backend/danswer -name '*.py' | xargs reorder-python-imports --py311-plus"
+   ```
+
+3. Save the file and run:
+   ```bash
+   source ~/.zshrc
+   ```
+
+### Windows (PowerShell)
+
+1. Open your PowerShell profile:
+   ```powershell
+   notepad $PROFILE
+   ```
+
+2. Add the following to the file:
+   ```powershell
+   # Danswer Development Aliases
+   function danswer_api { $env:AUTH_TYPE='disabled'; uvicorn danswer.main:app --reload --port 8080 }
+   function danswer_bg_jobs { python ./scripts/dev_run_background_jobs.py }
+   function danswer_model_server { uvicorn model_server.main:app --reload --port 9000 }
+   function danswer_docker_full { docker compose -f ./deployment/docker_compose/docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate }
+   function danswer_docker_core { docker compose -f ./deployment/docker_compose/docker-compose.dev.yml -p danswer-stack up -d index relational_db }
+   function danswer_docker_cleanup { docker compose -f ./deployment/docker_compose/docker-compose.dev.yml down -v }
+   function danswer_db_connect { psql -h localhost -p 5432 -U postgres -d postgres }
+   function danswer_db_migrate { alembic upgrade head }
+   function danswer_format_web { npx prettier --write web }
+   function danswer_format_all { black .; npx prettier --write web }
+   function danswer_lint { mypy .; ruff .; Get-ChildItem -Recurse -Filter *.py | ForEach-Object { reorder-python-imports --py311-plus $_.FullName } }
+   ```
+
+3. Save the file and restart PowerShell or run:
+   ```powershell
+   . $PROFILE
+   ```
+
+These aliases will allow you to use shorter commands for common Danswer development tasks, making your workflow more efficient. Remember to run the linting and formatting checks before submitting your pull requests to ensure smooth integration of your contributions.
