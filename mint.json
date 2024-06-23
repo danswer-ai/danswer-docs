@@ -52,14 +52,7 @@
             "gen_ai_configs/custom_server"
           ]
         },
-        {
-          "group": "Configuration",
-          "icon": "screwdriver-wrench",
-          "pages": [
-            "configuration/configuration_guide",
-            "configuration/environment_variables"
-          ]
-        },
+        "configuration_guide",
         "system_overview",
         "contact_us"
       ]

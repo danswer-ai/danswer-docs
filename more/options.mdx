@@ -25,12 +25,9 @@ If you must delete a connector and related information before the process of wai
 
 ![Connector ID](/images/more/connectorID.png)
 
-
 3. On the connector's page, the URL's final number will be the ID of the connector. For example, in this example, the connector's ID is 2. Here is also a more zoomed in photo of the URL bar.
 
-
-![Zoomed in Connector ID](/images/more/zoomConnectorID.png)
-
+![Zoomed in Connector ID](/images/more/zoomConnectorID.png)m
 
 
 #### Deleting Locally
@@ -41,7 +38,7 @@ If you must delete a connector and related information before the process of wai
 
 2. Navigate to the base folder of your Danswer repository.
 
-3. Run `python3 backend/scripts/deletion_script.py <CONNECTOR_ID>`
+3. Run `python3 backend/scripts/force_delete_connector_by_id.py <CONNECTOR_ID>`
 
 #### Deleting in Docker Compose 
 
@@ -61,14 +58,14 @@ Follow these steps to manually and immediately delete a connector and its conten
 
 4. Run the deletion script inside the Docker container:
    ```
-   docker exec -it <CONTAINER_ID> python scripts/deletion_script.py <CONNECTOR_ID>
+   docker exec -it <CONTAINER_ID> python scripts/force_delete_connector_by_id.py <CONNECTOR_ID>
    ```
 
    Replace `<CONTAINER_ID>` with your actual API container ID, and `<CONNECTOR_ID>` with the ID of the connector you want to delete.
 
    For example:
    ```
-   docker exec -it 92492089ada1 python scripts/deletion_script.py 10
+   docker exec -it 92492089ada1 python scripts/force_delete_connector_by_id.py 10
    ```
 
 5. The script will execute inside the container, accessing the necessary resources and performing the deletion.
@@ -78,7 +75,7 @@ Follow these steps to manually and immediately delete a connector and its conten
 
 - If you encounter permission issues, you may need to run the docker-compose command with sudo:
   ```
-  sudo docker-compose exec <CONTAINER_ID> python /app/scripts/deletion_script.py `CONNECTOR_ID`
+  sudo docker-compose exec <CONTAINER_ID> python /app/scripts/force_delete_connector_by_id.py `CONNECTOR_ID`
   ```
 
 - Ensure that your user has the necessary permissions to execute docker-compose commands.
