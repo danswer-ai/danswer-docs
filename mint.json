@@ -74,12 +74,21 @@
         "production/digitalocean"
       ]
     },
+
     {
       "group": "Auth",
       "pages": [
         "basic_auth",
         "google_oauth_setup",
         "oidc_saml"
+      ]
+    },
+     
+    {
+      "group": "Enterprise",
+      "pages": [
+        "enterprise/enterprise",
+        "enterprise/configuration"
       ]
     },
     {
