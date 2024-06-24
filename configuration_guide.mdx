@@ -251,15 +251,3 @@ Set to `true` to enable additional logging of Vespa query performance.
 #### LOG_ENDPOINT_LATENCY
 Set to `true` to enable logging of endpoint latency information.
 
-
-### ENV_SEED_CONFIGURATION  
-If you want to start your instance of Danswer with pre-configured options, you can use environment variables to seed it 
-with pre-specified options. These will persist across restarts, shut-down of volumes, etc.
-
-- `llms`: a list of llm configurations 
-  - Each item in the list should contain: `name`, `provider`, `api_key`, `api_base`, `api_version`, `custom_config`, `default_model_name`, `fast_default_model_name` 
-- `admin_user_emails`: a list of email addresses which, upon signing up, should automatically be assigned admin roles.
-- `seeded_name`: pre-set name for your company's Danswer instance (e.g. "Acme's Danswer").
-- `seeded_logo_path`: pre-set path to your logo (as seen from the perspective of the `backend` repository). This should point to a path within `assets` (the folder within `/backend`) (e.g. `assets/logo.png`)
-
-Example configuration: `export ENV_SEED_CONFIGURATION='{"admin_user_emails": ["email@gmail.com"], "seeded_name": "Acme Corp", "seeded_logo_path": "assets/logo.png"}'`

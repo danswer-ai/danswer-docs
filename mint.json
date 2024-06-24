@@ -82,6 +82,14 @@
         "oidc_saml"
       ]
     },
+     
+    {
+      "group": "Enterprise",
+      "pages": [
+        "enterprise_edition/overview",
+        "enterprise_edition/configuration"
+      ]
+    },
     {
       "group": "Connectors",
       "icon": "plug",
