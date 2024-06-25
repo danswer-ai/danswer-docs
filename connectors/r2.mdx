@@ -1,0 +1,55 @@
+---
+title: R2 Connector
+description: 'Access documents stored in Cloudflare R2 buckets'
+---
+
+## How it works
+The R2 connector pulls in all documents from the specified Cloudflare R2 bucket. It supports various file formats including PDF, DOC, DOCX, TXT, and more.
+
+Documents are updated every **10** minutes.
+
+## Setting up
+
+### Authorization
+
+1. Log into your Cloudflare dashboard.
+2. Navigate to "R2" in the sidebar.
+3. Click on "Manage R2 API Tokens".
+4. Click "Create API token".
+5. Give your token a name (e.g., "DanswerR2Connector") and select the appropriate permissions (read access to your bucket).
+6. Click "Create API Token".
+7. On the next screen, you'll see your Access Key ID and Secret Access Key. Make sure to copy these immediately as you won't be able to access the Secret Access Key again.
+
+![R2 Credentials](/images/connectors/r2/r2_credentials.png)
+
+8. To find your Account ID, go to the Overview page in your Cloudflare dashboard. The Account ID is listed in the right sidebar.
+
+![R2 Account ID](/images/connectors/r2/r2_account_id.png)
+
+### Indexing
+
+1. Navigate to the Admin Dashboard and select the **R2** Connector.
+2. In **Step 1**, provide your R2 credentials:
+
+![R2 Auth](/images/connectors/r2/r2_auth.png)
+
+* Provide your R2 Access Key ID, Secret Access Key, and Account ID for authentication.
+* These credentials will be used to access your R2 buckets.
+
+**R2 Access Key ID:**
+**R2 Secret Access Key:**
+**Account ID:**
+
+3. Click "Update" to save your credentials.
+
+4. In **Step 2**, specify which R2 bucket you want to make searchable:
+
+![R2 Bucket Selection](/images/connectors/r2/r2_bucket_selection.png)
+
+5. Click "Connect" to begin indexing.
+
+## Understanding R2 Structure
+
+Cloudflare R2 organizes data into buckets, similar to Amazon S3. Each bucket can contain an unlimited number of objects (files). You can think of a bucket as a root directory, and the objects as files within that directory.
+
+For more information on R2 structure, visit the [Cloudflare R2 documentation](https://developers.cloudflare.com/r2/).

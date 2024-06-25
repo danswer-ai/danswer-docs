@@ -1,0 +1,52 @@
+---
+title: Oracle Cloud Infrastructure Storage Connector
+description: 'Access documents stored in Oracle Cloud Infrastructure Object Storage'
+---
+
+## How it works
+The Oracle Cloud Infrastructure (OCI) Storage connector pulls in all documents from the specified OCI bucket. It supports various file formats including PDF, DOC, DOCX, TXT, and more.
+
+Documents are updated every **10** minutes.
+
+## Setting up
+
+### Authorization
+
+1. Log into your Oracle Cloud Console.
+2. Click on the user icon in the top-right corner and select "User Settings".
+3. Under "Resources", click on "API Keys".
+4. Click "Add API Key".
+5. Select "Generate API Key Pair" and click "Download Private Key".
+6. Click "Add" to add the public key to your account.
+7. After adding the key, you'll see a configuration file. Keep this information handy as you'll need it for the connector setup.
+
+![OCI API Key](/images/connectors/oci/oci_api_key.png)
+
+### Indexing
+
+1. Navigate to the Admin Dashboard and select the **Oracle Cloud Infrastructure Storage** Connector.
+2. In **Step 1**, provide your OCI credentials:
+
+![OCI Auth](/images/connectors/oci/oci_auth.png)
+
+* Provide your OCI Access Key ID, Secret Access Key, Namespace, and Region for authentication.
+* These credentials will be used to access your OCI buckets.
+
+**OCI Access Key ID:** (This is your user OCID from the configuration file)
+**OCI Secret Access Key:** (This is the content of the private key file you downloaded)
+**Namespace:** (This is found in the configuration file)
+**Region:** (This is found in the configuration file)
+
+3. Click "Update" to save your credentials.
+
+4. In **Step 2**, specify which OCI bucket you want to make searchable:
+
+![OCI Bucket Selection](/images/connectors/oci/oci_bucket_selection.png)
+
+5. Click "Connect" to begin indexing.
+
+## Understanding Oracle Cloud Infrastructure Object Storage Structure
+
+Oracle Cloud Infrastructure Object Storage organizes data into buckets. Each bucket can contain an unlimited number of objects (files). You can think of a bucket as a root directory, and the objects as files within that directory.
+
+For more information on OCI Object Storage structure, visit the [Oracle Cloud Infrastructure Object Storage documentation](https://docs.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm).

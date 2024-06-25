@@ -1,0 +1,59 @@
+---
+title: Google Cloud Storage Connector
+description: 'Access documents stored in Google Cloud Storage buckets'
+---
+
+## How it works
+The Google Cloud Storage connector pulls in all documents from the specified GCS bucket. It supports various file formats including PDF, DOC, DOCX, TXT, and more.
+
+Documents are updated every **10** minutes.
+
+## Setting up
+
+### Authorization
+
+1. Log into your Google Cloud Console.
+2. Navigate to "IAM & Admin" > "Service Accounts".
+3. Click "Create Service Account".
+4. Set a name for the new service account (e.g., "danswer-gcs-connector") and click "Create".
+5. For the role, select "Storage Object Viewer" and click "Continue".
+6. Click "Done" to finish creating the service account.
+7. On the Service Accounts page, find your newly created account and click on it.
+8. In the "Keys" section, click "Add Key" > "Create new key".
+9. Choose "JSON" as the key type and click "Create".
+10. A JSON file will be downloaded to your computer. This file contains your credentials.
+
+![GCS Service Account Key](/images/connectors/gcs/gcs_service_account_key.png)
+
+11. Open the JSON file and note down the following information:
+   - `project_id`
+   - `client_email`
+   - `private_key`
+
+### Indexing
+
+1. Navigate to the Admin Dashboard and select the **Google Cloud Storage** Connector.
+2. In **Step 1**, provide your GCS credentials:
+
+![GCS Auth](/images/connectors/gcs/gcs_auth.png)
+
+* Provide your GCS Project ID, Client Email, and Private Key for authentication.
+* These credentials will be used to access your GCS buckets.
+
+**GCS Project ID:**
+**Client Email:**
+**Private Key:**
+
+3. Click "Update" to save your credentials.
+
+4. In **Step 2**, specify which GCS bucket you want to make searchable:
+
+![GCS Bucket Selection](/images/connectors/gcs/gcs_bucket_selection.png)
+
+5. Click "Connect" to begin indexing.
+
+## Understanding Google Cloud Storage Structure
+
+Google Cloud Storage organizes data into buckets. Each bucket can contain an unlimited number of objects (files). You can think of a bucket as a root directory, and the objects as files within that directory.
+
+For more information on Google Cloud Storage structure, visit the [Google Cloud Storage documentation](https://cloud.google.com/storage/docs).
