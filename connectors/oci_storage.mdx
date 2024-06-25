@@ -14,34 +14,51 @@ Documents are updated every **10** minutes.
 
 1. Log into your Oracle Cloud Console.
 2. Click on the user icon in the top-right corner and select "User Settings".
-3. Under "Resources", click on "API Keys".
-4. Click "Add API Key".
-5. Select "Generate API Key Pair" and click "Download Private Key".
-6. Click "Add" to add the public key to your account.
-7. After adding the key, you'll see a configuration file. Keep this information handy as you'll need it for the connector setup.
 
-![OCI API Key](/images/connectors/oci/oci_api_key.png)
+![API Keys](/images/connectors/blob/oci/topbar.png)
+
+
+3. Under "Resources", click on "Customer Secret Keys".
+![API Keys](/images/connectors/blob/oci/apikeys.png)
+
+
+4. Click "Generate Secret Key".
+5. Enter a friendly name for your key (e.g., "DanswerOCIConnector").
+6. Click "Generate Secret Key".
+7. You will see your Secret Key. Make sure to copy the key immediately, as you won't be able to retrieve the Secret Key later.
+
+8. You should now be taken to the "Customer Secret Keys" page and see a list of keys (including the name of the key you just generated). The corresponding access key should be present.
+
+![API Keys](/images/connectors/blob/oci/secretkeys.png)
+![Hover Key](/images/connectors/blob/oci/hoverkey.png)
+
+
+8. To find your tenancy's Object Storage namespace, click on the user icon in the top-right corner and select "Tenancy: [your tenancy name]".
+9. In the tenancy details, you'll find the Object Storage namespace.
+
 
 ### Indexing
 
 1. Navigate to the Admin Dashboard and select the **Oracle Cloud Infrastructure Storage** Connector.
 2. In **Step 1**, provide your OCI credentials:
 
-![OCI Auth](/images/connectors/oci/oci_auth.png)
 
-* Provide your OCI Access Key ID, Secret Access Key, Namespace, and Region for authentication.
+![API Keys](/images/connectors/blob/oci/danswer1.png)
+
+* Provide your OCI Access Key, Secret Key, Namespace, and Region for authentication.
 * These credentials will be used to access your OCI buckets.
 
-**OCI Access Key ID:** (This is your user OCID from the configuration file)
-**OCI Secret Access Key:** (This is the content of the private key file you downloaded)
-**Namespace:** (This is found in the configuration file)
-**Region:** (This is found in the configuration file)
+**OCI Access Key:**
+**OCI Secret Key:**
+**Namespace:**
+**Region:**
 
 3. Click "Update" to save your credentials.
 
 4. In **Step 2**, specify which OCI bucket you want to make searchable:
 
-![OCI Bucket Selection](/images/connectors/oci/oci_bucket_selection.png)
+![API Keys](/images/connectors/blob/oci/danswer2.png)
+
 
 5. Click "Connect" to begin indexing.
 

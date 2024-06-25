@@ -14,23 +14,31 @@ Documents are updated every **10** minutes.
 
 1. Log into your AWS Management Console.
 2. Navigate to the IAM (Identity and Access Management) dashboard.
-3. In the left sidebar, click on "Users" and then "Add user".
-4. Set a name for the new user (e.g., "DanswerS3Connector") and select "Programmatic access".
-5. Click "Next: Permissions".
-6. Choose "Attach existing policies directly" and search for "AmazonS3ReadOnlyAccess".
-7. Select this policy and click "Next: Tags".
-8. Add any tags if needed, then click "Next: Review".
-9. Review the details and click "Create user".
-10. On the success page, you'll see the Access Key ID and Secret Access Key. Make sure to copy these immediately as you won't be able to access the Secret Access Key again.
+3. In the left sidebar, click on "Users" and then "Create user".
 
-![AWS Credentials](/images/connectors/s3/aws_credentials.png)
+![IAM page](/images/connectors/blob/s3/iam.png)
+
+
+4. Set a name for the new user (e.g., "DanswerS3Connector") and click "Next".
+5. Click "Attach policies directly" and search for "AmazonS3ReadOnlyAccess".
+6. Select this policy and click "Next".
+7. Add any tags if needed, then click "Create user".
+8. You'll now be on the `users` page. Click on the user you just created. 
+9. Click "create access key" and select "Third-party service"
+10. Select "I understand the above recommendation and want to proceed to create an access key" and then "Next".
+11. Optionally, set a description tag and then press "create access key".
+12. You should now see, you'll see the Access Key ID and Secret Access Key. Make sure to copy these immediately as you won't be able to access the Secret Access Key again.
+
+
+![AWS Credentials](/images/connectors/blob/s3/accesskeyspage.png)
 
 ### Indexing
 
 1. Navigate to the Admin Dashboard and select the **S3** Connector.
 2. In **Step 1**, provide your AWS credentials:
 
-![S3 Auth](/images/connectors/s3/s3_auth.png)
+![Danswer S3 page 1](/images/connectors/blob/s3/danswer1.png)
+
 
 * If AWS Access Key ID and AWS Secret Access Key are provided, they will be used for authenticating the connector.
 * Otherwise, the Profile Name will be used (if provided).
@@ -40,13 +48,19 @@ Documents are updated every **10** minutes.
 **AWS Secret Access Key:**
 **Profile Name:**
 
+
 3. Click "Update" to save your credentials.
 
 4. In **Step 2**, specify which S3 bucket you want to make searchable:
 
-![S3 Bucket Selection](/images/connectors/s3/s3_bucket_selection.png)
+![Danswer S3 page 2](/images/connectors/blob/s3/danswer2.png)
 
 5. Click "Connect" to begin indexing.
+
+You should now see a page like below and be able to add more buckets with the same credentials!
+
+![Danswer S3 page 3](/images/connectors/blob/s3/danswer3.png)
+
 
 ## Understanding S3 Structure
 
