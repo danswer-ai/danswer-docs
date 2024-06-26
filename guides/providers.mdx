@@ -4,11 +4,10 @@ description: 'A comprehensive guide to selecting and using LLM providers in Dans
 icon: 'campground'
 ---
 
-## Introduction to LLM Providers
+## Danswer's Approach to LLM Providers
 
 Danswer is designed to be model-agnostic, offering you the flexibility to choose the Language Model (LLM) that best suits your needs. This approach ensures that you're not locked into a single provider and can leverage the strengths of different models for various tasks.
 
-![LLM Provider Selection Interface]()
 
 ## Model Overview
 
@@ -27,6 +26,8 @@ Danswer offers integration with several popular LLM providers, with a focus on m
 - **Knowledge cutoff**: April 2023
 - **Note**: Capable of image analysis
 
+Here's the updated information on Anthropic models, including Claude 3.5 Sonnet and a recommendation:
+
 ### Anthropic Models
 
 #### Claude-3 Opus
@@ -39,16 +40,21 @@ Danswer offers integration with several popular LLM providers, with a focus on m
 - **Best for**: General-purpose tasks requiring good quality and reasonable speed
 - **Note**: Good all-around performer for most use cases
 
+#### Claude 3.5 Sonnet
+- **Strengths**: Enhanced capabilities over Claude-3 Sonnet
+- **Best for**: Advanced general-purpose tasks with improved performance
+- **Note**: Recommended for most use cases due to its superior balance of capabilities
+
 #### Claude-3 Haiku
 - **Strengths**: Fast responses, efficient for simpler tasks
 - **Best for**: Quick queries, real-time applications
 - **Note**: Sacrifices some complexity for speed
 
+For most use cases, Claude 3.5 Sonnet is recommended as it offers an excellent balance of advanced capabilities, performance, and speed, making it suitable for a wide range of applications.
+
 
 ## Custom Providers
 Danswer allows you to add custom providers by integrating any model from the [LiteLLM providers list](https://docs.litellm.ai/docs/providers). This flexibility enables you to use specialized or proprietary models that best fit your organization's needs.
-
-![Model Comparison Chart]()
 
 
 
@@ -71,4 +77,3 @@ We recommend testing different models with your typical queries to determine whi
 3. **Stay Updated**: Regularly check for updates and new model releases.
 4. **Custom Integration**: Explore the option of integrating specialized models from the LiteLLM providers list for unique use cases.
 
-By leveraging Danswer's model-agnostic approach and the ability to integrate custom providers, you can ensure that you're always using the best LLM for each specific task, maximizing efficiency and effectiveness in your organization.

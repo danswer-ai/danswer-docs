@@ -8,7 +8,8 @@ icon: 'square-plus'
 
 Danswer empowers you to create custom AI assistants tailored to your specific needs. These assistants can be configured to handle a wide range of tasks, from answering HR queries to assisting with technical support. This guide will walk you through the process of creating an effective assistant using Danswer's platform.
 
-![Assistant Creation Overview]()
+![Assistant Configuration Interface](/images/guides/assistants/assistant_setup.png)
+
 
 ## Configuration Options
 
@@ -22,12 +23,12 @@ When creating an assistant in Danswer, you have several configuration options:
 6. **Starter Messages**: Initial messages to guide user interaction
 7. **LLM Provider**: The language model powering your assistant
 
-![Assistant Configuration Interface]()
+![Assistant Configuration Interface](/images/guides/assistants/assistant_search.png)
 
 
 ## Understanding Different Prompt Types
 
-Danswer uses two main types of prompts when configuring an assistant: the System Prompt and the Task Prompt. Understanding the difference between these is crucial for creating an effective assistant.
+Danswer uses two main types of prompts when configuring an assistant: the System Prompt and the Task Prompt ("Additional Instructions"). Understanding the difference between these is crucial for creating an effective assistant.
 
 ### System Prompt
 The System Prompt sets the overall context and behavior of your assistant. It defines:
@@ -35,7 +36,7 @@ The System Prompt sets the overall context and behavior of your assistant. It de
 - General behavioral guidelines
 - Any limitations or restrictions
 
-The System Prompt is like giving your assistant its job description and general rules of conduct. 
+The System Prompt is like giving your assistant its job description and what its purpose is. 
 
 Example System Prompt:
 ```
@@ -63,7 +64,6 @@ Follow these steps when responding to a user query:
 7. If the query is outside your knowledge base, politely direct the user to contact the HR department.
 ```
 
-![Prompt Configuration Interface]()
 
 
 ## Testing and Refinement
@@ -75,7 +75,6 @@ After creating your assistant:
 3. Use Danswer's analytics tools to identify areas for improvement
 4. Regularly update and refine your assistant based on feedback and changing needs
 
-![Assistant Analytics Dashboard]()
 
 ## Sharing and Permissions
 
