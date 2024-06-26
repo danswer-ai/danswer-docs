@@ -151,8 +151,7 @@
       "group": "Guides",
       "pages": [
         "guides/assistants",
-        "guides/providers",
-        "guides/permissions"
+        "guides/providers"
       ]
     },
     {
