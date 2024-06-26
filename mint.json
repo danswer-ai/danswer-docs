@@ -82,12 +82,19 @@
         "oidc_saml"
       ]
     },
-     
     {
       "group": "Enterprise",
       "pages": [
         "enterprise_edition/overview",
         "enterprise_edition/configuration"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/assistants",
+        "guides/providers",
+        "guides/permissions"
       ]
     },
     {
