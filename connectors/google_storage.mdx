@@ -1,0 +1,73 @@
+---
+title: Google Storage Connector
+description: 'Access documents stored in Google Cloud Storage buckets'
+---
+
+## How it works
+The Google Cloud Storage connector pulls in all documents from the specified GCS bucket. It supports various file formats including PDF, DOC, DOCX, TXT, and more.
+
+Documents are updated every **1** day.
+
+## Setting up
+
+### Authorization
+
+1. Log into your Google Cloud Console.
+2. Navigate to "IAM & Admin" > "Service Accounts".
+![Service Account Page](/images/connectors/blob/google/serviceaccount.png)
+
+3. Click "Create Service Account".
+![New Service Account](/images/connectors/blob/google/serviceaccount.png)
+
+4. Set a name for the new service account (e.g., "danswer-gcs-connector") and click "Create".
+
+5. For the role, select "Storage Object Viewer" or another appropriately permissive role and click "Continue".
+![Role](/images/connectors/blob/google/serviceaccountrole.png)
+
+6. Click "Done" to finish creating the service account.
+7. On the Service Accounts page, find your newly created account and click on it.
+8. In the "Keys" section, click "Add Key" > "Create new key".
+
+![New Key](/images/connectors/blob/google/newkey.png)
+
+
+9. Choose "JSON" as the key type and click "Create".
+
+
+10. A JSON file will be downloaded to your computer. This file contains your credentials.
+
+
+11. Open the JSON file and note down the following information:
+   - `project_id`
+   - `client_id` (this will be used as your Access Key ID)
+   - `private_key` (this will be used as your Secret Access Key)
+
+### Indexing
+
+1. Navigate to the Admin Dashboard and select the **Google Cloud Storage** Connector.
+2. In **Step 1**, provide your GCS credentials:
+
+
+![Danswer page1](/images/connectors/blob/google/danswer1.png)
+
+
+* Provide your GCS Project ID, Access Key ID, and Secret Access Key for authentication.
+* These credentials will be used to access your GCS buckets.
+
+**GCS Project ID:**
+**Access Key ID:**
+**Secret Access Key:**
+
+3. Click "Update" to save your credentials.
+
+4. In **Step 2**, specify which GCS bucket you want to make searchable:
+
+![Danswer page1](/images/connectors/blob/google/danswer2.png)
+
+5. Click "Connect" to begin indexing.
+
+## Understanding Google Cloud Storage Structure
+
+Google Cloud Storage organizes data into buckets. Each bucket can contain an unlimited number of objects (files). You can think of a bucket as a root directory, and the objects as files within that directory.
+
+For more information on Google Cloud Storage structure, visit the [Google Cloud Storage documentation](https://cloud.google.com/storage/docs).

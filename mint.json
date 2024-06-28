@@ -82,11 +82,10 @@
         "oidc_saml"
       ]
     },
-     
     {
       "group": "Enterprise",
       "pages": [
-        "enterprise_edition/overview",
+        "enterprise_edition/overview", 
         "enterprise_edition/configuration"
       ]
     },
@@ -135,7 +134,11 @@
         "connectors/google_sites",
         "connectors/dropbox",
         "connectors/discourse",
-        "connectors/clickup"
+        "connectors/clickup",
+        "connectors/s3",
+        "connectors/r2",
+        "connectors/oci_storage",
+        "connectors/google_storage"
       ]
     },
     {
