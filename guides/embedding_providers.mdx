@@ -1,0 +1,83 @@
+---
+title: 'Embedding Models'
+description: 'A comprehensive guide to selecting and using embedding models in your application'
+icon: 'network-wired'
+---
+
+## Overview of Embedding Models
+
+Our application supports integration with several popular embedding model providers, offering you flexibility in choosing the model that best suits your needs. Here's an overview of the available models:
+
+## OpenAI Models
+
+### text-embedding-3-small
+OpenAI's newer, more efficient embedding model. Good balance of performance and efficiency.
+
+### text-embedding-3-large
+OpenAI's large embedding model. Offers the best performance in the OpenAI lineup.
+
+### Credentials Setup
+To use OpenAI models:
+1. Sign up for an account at [OpenAI's website](https://openai.com/).
+2. Navigate to the API section and create an API key.
+3. In the application interface, paste your API key in the designated OpenAI credentials field.
+
+## Cohere Models
+
+### embed-english-v3.0
+Cohere's English embedding model. Good performance for English-language tasks.
+
+### embed-english-light-v3.0
+Cohere's lightweight English embedding model. Faster and more efficient for simpler tasks.
+
+### Credentials Setup
+To use Cohere models:
+1. Create an account on [Cohere's platform](https://cohere.ai/).
+2. Generate an API key in your account dashboard.
+3. In the application interface, paste your Cohere API key in the appropriate field.
+
+## Voyage Models
+
+### voyage-large-2-instruct
+Voyage's large embedding model. High performance with instruction fine-tuning.
+
+### voyage-light-2-instruct
+Voyage's lightweight embedding model. Good balance of performance and efficiency.
+
+### Credentials Setup
+To use Voyage models:
+1. Sign up for an account at [Voyage AI](https://www.voyageai.com/).
+2. Obtain your API key from the account dashboard.
+3. In the application interface, enter your Voyage API key in the designated field.
+
+## Vertex AI (Google) Model
+
+### gecko
+Google's Gecko embedding model. Powerful and efficient, but requires more setup.
+
+### Credentials Setup
+To use the Gecko model from Vertex AI:
+1. Set up a Google Cloud Platform (GCP) account if you don't have one.
+2. Create a new project in the Google Cloud Console.
+3. Enable the Vertex AI API for your project.
+4. Create a service account with the necessary permissions for Vertex AI.
+5. Generate a JSON key for the service account.
+6. In the application interface, upload the JSON key file in the Vertex AI credentials section.
+
+## Choosing the Right Model
+
+Consider these factors when selecting an embedding model:
+
+1. **Task Complexity**: More complex tasks may benefit from larger models like `text-embedding-3-large` or `voyage-large-2-instruct`.
+2. **Language Specificity**: For English-specific tasks, consider Cohere's models.
+3. **Performance vs. Efficiency**: Balance the trade-off between model performance and computational efficiency based on your needs.
+4. **Integration Complexity**: Consider the ease of setup, especially for models like Gecko that require more configuration.
+
+## Best Practices
+
+1. **Experiment**: Test different models with your typical data to compare performance.
+2. **Monitor Performance**: Keep track of model performance for your specific use cases.
+3. **Stay Updated**: Regularly check for updates or new model releases from providers.
+4. **Security**: Always use the secure interface provided by the application to input your API keys or upload credential files.
+
+Remember to review each provider's documentation for the most up-to-date information on model capabilities and integration details.
