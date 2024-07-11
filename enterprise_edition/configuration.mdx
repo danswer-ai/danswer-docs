@@ -47,7 +47,71 @@ export API_KEY_HASH_ROUNDS=600000
 Increasing this value enhances security but may impact performance. The default value provides a good balance for most use cases.
 
 
+## Additional API Endpoints
 
-If you have any questions, feel free to message us at founders@danswer.ai for clarification or join our [Slack](https://join.slack.com/t/danswer/shared_invite/zt-2lcmqw703-071hBuZBfNEOGUsLa5PXvQ)
-or [Discord](https://discord.gg/TDJ59cGV2X)
+
+
+### Standard Answers
+
+Endpoint: `POST /chat/test-standard-answer`
+
+This endpoint allows you to test the standard answers that would be returned for a given message and set of Slack bot categories.
+
+#### Request Body
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `message` | `string` | The message to test against the standard answers. |
+| `slack_bot_categories` | `list[string]` | The Slack bot categories to use when searching for standard answers. |
+
+#### Response
+
+The response will contain the standard answers that match the provided message and categories, or an empty list of standard answers if none are found.
+
+```json
+{
+  "standard_answers": [
+    {
+      "id": 1,
+      "keyword": "wifi",
+      "answer": "The wifi password is \"XYZ\"",
+      "categories": [
+        {
+          "id": 0,
+          "name": "General"
+        }
+      ]
+    }
+  ],
+  "error_msg": null
+}
+```
+
+If no standard answers are found, the response will be:
+
+```json
+{
+  "standard_answers": [],
+  "error_msg": null
+}
+```
+
+#### Example Usage
+
+You can test the endpoint using a tool like cURL:
+
+```bash
+curl -X POST 'http://localhost:8080/chat/test-standard-answer' \
+     -H 'Content-Type: application/json' \
+     -d '{
+       "message": "wifi password",
+       "slack_bot_categories": ["General"]
+     }'
+```
+
+This will test the standard answers for the message "wifi password" and the Slack bot category "General."
+
+If you have any questions, feel free to message us at founders@danswer.ai for clarification or join our [Slack](https://join.slack.com/t/danswer/shared_invite/zt-2lcmqw703-071hBuZBfNEOGUsLa5PXvQ) or [Discord](https://discord.gg/TDJ59cGV2X) communities.
+
+
 
