@@ -53,7 +53,7 @@ Increasing this value enhances security but may impact performance. The default 
 
 ### Standard Answers
 
-Endpoint: `POST /chat/test-standard-answer`
+Endpoint: `POST /query/standard-answer`
 
 This endpoint allows you to test the standard answers that would be returned for a given message and set of Slack bot categories.
 
@@ -101,7 +101,7 @@ If no standard answers are found, the response will be:
 You can test the endpoint using a tool like cURL:
 
 ```bash
-curl -X POST 'http://localhost:8080/chat/test-standard-answer' \
+curl -X POST 'http://localhost:8080/query/standard-answer' \
      -H 'Content-Type: application/json' \
      -d '{
        "message": "wifi password",
