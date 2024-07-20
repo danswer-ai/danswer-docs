@@ -1,0 +1,46 @@
+---
+title: "Theming"
+icon: "paintbrush"
+description: 'Customize the look of Danswer'
+---
+
+As part of the Enterprise Edition, we provide the ability to easily customize the look of Danswer. This comes in two forms:
+
+1. Adding in your own custom application name / logo.
+2. Customizing every color in the UI.
+
+### Customizing the Application Name / Logo
+
+To provide your own application name / logo, you can use the `Whitelabeling` tab in the admin panel. Here, we provide a way to input
+a name of your choice, as well as an optional logo.
+
+### Customizing Colors
+
+We use [Tailwind CSS](https://tailwindcss.com/) to theme Danswer. Every color used is one of 
+defined in our [tailwind.config.js file](https://github.com/danswer-ai/danswer/blob/main/web/tailwind-themes/tailwind.config.js).
+
+To customize all these colors, you can:
+
+1. Navigate to `web/tailwind-themes/custom`. 
+2. Create a new folder with the name of your organization.
+3. Create a `tailwind.config.js` file in this new folder.
+4. Override any values in specified in the base `tailwind.config.js` file.
+
+For example, if you wanted to make the blackground black, you could use:
+
+```
+/** @type {import('tailwindcss').Config} */
+
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        "background": "#000000",
+      },
+    },
+  },
+};
+```
+
+**NOTE:** for these changes to apply, you will need to build Danswer from source. If testing locally, you will need to restart the 
+NextJS application to apply the changes.
