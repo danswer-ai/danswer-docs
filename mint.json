@@ -158,7 +158,8 @@
       "group": "Enterprise",
       "pages": [
         "enterprise_edition/overview", 
-        "enterprise_edition/configuration"
+        "enterprise_edition/configuration",
+        "enterprise_edition/theming"
       ]
     },
     {
