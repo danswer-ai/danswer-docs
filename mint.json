@@ -83,10 +83,10 @@
       ]
     },
     {
-      "group": "Enterprise",
+      "group": "Tools",
       "pages": [
-        "enterprise_edition/overview", 
-        "enterprise_edition/configuration"
+        "tools/overview",
+        "tools/custom"
       ]
     },
     {
@@ -152,6 +152,13 @@
       "pages": [
         "apis/answer_with_quote",
         "apis/send_message_simple_api"
+      ]
+    },
+    {
+      "group": "Enterprise",
+      "pages": [
+        "enterprise_edition/overview", 
+        "enterprise_edition/configuration"
       ]
     },
     {

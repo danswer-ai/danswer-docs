@@ -1,0 +1,21 @@
+---
+title: "Tools Overview"
+description: "How to use tools with Danswer"
+icon: "wrench"
+---
+
+**Tools** are a way to give an Assistant additional capabilities. They allow the assistant to do things like:
+
+1. Fetch information from an external source (e.g. a database, an API, the Internet, etc.)
+2. Perform actions (e.g. write to a database, send an email, etc.)
+3. Generate content (e.g. generate an Image, create a plot, etc.)
+
+By default, we have a three tools built-in to Danswer. These are:
+
+- `SearchTool`. This is the core of Danswer. Adding this tool to an Assistant allows 
+it to search over the knowledge you've connected up to Danswer through `Connectors`. 
+This is the only tool available to the default `Danswer` assistant.
+
+- `ImageGenerationTool`. This leverages DALLE-3 to generate images.
+
+- `InternetSearchTool`. This uses Bing to search the internet. To enable this as an option, set the `BING_API_KEY` environment variable.
