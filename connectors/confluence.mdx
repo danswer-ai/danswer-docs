@@ -4,8 +4,7 @@ description: 'Access knowledge from your company Wiki'
 ---
 
 ## How it works
-The Confluence connector pulls in all pages and comments from the specified spaces every **10** minutes..
-- Depending on demand, Danswer may support indexing specific Confluence pages or directories in the future.
+The Confluence connector pulls in all pages and comments from the specified spaces/pages every 10 minutes.
 
 ## Setting up
 ### Authorization
@@ -13,13 +12,13 @@ The Confluence connector pulls in all pages and comments from the specified spac
 
 ### Indexing
     1. Navigate to the Admin Dashboard and select the **Confluence** Connector
-    2. In **Step 1**, provide the **Access Token** and the **Username** it belongs to:
+    2. In **Step 1**, provide the **Access Token** and the **Username** (typically an email) it belongs to:
 
 ![ConfluenceConnector](/images/connectors/confluence/ConfluenceAuth.png)
 
-    3. For each space to index, provide a single URL to any page in the space. For
-    example, it might look like the following:
+    3. Next, insert a link to a space/page. If the provided link is for a Confluence space, the entire space will be indexed.<br /> 
+       E.g., entering `https://danswer.atlassian.net/wiki/spaces/Engineering/overview` will index the entire Engineering Confluence space whereas entering<br /> 
+       `https://danswer.atlassian.net/wiki/spaces/Engineering/pages/164331/example+page` will index that page.<br /> 
+       Selecting the "Index Recursively" checkbox will index the single page's children in addition to itself.
 
-![ConfluenceConnector](/images/connectors/confluence/ConfluenceIndex.png)
-
-    4. Click the `Connect` button! All your Confluence pages in that space will now be pulled into Danswer every **10** minutes.
+    4. Click the `Connect` button! All the specified spaces/pages and related comments will now be pulled into Danswer every **10** minutes.
