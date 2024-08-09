@@ -90,6 +90,13 @@
       ]
     },
     {
+      "group": "Guides",
+      "pages": [
+        "guides/assistants",
+        "guides/providers"
+      ]
+    },
+    {
       "group": "Connectors",
       "icon": "plug",
       "pages": [
