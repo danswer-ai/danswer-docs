@@ -165,6 +165,7 @@
     {
       "group": "More",
       "pages": [
+        "more/faq",
         "more/telemetry",
         "more/options"
       ]
