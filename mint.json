@@ -159,7 +159,8 @@
       "pages": [
         "enterprise_edition/overview", 
         "enterprise_edition/configuration",
-        "enterprise_edition/theming"
+        "enterprise_edition/theming",
+        "enterprise_edition/custom_analytics"
       ]
     },
     {
