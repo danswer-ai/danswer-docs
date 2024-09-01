@@ -16,9 +16,18 @@ The Confluence connector pulls in all pages and comments from the specified spac
 
 ![ConfluenceConnector](/images/connectors/confluence/ConfluenceAuth.png)
 
-    3. Next, insert a link to a space/page. If the provided link is for a Confluence space, the entire space will be indexed.<br /> 
-       E.g., entering `https://danswer.atlassian.net/wiki/spaces/Engineering/overview` will index the entire Engineering Confluence space whereas entering<br /> 
-       `https://danswer.atlassian.net/wiki/spaces/Engineering/pages/164331/example+page` will index that page.<br /> 
-       Selecting the "Index Recursively" checkbox will index the single page's children in addition to itself.
+    3. In **Step 2**, provide the following information:
+       - **Wiki Base URL**: The base URL of your Confluence instance (e.g., https://your-domain.atlassian.net/wiki)
+       - **Space**: The Confluence space name to index (e.g., `KB`)
+       - **Page ID** (optional): Specific page ID to index - leave empty to index the entire space (e.g., `131368` for a specific page)
+       - **Index Recursively**: Check this box to index the specified page and all of its children
+       - **Whether you're using Confluence Cloud or Datacenter**: Check the `Is Cloud` box if you are using a Confluence Cloud instance, uncheck for Confluence Server/Data Center
 
     4. Click the `Connect` button! All the specified spaces/pages and related comments will now be pulled into Danswer every **10** minutes.
+
+Note: If no Page ID is provided, the entire space will be indexed. Here's an example to illustrate:
+- Wiki Base URL: "https://example-company.atlassian.net/wiki"
+- Space: "KB" (for Knowledge Base)
+- Page ID: "164331"
+
+This configuration would index the specific page at https://example-company.atlassian.net/wiki/spaces/KB/pages/164331/SomePage. If you leave the Page ID empty, it will index the entire KB space.
