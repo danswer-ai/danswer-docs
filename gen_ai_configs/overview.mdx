@@ -6,16 +6,8 @@ description: 'Overview of the Generative AI functionality in Danswer'
 ## LLM Options
 Danswer supports a large range of LLM hosting services and local/custom such as:
 
-`OpenAI`, `Azure OpenAI`, `HuggingFace`, `Anthropic`, `Replicate`, `AWS Bedrock`, `Cohere`, amongst many others.
-
-For each of these, Danswer supports multiple model options as well, such as gpt-3.5-turbo,
-gpt-4, text-davinci-003 for OpenAI and so on.
-
-Danswer also supports local LLMs such as Ollama and GPT4All.
-
-Finally, Danswer supports custom model hosting servers that don't conform to standard APIs. For this option however,
-the user is required to implement a small [LLM class](https://github.com/danswer-ai/danswer/blob/main/backend/danswer/llm/custom_llm.py#L14)
-which can call out to your custom model hosting server.
+- For cloud providers, we support `OpenAI`, `Anthropic`, `Azure OpenAI`, `HuggingFace`, `Replicate`, `AWS Bedrock`, `Cohere`, and many others.
+- For self-hosted, we support Ollama and GPT4All (or any other way you choose to provide an OpenAI-compatible API).
 
 **Note:** Most of the different LLM support is provided by the [LiteLLM Langchain library](https://python.langchain.com/docs/integrations/chat/litellm)
 and are configured accordingly (see the following sections for some examples).
@@ -27,14 +19,12 @@ These models extract out the useful knowledge from your documents and generates 
 
 
 ## What is the default LLM?
-By default, Danswer uses `GPT-3.5-Turbo` from OpenAI. This is the most accessible model/hosting service since it does
-not require any access approval process like `GPT-4` or `Llama2` variants.
-OpenAI also hosts the models behind an API which makes it easy to use and much more cost efficient than hosting a model
-yourself on dedicated hardware.
+Our default recommendation is to use `gpt4` from OpenAI or `Claude 3.5 Sonnet` from Anthropic. These are the most powerful and highest quality models available.
 
+Azure OpenAI, Claude through Bedrock, or self-hosted Llama3.1 70B / 405B are also highly recommended. 
 
 ## Why would you want to use a different model?
-- Use a more powerful model despite higher cost (such as GPT-4)
+- Use a cheaper, faster model (such as `gpt-4o`)
 - Use a hosting service with a different data retention policy
     - Currently OpenAI and Azure OpenAI retain data for 30 days for monitoring against misuse
 - Host the model yourself for complete control and flexibility
@@ -43,23 +33,12 @@ yourself on dedicated hardware.
 - Use a different model perhaps finetuned or better suited for a particular domain of interest
 
 
-## Danswer Model configs
-All Danswer Gen AI configs are done through deployment environment variables. For `docker compose` this means
-overwriting the default values in the .env file during deployment. For `kubernetes` this means updating the service
-deployment yaml files (specifically, the api_server and background services).
+## Danswer LLM Configs
+To setup various LLMs, head to the `LLM` page on the Admin Panel. A fun thing about Danswer is that 
+you can setup multiple LLM providers at the same time! This allows you use different models for different
+assistants and play to each LLM's strengths.
 
-The environment variables that impact the Gen AI models are as follows:
-- **GEN_AI_MODEL_PROVIDER**: Use a LiteLLM compatible model service (ie. openai, azure, huggingface, gpt4all, etc),
-    - Specify "custom" to use a [custom implementation](https://github.com/danswer-ai/danswer/blob/main/backend/danswer/llm/custom_llm.py#L14).
-- **GEN_AI_MODEL_VERSION**: Which model version to use, such as `gpt-4`, `Falcon-180B-Chat-GPTQ`, etc.
-    - _Be sure to use a version compatible with the hosting service_
-- **GEN_AI_API_KEY**: Provide this if your LLM services requires an API key (it probably does).
-- **GEN_AI_API_ENDPOINT**: API endpoint, such as `https://danswer.openai.azure.com/` for Azure OpenAI.
-- **GEN_AI_API_VERSION**: API version for Azure OpenAI, such as "2023-09-15-preview"
-- **GEN_AI_LLM_PROVIDER_TYPE**: Set if using a model server that follows a standard LLM API.
-For an OpenAI compatible model server like fastChat, set to "openai".
-
-See the next sections for some examples on how to configure different options.
+See the next sections for some examples on how to configure different providers.
 
 As always, don't hesitate to reach out to the [Danswer team](https://docs.danswer.dev/contact_us) if you have any
-questions or issues.
+questions or issues!

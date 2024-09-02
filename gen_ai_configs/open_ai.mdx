@@ -1,19 +1,9 @@
 ---
-title: OpenAI Options
+title: OpenAI
 description: 'Configure Danswer to use different OpenAI models'
 ---
 
-Refer to [Model Configs](https://docs.danswer.dev/gen_ai_configs/overview#model-configs) for how to set the
-environment variables for your particular deployment.
+OpenAI is quite straightforward. Grab an API key from the developer platform, then put it into the `API Key` field 
+and you'll be good to go!
 
-The default Danswer model is GPT-3.5-Turbo so if you wish to use this, there's no need to change anything.
-
-## Set Danswer to use GPT-4
-- GEN_AI_MODEL_VERSION=gpt-4
-- GEN_AI_API_KEY=&lt;your-gpt4-compatible-key&gt;
-    - You can also leave this unset and set it later via the UI
-
-## Set Danswer to use Text-Davinci-003
-- GEN_AI_MODEL_VERSION=text-davinci-003
-- GEN_AI_API_KEY=&lt;your-openai-key&gt;
-    - You can also leave this unset and set it later via the UI
+![OpenAI](/images/gen_ai/OpenAI.png)
