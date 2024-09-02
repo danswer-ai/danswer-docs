@@ -94,51 +94,56 @@
       "icon": "plug",
       "pages": [
         "connectors/overview",
-        "connectors/web",
-        "connectors/file",
-        "connectors/slack",
-        "connectors/github",
-        "connectors/gitlab",
-        "connectors/confluence",
-        "connectors/jira",
         {
-          "group": "Google Drive Connector",
+          "group": "Available Connectors",
           "pages": [
-            "connectors/google_drive/overview",
-            "connectors/google_drive/oauth",
-            "connectors/google_drive/service_account"
+            "connectors/bookstack",
+            "connectors/clickup",
+            "connectors/confluence",
+            "connectors/discourse",
+            "connectors/document360",
+            "connectors/dropbox",
+            "connectors/file",
+            "connectors/github",
+            "connectors/gitlab",
+            {
+              "group": "Gmail Connector",
+              "pages": [
+                "connectors/gmail/overview",
+                "connectors/gmail/oauth"
+              ]
+            },
+            "connectors/gong",
+            {
+              "group": "Google Drive Connector",
+              "pages": [
+                "connectors/google_drive/overview",
+                "connectors/google_drive/oauth",
+                "connectors/google_drive/service_account"
+              ]
+            },
+            "connectors/google_sites",
+            "connectors/google_storage",
+            "connectors/guru",
+            "connectors/hubspot",
+            "connectors/jira",
+            "connectors/linear",
+            "connectors/notion",
+            "connectors/oci_storage",
+            "connectors/productboard",
+            "connectors/r2",
+            "connectors/requesttracker",
+            "connectors/s3",
+            "connectors/salesforce",
+            "connectors/sharepoint",
+            "connectors/slack",
+            "connectors/slab",
+            "connectors/teams",
+            "connectors/web",
+            "connectors/zendesk",
+            "connectors/zulip"
           ]
-        },
-        {
-          "group": "Gmail Connector",
-          "pages": [
-            "connectors/gmail/overview",
-            "connectors/gmail/oauth"
-          ]
-        },
-        "connectors/notion",
-        "connectors/zendesk",
-        "connectors/sharepoint",
-        "connectors/salesforce",
-        "connectors/teams",
-        "connectors/gong",
-        "connectors/linear",
-        "connectors/bookstack",
-        "connectors/document360",
-        "connectors/requesttracker",
-        "connectors/slab",
-        "connectors/guru",
-        "connectors/productboard",
-        "connectors/hubspot",
-        "connectors/zulip",
-        "connectors/google_sites",
-        "connectors/dropbox",
-        "connectors/discourse",
-        "connectors/clickup",
-        "connectors/s3",
-        "connectors/r2",
-        "connectors/oci_storage",
-        "connectors/google_storage"
+        }
       ]
     },
     {
