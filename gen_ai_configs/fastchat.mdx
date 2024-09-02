@@ -18,14 +18,23 @@ In this case, we use LiteLLM's custom model server option. See here for more inf
 https://litellm.vercel.app/docs/providers/custom_openai_proxy
 
 ## Set Danswer to use FastChat Server
-```
-# Pick any model served by FastChat
-GEN_AI_MODEL_VERSION=vicuna-7b-v1.5
-# Hint: To point Docker containers to http://localhost, use http://host.docker.internal
-# Don't forget to include the /v1 below
-GEN_AI_API_ENDPOINT=http://<your-FastChat-server>/v1
-GEN_AI_LLM_PROVIDER_TYPE=openai  # Since it's an OpenAI compatible API
 
+On the `LLM` page in the Admin Panel add a `Custom LLM Provider` with the following settings. 
+Note that the `Provider Name` is OpenAI, since FastChat provides an OpenAI compatible.
+
+*Hints*: 
+- To point to other Docker containers running locally (e.g. accessible at http://localhost), 
+use http://host.docker.internal.
+# Don't forget to include the /v1 in the API base.
+
+
+![FastChatLLMProvider1](/images/gen_ai/FastChatLLMProvider1.png)
+
+![FastChatLLMProvider2](/images/gen_ai/FastChatLLMProvider2.png)
+
+You may also want to update some of the environment variables depending on your model choice / how 
+you're running FastChat (e.g. on CPU vs GPU):
+```
 # Let's also make some changes to accommodate the weaker locally hosted LLM
 QA_TIMEOUT=120  # Set a longer timeout, running models on CPU can be slow
 # Always run search, never skip
@@ -36,6 +45,7 @@ DISABLE_LLM_CHUNK_FILTER=True
 DISABLE_LLM_QUERY_REPHRASE=True
 # Don't use LLM to automatically discover time/source filters
 DISABLE_LLM_FILTER_EXTRACTION=True
+# Uncomment this one if you find that the model is struggling (slow or distracted by too many docs)
 # Use only 1 section from the documents and do not require quotes
-QA_PROMPT_OVERRIDE=weak
+# QA_PROMPT_OVERRIDE=weak
 ```

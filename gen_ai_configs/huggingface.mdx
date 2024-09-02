@@ -17,27 +17,12 @@ To use the HuggingFace Inference APIs, you must sign up for a `Pro Account` to g
 
 
 ## Set Danswer to use `Llama-2-70B` via next-token generation prompting
-```
-GEN_AI_MODEL_PROVIDER=huggingface
-GEN_AI_MODEL_VERSION=https://api-inference.huggingface.co/models/meta-llama/Llama-2-70b-chat-hf
-GEN_AI_API_KEY=&lt;your-huggingface-access-token&gt;
 
-# Let's also make some changes to accommodate the weaker locally hosted LLM
-QA_TIMEOUT=120  # Set a longer timeout, running models on CPU can be slow
-# Always run search, never skip
-DISABLE_LLM_CHOOSE_SEARCH=True
-# Don't use LLM for reranking, the prompts aren't properly tuned for these models
-DISABLE_LLM_CHUNK_FILTER=True
-# Don't try to rephrase the user query, the prompts aren't properly tuned for these models
-DISABLE_LLM_QUERY_REPHRASE=True
-# Don't use LLM to automatically discover time/source filters
-DISABLE_LLM_FILTER_EXTRACTION=True
-# Uncomment this one if you find that the model is struggling (slow or distracted by too many docs)
-# Use only 1 section from the documents and do not require quotes
-# QA_PROMPT_OVERRIDE=weak
-```
-**Note** that the endpoint URL is assigned to `GEN_AI_MODEL_VERSION` (not `GEN_AI_API_ENDPOINT`),
-this is a quirk from the LiteLLM library.
+On the `LLM` page in the Admin Panel add a `Custom LLM Provider` with the following settings:
+
+![HFCustomLLMProvider1](/images/gen_ai/HFCustomLLMProvider1.png)
+
+![HFCustomLLMProvider2](/images/gen_ai/HFCustomLLMProvider2.png)
 
 **Update (November 2023)**: HuggingFace has stopped supporting very large models (>10GB) via the *Pro Plan*.
 The latest options are to rent dedicated hardware from them via Inference Endpoint or get an Enterprise Plan.
