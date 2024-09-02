@@ -1,0 +1,49 @@
+---
+title: "Curator Role Overview"
+icon: "user-large"
+---
+
+
+The Curator role is a role available in Danswer's Enterprise Edition. 
+
+Curators are essentially group level admins.
+
+This role is designed for larger organizations to be able to delegate the task of managing each group's data to users within that group. 
+
+## Curator Role Capabilities
+Curators are able to do the following for groups they curate:
+
+1. **Add and Remove Users to/from a Group**<br />
+   Curators are able to add and remove Basic users to/from a group.
+
+2. **Create and Manage Credentials**<br />
+   Curators are able to create credentials for connectors.
+
+3. **Create and Manage Connectors**<br />
+   Curators are able to create connectors that belong exclusively to the group(s) they curate.
+
+4. **Create and Manage Document Sets**<br />
+   Curators are able to create document sets that belong exclusively to the group they curate. <br />
+   Users are then able to add connectors they curate to these document sets. They are also able to add/remove public connectors to/from these document sets.
+
+5. **Create and Manage Personas for a Group**<br />
+   Curators are able to create and manage personas that belong exclusively to the group(s) they curate.
+
+## Curator Role Restrictions
+
+1. **Curators can only edit objects that belong exclusively to the group(s) they curate**<br />
+   If the object a Curator is trying to edit belongs to another group that the Curator doesn't curate, they will not be able to edit it. 
+   However, they will still be able to view it. They will also be able to add/remove it to document sets they curate or remove it from the group they curate.
+
+2. **Curators cannot create public objects**<br />
+   Curators cannot create/edit public objects such as connectors, credentials, or document sets. However, they can add/remove public objects from other objects they curate. <br />
+   E.g. A Curator cannot create a public connector, but they can add/remove public connectors to/from the document sets they curate. Same goes for adding/removing public document sets to a group.
+
+3. **Curators must attach objects they create to a group they curate**<br />
+   If a curator created an object without attaching it to a group, they would not be able to see, edit, or delete that object. So we disallow that possibility.
+
+For a better understanding of how the Curator role works, please refer to the [Curator Setup Examples](/enterprise_edition/curator/admin_examples).
+
+## Global Curators
+
+Global Curators are identical to Curators except that they are automatically curators of all groups they are a member of.
