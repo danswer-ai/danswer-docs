@@ -8,3 +8,11 @@ icon: "question"
 
 ### Why did my PR Vercel build fail? or how can I see the vercel logs for my failed PR deployment? 
 From the `/web` directory, run `npm run build` to see the error.
+
+### When I change/upgrade authentication methods (e.g. OAuth or Email verification), no accounts are verified and thus can't log in?
+Presuming that all your existing users are ones you want to keep in the system,
+perform a one time database edit to mark all existing users as verified.
+
+`UPDATE public.user SET is_verified = true;`
+
+There will be a friendlier way of handling this in future releases.
