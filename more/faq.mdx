@@ -16,3 +16,20 @@ perform a one time database edit to mark all existing users as verified.
 `UPDATE public.user SET is_verified = true;`
 
 There will be a friendlier way of handling this in future releases.
+
+### I'm having trouble sending verification e-mails with Gmail's SMTP server.
+Gmail SMTP integration currently require that you use an "app password", not your regular user password, to send e-mails.
+
+See https://support.google.com/mail/answer/185833 for context.
+
+Gmail's default settings for app passwords are somewhat hidden by default. In addition to the above help link, take note of the following.
+
+Under Google Account Settings / Security:
+
+1. Ensure that two step verification is enabled (required for app passwords to be enabled).
+2. If you have a "Less secure apps" setting and it is off, ensure that it is on.
+3. Getting to the actual app password generation page is somewhat hidden. You can search for "App passwords" at the top of the page, or
+follow a direct link to https://myaccount.google.com/apppasswords.
+4. For the SMTP_USER variable, enter the full e-mail address of the account you wish to send e-mails from ... e.g. "user@gmail.com" (without quotes).
+5. For the SMTP_PASS variable, enter the 16 character app password presented to you when you created it ... without spaces.
+(The default way in which the password is presented to you will copy the password with spaces. The spaces are not part of the app password!)
