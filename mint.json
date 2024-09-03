@@ -190,5 +190,11 @@
     "github": "https://github.com/danswer-ai/danswer",
     "twitter": "https://twitter.com/DanswerAI",
     "linkedin": "https://linkedin.com/company/danswerai"
+  },
+  "analytics": {
+    "posthog": {
+        "apiKey": "phc_Qs1pCboonkMRodE3ZoHaDvPiU5dSGeBDf2avnPDR806",
+        "apiHost": "https://us.i.posthog.com"
+    }
   }
 }
