@@ -33,3 +33,20 @@ follow a direct link to https://myaccount.google.com/apppasswords.
 4. For the SMTP_USER variable, enter the full e-mail address of the account you wish to send e-mails from ... e.g. "user@gmail.com" (without quotes).
 5. For the SMTP_PASS variable, enter the 16 character app password presented to you when you created it ... without spaces.
 (The default way in which the password is presented to you will copy the password with spaces. The spaces are not part of the app password!)
+
+Note that inviting users currently does NOT send emails, but does allow users to sign up with an invited e-mail address.
+
+Verification e-mails are sent when:
+1. Verification emails are enabled in settings.
+2. The user attempts to create an account with an invited e-mail address and clicks on the verification link.
+
+### How do I use the API key in my requests to my Danswer instance's server endpoints?
+If you are trying to use any Danswer endpoint that requires authorization, such as the [Answer with Quote](/apis/answer_with_quote) endpoint, 
+ensure that you both:
+
+1. Have an API key created with the correct permission level.  Both Basic and Admin keys can be created.
+2. Send the Authorization header properly.
+
+```
+Authorization: Bearer your_api_key_here
+```
