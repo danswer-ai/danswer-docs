@@ -8,6 +8,15 @@ First, navigate to the Admin console, and go to the **Tools** tab. Click the **N
 
 Next, specify a OpenAPI 3.0 or OpenAPI 3.1 schema that defines the APIs that you want to make available as part of this tool.
 
+
+Danswer provides dynamic context variables that can be utilized within your OpenAPI definition, enhancing the functionality and context-awareness of your custom tools. These variables are:
+
+- `CHAT_SESSION_ID`: Replaced with the chat session ID in which the tool call was made.
+
+- `CHAT_MESSAGE_ID`: Replaced with the chat message ID which triggered the tool call.
+
+
+
 To improve performance:
 
 - Add descriptive `summary`s for each operation (API). 
