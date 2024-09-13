@@ -1,8 +1,65 @@
 ---
-title: "[Coming Soon] EKS"
-description: "Setup Danswer on AWS EKS"
+title: "EKS"
+description: "This guide provides instructions for setting up EKS and installing Danswer on the EKS infrastructure."
 ---
 
-<Info>
-  EKS guide coming soon! For now, checkout our [AWS EC2 guide](https://docs.danswer.dev/production/aws/ec2), which should fit most company's needs.
-</Info>
+## Prerequisites
+
+- [AWS CLI](https://aws.amazon.com/cli/) (required for creating and accessing the cluster)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/) (for cluster access through the CLI)
+
+## Cluster Setup and Configuration
+
+### Create the Cluster
+
+1. Navigate to Elastic Kubernetes Service (EKS) and create a new cluster.
+2. For `Cluster service role`, create a new IAM role accepting all the defaults.
+3. Select a `Kubernetes version` with standard support and set `Upgrade policy` to `Standard`.
+4. Accept the remaining defaults and create the cluster.
+
+### Add Worker Nodes
+
+1. When the cluster is Active, select the `Compute` tab and then `Add node group`.
+2. Provide a `Name` for the group and create a new IAM role for this node group.
+3. Set `Instance Types` to `c4.2xlarge` and accept the remaining defaults.
+4. Create the node group (this may take up to 15 minutes).
+
+### Create and Connect a User
+
+1. In the IAM Dashboard, create a new user with the following permissions:
+   - `AmazonEKSClusterPolicy`
+   - `AmazonEKSServicePolicy`
+2. Create an access key for this user, selecting the CLI option.
+3. In the EKS cluster, create an access entry for this user with the `AmazonEKSClusterAdminPolicy`.
+
+## Fetch the kubeconfig File
+
+1. Log into AWS CLI:
+   ```shell
+   aws configure
+   ```
+2. Update kubeconfig:
+   ```shell
+   aws eks update-kubeconfig --region <region-code> --name <cluster-name>
+   ```
+
+## Install Danswer Services
+
+1. Create a namespace for Danswer:
+   ```shell
+   kubectl create ns danswer
+   ```
+2. Navigate to `danswer/deployment/kubernetes` in your cloned repository.
+3. Apply the Kubernetes configurations:
+   ```shell
+   kubectl apply -f . --namespace danswer
+   ```
+4. Find the nginx load balancer URL:
+   ```shell
+   kubectl get svc -n danswer | grep nginx-service | awk '{print $4}'
+   ```
+
+Navigate to the URL provided to access your Danswer installation.
+
+
+
