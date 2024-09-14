@@ -1,8 +1,55 @@
 ---
-title: "[Coming Soon] ECS"
-description: "Setup Danswer on AWS ECS"
+title: "ECS"
+description: "This guide provides instructions for setting up ECS and installing Danswer on ECS infrastructure"
 ---
 
-<Info>
-  ECS guide coming soon! For now, checkout our [AWS EC2 guide](https://docs.danswer.dev/production/aws/ec2), which should fit most company's needs.
-</Info>
+## Prerequisites
+
+- [AWS CLI](https://aws.amazon.com/cli/) (required for creating and accessing the cluster)
+- [Amazon ECS CLI](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html) (for cluster management through the CLI)
+
+## Cluster Setup and Configuration
+
+### Create the Cluster
+
+1. Navigate to Elastic Container Service (ECS) and create a new cluster.
+2. Choose "EC2 Linux + Networking" as the cluster template.
+3. Provide a cluster name and configure the EC2 instance type (e.g., t2.medium for testing, c5.large for production).
+4. Set the number of instances and configure networking options.
+5. Create an IAM role for the ECS instances or use an existing one with appropriate permissions.
+6. Review and create the cluster.
+
+### Configure Task Definitions
+
+1. In the ECS dashboard, go to "Task Definitions" and create a new task definition.
+2. Choose "EC2" as the launch type compatibility.
+3. Define containers for Danswer services (API, Web UI, Background, etc.) using the official Danswer Docker images.
+4. Set appropriate resource allocations (CPU, memory) for each container.
+5. Configure environment variables and port mappings as needed.
+6. Review and create the task definition.
+
+## Deploy Danswer Services
+
+### Create ECS Service
+
+1. In your ECS cluster, create a new service.
+2. Select the task definition you created for Danswer.
+3. Configure the service name, number of tasks, and deployment options.
+4. Set up load balancing if required (recommended for production).
+5. Configure service discovery if needed.
+6. Review and create the service.
+
+### Access Danswer
+
+1. Once the service is running, find the public IP or DNS of your EC2 instances:
+   ```shell
+   aws ec2 describe-instances --filters "Name=tag:aws:ecs:clusterName,Values=YOUR_CLUSTER_NAME" --query "Reservations[].Instances[].PublicIpAddress"
+   ```
+2. If you set up a load balancer, use its DNS name to access Danswer.
+
+## Monitoring and Scaling
+
+1. Use Amazon CloudWatch to monitor your ECS cluster and Danswer services.
+2. Set up auto-scaling rules based on CPU/memory usage or custom metrics.
+
+Navigate to the IP address or load balancer DNS provided to access your Danswer installation.

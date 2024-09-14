@@ -7,6 +7,7 @@ description: "This guide provides instructions for setting up EKS and installing
 
 - [AWS CLI](https://aws.amazon.com/cli/) (required for creating and accessing the cluster)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/) (for cluster access through the CLI)
+- [Helm](https://helm.sh/docs/intro/install/) (for installing Danswer using Helm charts)
 
 ## Cluster Setup and Configuration
 
@@ -45,21 +46,71 @@ description: "This guide provides instructions for setting up EKS and installing
 
 ## Install Danswer Services
 
-1. Create a namespace for Danswer:
+### Option 1: Using Kubernetes Configurations
+
+[Unchanged content for Option 1]
+
+### Option 2: Using Helm Charts
+
+1. Install Helm if you haven't already:
    ```shell
-   kubectl create ns danswer
-   ```
-2. Navigate to `danswer/deployment/kubernetes` in your cloned repository.
-3. Apply the Kubernetes configurations:
-   ```shell
-   kubectl apply -f . --namespace danswer
-   ```
-4. Find the nginx load balancer URL:
-   ```shell
-   kubectl get svc -n danswer | grep nginx-service | awk '{print $4}'
+   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
    ```
 
-Navigate to the URL provided to access your Danswer installation.
+2. Install the EBS CSI driver:
+   ```shell
+   helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+   helm repo update
+   helm upgrade --install aws-ebs-csi-driver aws-ebs-csi-driver/aws-ebs-csi-driver \
+       --namespace kube-system \
+       --set controller.serviceAccount.create=true \
+       --set controller.serviceAccount.name=ebs-csi-controller-sa
+   ```
 
+3. Configure IAM permissions for the EBS CSI driver:
+   - Create a new IAM policy with the necessary permissions for EBS operations.
+   - Attach the policy to the IAM role associated with your EKS node group.
+   - Also attach the AWS-managed policy for EBS CSI driver:
+     ```shell
+     aws iam attach-role-policy --role-name <your-node-group-role> --policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
+     ```
 
+4. Create an EBS StorageClass:
+   ```yaml
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     name: ebs-sc
+   provisioner: ebs.csi.aws.com
+   volumeBindingMode: WaitForFirstConsumer
+   parameters:
+     type: gp3
+   ```
+   Apply this StorageClass: `kubectl apply -f ebs-storageclass.yaml`
 
+5. Navigate to the directory containing the Helm charts:
+   ```shell
+   cd path/to/danswer/deployment/helm
+   ```
+
+6. Create a namespace for Danswer:
+   ```shell
+   kubectl create namespace danswer
+   ```
+
+7. Install Danswer using Helm:
+   ```shell
+   helm install danswer . --namespace danswer
+   ```
+
+8. Wait for all pods to be in the "Running" state:
+   ```shell
+   kubectl get pods -n danswer --watch
+   ```
+
+9. Get the external IP or hostname of the Danswer service:
+   ```shell
+   kubectl get svc -n danswer danswer-nginx -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+   ```
+
+Navigate to the URL or IP address provided to access your Danswer installation.
