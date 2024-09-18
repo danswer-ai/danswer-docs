@@ -48,7 +48,53 @@ description: "This guide provides instructions for setting up EKS and installing
 
 ### Option 1: Using Kubernetes Configurations
 
-[Unchanged content for Option 1]
+### Option 1: Using Kubernetes Configurations
+
+1. Create a namespace for Danswer:
+   ```shell
+   kubectl create namespace danswer
+   ```
+
+2. Navigate to the Kubernetes configuration directory:
+   ```shell
+   cd path/to/danswer/deployment/kubernetes
+   ```
+
+3. Apply the Kubernetes configurations:
+   ```shell
+   kubectl apply -f . --namespace danswer
+   ```
+
+4. Find the NGINX load balancer URL:
+   ```shell
+   kubectl get svc -n danswer | grep nginx-service | awk '{print $4}'
+   ```
+
+5. Navigate to the URL provided by the previous command to access Danswer.
+
+Note: Before applying the Kubernetes configurations, you need to set up the EBS CSI driver and create an EBS StorageClass. Here's a brief explanation of the StorageClass setup:
+
+1. The StorageClass is a Kubernetes resource that defines how storage is provisioned dynamically.
+2. For AWS EKS, we typically use the EBS CSI driver to provision EBS volumes.
+3. A basic EBS StorageClass configuration looks like this:
+
+   ```yaml
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     name: ebs-sc
+   provisioner: ebs.csi.aws.com
+   volumeBindingMode: WaitForFirstConsumer
+   parameters:
+     type: gp3
+   ```
+
+   This configuration creates a StorageClass named 'ebs-sc' that uses the EBS CSI driver to provision gp3 EBS volumes.
+
+4. After creating this StorageClass, you can reference it in your PersistentVolumeClaims to dynamically provision EBS volumes for your pods.
+
+Ensure you have set up the EBS CSI driver and created an appropriate StorageClass before proceeding with the Danswer deployment.
+
 
 ### Option 2: Using Helm Charts
 
