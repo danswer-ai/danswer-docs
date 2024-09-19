@@ -166,6 +166,7 @@
         "enterprise_edition/configuration",
         "enterprise_edition/theming",
         "enterprise_edition/custom_analytics",
+        "enterprise_edition/permissioning",
         {
           "group": "Curator",
           "icon": "user-group-crown",
