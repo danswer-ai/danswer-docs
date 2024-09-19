@@ -97,6 +97,7 @@
         {
           "group": "Available Connectors",
           "pages": [
+            "connectors/asana",
             "connectors/bookstack",
             "connectors/clickup",
             "connectors/confluence",
