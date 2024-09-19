@@ -7,16 +7,16 @@ Permissions for what documents users can and cannot access in Danswer are determ
 
 ## Connector Access Levels:
 
-### 1. Public
+#### 1. Public
     - Any user can access the documents in the connector
-
-### 2. Private
-    - These are only accessible to users in the group that the connector is in.
-
-### 3. Sync
-    - When one a connector is created with syncing enabled, the permissions are inhereted from the source based.
+#### 2. Private
+    - All documents from connectors that are private are only accessible to users in the group(s) that the connector is attached to.
+#### 3. Sync
+    - When one a connector is created with syncing enabled, the permissions are inhereted from the source.
     - This means that permissions for each document match the document permissions in the source.
-    - The permissions of these connectors/documents are not editable within Danswer.
+        - For example, if a document is shared with a user on Google Drive, that user will be able to access that document in Danswer.
+    - This matching is done based on the user's email
+    - The permissions of documents owned by sync connectors are not editable within Danswer.
     - Syncing is available for:
         - Google Drive
 
