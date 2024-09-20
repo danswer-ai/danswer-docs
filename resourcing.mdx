@@ -33,8 +33,6 @@ If you go with this approach, we recommend:
   - Note: Vespa, used by Danswer for document indexing, requires Haswell (2013) or later CPUs. For older CPUs, use the `vespaengine/vespa-generic-intel-x86_64` image in your `docker-compose.yml`. This generic image is slower but ensures compatibility. For details, see [Vespa CPU Support](https://docs.vespa.ai/en/cpu-support.html).
   To clean up these unused images, run: `docker system prune --all`.
 
-
-
 For reference, we have chosen to give each Danswer Cloud customer a `m7g.xlarge` instance by default,
 which has 4vCPU cores + 16GB of RAM + 200GB of disk space. We're comfortable using 4vCPU cores in a
 production setting since we have dedicated GPU instances that run the embedding / cross-encoder models.
