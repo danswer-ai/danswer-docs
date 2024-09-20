@@ -30,7 +30,10 @@ If you go with this approach, we recommend:
   we would recommend getting extra disk beyond this recommendation to be safe.
   - Note: Vespa does not allow writes when disk usage is >75%, so make sure to always have some headroom here
   - Note: old, unused docker images often take up a bunch of space when performing frequent upgrades of Danswer.
+  - Note: Vespa, used by Danswer for document indexing, requires Haswell (2013) or later CPUs. For older CPUs, use the `vespaengine/vespa-generic-intel-x86_64` image in your `docker-compose.yml`. This generic image is slower but ensures compatibility. For details, see [Vespa CPU Support](https://docs.vespa.ai/en/cpu-support.html).
   To clean up these unused images, run: `docker system prune --all`.
+
+
 
 For reference, we have chosen to give each Danswer Cloud customer a `m7g.xlarge` instance by default,
 which has 4vCPU cores + 16GB of RAM + 200GB of disk space. We're comfortable using 4vCPU cores in a
