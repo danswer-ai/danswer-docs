@@ -50,10 +50,10 @@ Danswer also has some advanced customization options
 
 Danswer uses [Tailwind CSS](https://tailwindcss.com/) for theming. The color palette is defined in two main files:
 1. `web/tailwind-themes/tailwind.config.js`: This file contains the base Tailwind configuration, including color definitions.
-2. `web/src/styles/globals.css`: This file defines CSS variables for colors, which are then used in the Tailwind config.
+2. `web/src/app/globals.css`: This file defines CSS variables for colors, which are then used in the Tailwind config.
 
 To customize the color palette of Danswer, you can:
-1. Navigate to `web/src/styles/globals.css`
+1. Navigate to `web/src/app/globals.css`
 2. Customize the base color palette (for example, create different accent colors, background colors, etc.)
 
 To choose specific colors for a given set of UI elements, you can:
@@ -62,7 +62,7 @@ To choose specific colors for a given set of UI elements, you can:
 
 Alternatively, to customize all these colors, you can:
 
-1. Navigate to `web/tailwind-themes/custom`. 
+1. Navigate to `web/tailwind-themes`. 
 2. Create a new folder with the name of your organization.
 3. Create a `tailwind.config.js` file in this new folder.
 4. Override any values specified in the base `tailwind.config.js` file.
