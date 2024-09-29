@@ -46,35 +46,20 @@ Danswer also has some advanced customization options
   ![Chat Footer Logotype](/images/customization/chat_logotype.png)
 
 
-
 ### Customizing Colors
 
-We use [Tailwind CSS](https://tailwindcss.com/) to theme Danswer. Every color used is one of 
-defined in our [tailwind.config.js file](https://github.com/danswer-ai/danswer/blob/main/web/tailwind-themes/tailwind.config.js).
+Danswer uses [Tailwind CSS](https://tailwindcss.com/) for theming. The color palette is defined in two main files:
 
-To customize all these colors, you can:
+1. `web/tailwind-themes/tailwind.config.js`: This file contains the base Tailwind configuration, including color definitions.
+2. `web/src/styles/globals.css`: This file defines CSS variables for colors, which are then used in the Tailwind config.
 
-1. Navigate to `web/tailwind-themes/custom`. 
-2. Create a new folder with the name of your organization.
-3. Create a `tailwind.config.js` file in this new folder.
-4. Override any values in specified in the base `tailwind.config.js` file.
-5. Set `NEXT_PUBLIC_THEME` to the name of your organization (e.g. the same name as the folder you created in step 2).
+To customize the color palette of Danswer, you can:
+1. Navigate to `web/src/styles/globals.css`
+2. Customize the base color palette (for example, create different accent colors, background colors, etc.)
 
-For example, if you wanted to make the blackground black, you could use:
-
-```
-/** @type {import('tailwindcss').Config} */
-
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        "background": "#000000",
-      },
-    },
-  },
-};
-```
+To choose specific colors for a given set of UI elements, you can:
+1. Navigate to `web/tailwind-themes/tailwind.config.js`.
+2. Override any values specified in the base `tailwind.config.js` file.
 
 **NOTE:** for these changes to apply, you will need to build Danswer from source. If testing locally, you will need to restart the 
 NextJS application to apply the changes.
