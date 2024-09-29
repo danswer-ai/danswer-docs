@@ -61,5 +61,29 @@ To choose specific colors for a given set of UI elements, you can:
 1. Navigate to `web/tailwind-themes/tailwind.config.js`.
 2. Override any values specified in the base `tailwind.config.js` file.
 
+Alternatively, to customize all these colors, you can:
+
+1. Navigate to `web/tailwind-themes/custom`. 
+2. Create a new folder with the name of your organization.
+3. Create a `tailwind.config.js` file in this new folder.
+4. Override any values specified in the base `tailwind.config.js` file.
+5. Set `NEXT_PUBLIC_THEME` to the name of your organization (e.g. the same name as the folder you created in step 2).
+
+For example, if you wanted to make the background black, you could use:
+
+```
+/** @type {import('tailwindcss').Config} */
+
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        "background": "#000000",
+      },
+    },
+  },
+};
+```
+
 **NOTE:** for these changes to apply, you will need to build Danswer from source. If testing locally, you will need to restart the 
 NextJS application to apply the changes.
