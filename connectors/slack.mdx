@@ -19,7 +19,7 @@ The Slack connector indexes all public channels for a given workspace.
 
 ![SlackApp](/images/connectors/slack/SlackApp.png)
 
-4. Copy the following manifest into the text box
+4. Select the "YAML" tab, paste the following manifest into the text box, and click **Next**:
 ```
 display_information:
   name: DanswerConnector
@@ -38,6 +38,8 @@ oauth_config:
       - channels:join
       - im:history
       - users:read
+      - users:read.email
+      - usergroups:read
 settings:
   org_deploy_enabled: false
   socket_mode_enabled: false
