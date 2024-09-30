@@ -65,8 +65,8 @@
           "icon": "aws",
           "pages": [
             "production/aws/ec2",
-            "production/aws/ecs",
-            "production/aws/eks"
+            "production/aws/eks",
+            "production/aws/ecs"
           ]
         },
         "production/gcp",
