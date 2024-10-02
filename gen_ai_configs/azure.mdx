@@ -3,44 +3,48 @@ title: Azure OpenAI
 description: 'Configure Danswer to use GPT models hosted on Azure'
 ---
 
-Refer to [Model Configs](https://docs.danswer.dev/gen_ai_configs/overview#model-configs) for how to set the
-environment variables for your particular deployment.
+## Setting up Azure OpenAI Endpoint
 
-If you're already familiar with Azure OpenAI, feel free to skip to the
-[configuring Danswer](https://docs.danswer.dev/gen_ai_configs/azure#configuring-danswer-to-use-azure-openai-endpoint)
-section at the end
+To configure Danswer with Azure OpenAI, follow these steps:
 
-## Why use Azure OpenAI
-By far the most requested model integration has been Azure OpenAI. As of Aug 2023, GPT-4 is the most capable LLM
-available. When combined with the Enterprise grade security and geographical deployment options of Azure, this
-becomes a very attractive option for using with Danswer.
+1. Access the Azure Portal and search for "Azure OpenAI Service"
 
-## Set up Azure OpenAI Endpoint
-As of Aug 2023, Azure OpenAI access is by
-[application](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/limited-access) only. This may change
-moving forward, please check online for the latest information.
+![Azure OpenAI Service](/images/gen_ai/azure/1_azure.png)
 
-Start by creating the Azure OpenAI Resource
-- Search for `Azure OpenAI` service
-- Click on **+Create** to create a new Azure OpenAI resource
+2. Click "Create a resource" to begin setup
 
-![AzureResource](/images/gen_ai/AzureResource.png)
+![Create a resource](/images/gen_ai/azure/2_create.png)
 
-## Getting the Model Endpoint Info
-Once the resource is created, visit it in **Azure OpenAI Studio**
-Select **Chat**
+3. Create a new resource group and complete the required form fields
 
-![AzurePlayground](/images/gen_ai/AzurePlayground.png)
+![Create resource group](/images/gen_ai/azure/3_createopenai.png)
 
-Then click on **View Code** to see the connection info which we will configure for Danswer
+4. Wait for the deployment to complete, then navigate to Azure OpenAI Studio at https://oai.azure.com/
 
-![AzureViewCode](/images/gen_ai/AzureViewCode.png)
+5. In the studio, access the chat panel
 
-Note the values provided in the sample code (also feel free to try out the code to verify it works)
+![Chat panel](/images/gen_ai/azure/4_chatplayground.png)
 
-![AzureSample](/images/gen_ai/AzureSample.png)
+6. Create a new deployment by selecting a chat completion model
 
-## Configuring Danswer to use Azure OpenAI Endpoint
-Following the image above, you would configure Danswer with the following values:
+![Create deployment](/images/gen_ai/azure/5_model.png)
+![Select model](/images/gen_ai/azure/6_deploy.png)
 
-![AzureLLMProvider](/images/gen_ai/AzureLLMProvider.png)
+7. Configure your settings and deploy the model
+
+8. Test your configuration using the chat bar on the right side of the screen
+
+![Validate configuration](/images/gen_ai/azure/7_validate.png)
+
+9. After validation, click "View Code" to access your credentials
+
+![View Code](/images/gen_ai/azure/8_secrets.png)
+
+10. Locate your credentials:
+   - API version: The string after `?api-version=`
+   - API Base: The Endpoint value
+   - API Key: The obfuscated key
+
+![Credentials](/images/gen_ai/azure/9_version.png)
+
+With these steps completed, you'll have successfully set up and configured Azure OpenAI for use with Danswer.
