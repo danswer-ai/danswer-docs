@@ -41,15 +41,21 @@ production deployment.
 
 ## Kubernetes / AWS ECS
 
-If you prefer to give each component it's own dedicated resources for more efficient scaling, we recommend giving each container at least the following resources:
+If you prefer to give each component it's own dedicated resources for more efficient 
+scaling, we recommend giving each container access to at least the following resources:
 
-`api_server` - 2500m CPU, 5Gi Memory
+`api_server` - 1 CPU, 2Gi Memory
 
-`background` - 2500m CPU, 5Gi Memory
+`background` - 2 CPU, 4Gi Memory
 
-`postgres` - 500m CPU, 1Gi Memory
+`indexing_model_server` / `inference_model_server` - 2 CPU, 4Gi Memory
 
-`vespa` - >=2000m CPU, >= 4Gi Memory (may need to increase these depending on the number of documents you have indexed)
+`postgres` - 500m CPU, 2Gi Memory
+
+`vespa` - >=4 CPU, >= 4Gi Memory. This is the bare minimum, and we would generally recommend 
+higher than this. The resources required here also scales linearly with the number of documents indexed. 
+For reference, with 50GB of documents, we would generally recommend at least 10 CPU, 20Gi Memory + 
+tuning the `VESPA_SEARCHER_THREADS` environment variable.
 
 `nginx` - 250m CPU, 128Mi Memory
 
