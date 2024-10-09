@@ -95,7 +95,7 @@
       "pages": [
         "connectors/overview",
         {
-          "group": "Available Connectors",
+          "group": "Connectors",
           "pages": [
             "connectors/asana",
             "connectors/bookstack",
