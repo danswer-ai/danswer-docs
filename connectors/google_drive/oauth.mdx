@@ -40,6 +40,10 @@ checkout the section [here](/connectors/google_drive/service_account).
 
     4. Set up Scopes
         - Add the scope `.../auth/drive.readonly` for `Google Drive API`
+
+        4.1. If you are using the **Enterprise Edition** of Danswer and you'd like to automatically sync user permissions, you must also:
+            - Add the scope `.../auth/groups.metadata.readonly` for `Cloud Identity API`
+
 ![GoogleDriveScopes](/images/connectors/google_drive/GoogleDriveScopes.png)
 
     5. Set up Test users
