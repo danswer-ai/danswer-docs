@@ -20,6 +20,14 @@ checkout the section [here](/connectors/google_drive/service_account).
         - Alternatively visit this [link](https://console.cloud.google.com/flows/enableapi?apiid=drive.googleapis.com),
         select your project and enable the **Google Drive API**
 
+        2.1. If you are using the **Enterprise Edition** of Danswer and you'd like to automatically sync user permissions, you must also:
+            - On the left panel, open **APIs & services**
+            - Go to **Enabled APIs and services**
+            - On the top click **+ENABLE APIS AND SERVICES**
+            - Search for **Cloud Identity** and make sure to select the option that is exactly named **Cloud Identity** and click **ENABLE**
+            - Alternatively visit this [link](https://console.cloud.google.com/flows/enableapi?apiid=cloudidentity.googleapis.com),
+            select your project and enable the **Cloud Identity API**
+
 ![GoogleDriveEnableAPI](/images/connectors/google_drive/GoogleDriveEnableAPI.png)
 
     3. Set up the OAuth consent screen
@@ -32,6 +40,10 @@ checkout the section [here](/connectors/google_drive/service_account).
 
     4. Set up Scopes
         - Add the scope `.../auth/drive.readonly` for `Google Drive API`
+
+        4.1. If you are using the **Enterprise Edition** of Danswer and you'd like to automatically sync user permissions, you must also:
+            - Add the scope `.../auth/groups.metadata.readonly` for `Cloud Identity API`
+
 ![GoogleDriveScopes](/images/connectors/google_drive/GoogleDriveScopes.png)
 
     5. Set up Test users

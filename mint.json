@@ -107,6 +107,7 @@
             "connectors/file",
             "connectors/github",
             "connectors/gitlab",
+            "connectors/gong",
             {
               "group": "Gmail Connector",
               "pages": [
@@ -114,7 +115,6 @@
                 "connectors/gmail/oauth"
               ]
             },
-            "connectors/gong",
             {
               "group": "Google Drive Connector",
               "pages": [
