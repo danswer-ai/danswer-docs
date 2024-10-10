@@ -90,6 +90,14 @@
       ]
     },
     {
+      "group": "Guides",
+      "pages": [
+        "guides/assistants",
+        "guides/providers",
+        "guides/embedding_providers"
+      ]
+    },
+    {
       "group": "Connectors",
       "icon": "plug",
       "pages": [
