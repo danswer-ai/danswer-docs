@@ -181,6 +181,17 @@
     {
       "group": "More",
       "pages": [
+        {
+          "group": "Use Cases",
+          "pages": [
+            "more/use_cases/overview",
+            "more/use_cases/enterprise_search",
+            "more/use_cases/ai_platform",
+            "more/use_cases/support",
+            "more/use_cases/sales",
+            "more/use_cases/operations"
+          ]
+        },
         "more/faq",
         "more/telemetry",
         "more/options"
