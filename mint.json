@@ -170,7 +170,6 @@
         "enterprise_edition/permissioning",
         {
           "group": "Curator",
-          "icon": "user-group-crown",
           "pages": [
             "enterprise_edition/curator/overview",
             "enterprise_edition/curator/admin_examples",
