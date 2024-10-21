@@ -1,0 +1,85 @@
+---
+title: 'Creating Assistants'
+description: 'A comprehensive guide to creating and configuring AI assistants in Danswer'
+icon: 'square-plus'
+---
+
+## Introduction
+
+Danswer empowers you to create custom AI assistants tailored to your specific needs. These assistants can be configured to handle a wide range of tasks, from answering HR queries to assisting with technical support. This guide will walk you through the process of creating an effective assistant using Danswer's platform.
+
+![Assistant Configuration Interface](/images/guides/assistants/assistant_setup.png)
+
+
+## Configuration Options
+
+When creating an assistant in Danswer, you have several configuration options:
+
+1. **Name**: The identifier for your assistant
+2. **Description**: A brief overview of the assistant's purpose and capabilities
+3. **System Prompt**: Defines the assistant's role and overall behavior
+4. **Task Prompt**: Specifies how the assistant should handle user queries
+5. **Tools**: Available integrations and capabilities
+6. **Starter Messages**: Initial messages to guide user interaction
+7. **LLM Provider**: The language model powering your assistant
+
+![Assistant Configuration Interface](/images/guides/assistants/assistant_search.png)
+
+
+## Understanding Different Prompt Types
+
+Danswer uses two main types of prompts when configuring an assistant: the System Prompt and the Task Prompt ("Additional Instructions"). Understanding the difference between these is crucial for creating an effective assistant.
+
+### System Prompt
+The System Prompt sets the overall context and behavior of your assistant. It defines:
+- The assistant's role
+- General behavioral guidelines
+- Any limitations or restrictions
+
+The System Prompt is like giving your assistant its job description and what its purpose is. 
+
+Example System Prompt:
+```
+You are an HR assistant for Danswer Inc. You have access to the company's HR policies, benefits packages, and procedures. Maintain a professional and friendly tone in all interactions. If you're unsure about any information, advise the user to contact the HR department directly. Do not make up information or policies.
+```
+
+### Task Prompt
+The Task Prompt provides specific instructions on how the assistant should handle and respond to user queries. It defines:
+- Steps to follow for each query
+- How to process and present information
+- When to ask for clarification
+- How to handle different types of requests
+
+The Task Prompt is like giving your assistant a specific protocol for handling each interaction.
+
+Example Task Prompt:
+```
+Follow these steps when responding to a user query:
+1. Identify the main HR topic or policy in the user's question.
+2. Search the provided HR documents for relevant information.
+3. Summarize the applicable policy or procedure in clear, concise language.
+4. If multiple policies apply, list them in order of relevance.
+5. Provide the source document and section for your information.
+6. If the query is unclear, ask the user for clarification before providing an answer.
+7. If the query is outside your knowledge base, politely direct the user to contact the HR department.
+```
+
+
+
+## Testing and Refinement
+
+After creating your assistant:
+
+1. Conduct test runs with various queries
+2. Gather feedback from a small group of users
+3. Use Danswer's analytics tools to identify areas for improvement
+4. Regularly update and refine your assistant based on feedback and changing needs
+
+
+## Sharing and Permissions
+
+- Determine the appropriate access level for the assistant (e.g., specific departments, entire organization)
+- Utilize Danswer's group features to manage access efficiently
+- Consider creating multiple versions of an assistant for different user groups if needed
+
+By carefully configuring these elements, you can create a Danswer assistant that effectively serves your organization's needs, providing accurate and helpful responses to user queries.

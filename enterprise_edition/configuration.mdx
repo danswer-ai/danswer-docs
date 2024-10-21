@@ -45,6 +45,81 @@ export API_KEY_HASH_ROUNDS=600000
 
 Increasing this value enhances security but may impact performance. The default value provides a good balance for most use cases.
 
+## Create persona on the fly
+
+Endpoint: POST `/query/answer-with-quote'
+
+Enterprise Edition users can dynamically create custom personas for AI assistants during API interactions. This feature allows for tailored AI behavior without pre-configuration.
+
+### Using Persona Configuration in send-message Request
+
+Include a `persona_config` in your POST request to the `/chat/send-message` endpoint to create a custom persona for that interaction.
+
+### Persona Configuration Options
+
+1. **Basic Information**: 
+   - `name`: A unique identifier for your persona (e.g., "Renewable Energy Expert")
+   - `description`: Brief explanation of the persona's purpose
+
+2. **Search Settings**: 
+   - `search_type`: Choose from "hybrid", "semantic", or "keyword"
+   - `num_chunks`: Number of text chunks to retrieve (e.g., 5)
+   - `llm_relevance_filter`: Set to `true` or `false` to enable/disable AI-powered filtering
+
+3. **Language Model**: 
+   - `llm_model_provider_override`: Optional, specify a different AI model provider
+   - `llm_model_version_override`: Optional, choose a specific model version
+
+4. **Prompts**: Include a list of prompt configurations, each containing:
+   - `name`: Identifier for the prompt
+   - `system_prompt`: Define the overall role and behavior of the AI
+   - `task_prompt`: Provide specific instructions for handling queries
+
+5. **Knowledge Base**: 
+   - `document_sets`: List of document set IDs the AI can access (e.g., `[{"id": 1}, {"id": 2}]`)
+
+6. **Tools**: List of tools, each containing:
+   - `name`: Identifier for the tool (e.g., "Search tool")
+   - `description`: Brief explanation of the tool's function
+   - `display_name`: User-friendly name for the tool
+   - `id`: The id of the tol you wish you enable for this persona
+   - `in_code_tool_id`: Optional, specify the ID for internal reference
+
+### Usage Example
+
+```json
+{
+  "persona_config": {
+    "name": "Renewable Energy Expert",
+    "description": "An expert in renewable energy technologies and trends",
+    "search_type": "hybrid",
+    "num_chunks": 5,
+    "llm_relevance_filter": true,
+    "prompts": [
+      {
+        "name": "Renewable Energy Advisor",
+        "system_prompt": "You are an expert in renewable energy technologies.",
+        "task_prompt": "Provide up-to-date information on renewable energy developments, focusing on accuracy and citing sources when possible."
+      }
+    ],
+    "document_sets": [{"id": 1}, {"id": 2}],
+    "tools": [
+      {
+        "name": "Search tool",
+        "description": "Searches renewable energy databases",
+        "display_name": "Renewable Energy Search",
+        "in_code_tool_id": 1
+      }
+    ]
+  },
+  "chat_session_id": 1,
+  "message": "What are the latest trends in solar energy?",
+  "prompt_id": 1,
+  "retrieval_options": {
+    "filters": [],
+    "use_all_docs": true
+  }
+}
 
 ## Additional API Endpoints
 
