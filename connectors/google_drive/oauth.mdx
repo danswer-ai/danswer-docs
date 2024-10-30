@@ -43,7 +43,7 @@ checkout the section [here](/connectors/google_drive/service_account).
     
     
 <br/>
-### **You should see something like this:**
+### You should see something like this:
 <div align="center">
   <img src="/images/connectors/google_drive/GoogleDriveScopes.png" alt="GoogleDriveScopes" width="60%" />
 </div>
@@ -57,15 +57,27 @@ checkout the section [here](/connectors/google_drive/service_account).
 
     6. Create Credentials
         - Go to the **Credentials** tab and select **+ CREATE CREDENTIALS** -> **OAuth client ID**
-![GoogleDriveCredential](/images/connectors/google_drive/GoogleDriveCredential.png)
+
+
+<div align="center">
+  <img src="/images/connectors/google_drive/GoogleDriveCredential.png" alt="GoogleDriveScopes" width="90%" />
+</div>
+
+
         - Choose **Web application** and give it some name like `DanswerConnector`
         - Add a **Authorized JavaScript origins** for `http://localhost:3000` (or `https://<INTERNAL_DEPLOYMENT_URL>` if you have setup Danswer for production use)
         - Add a **Authorized redirect URIs** for `http://localhost:3000/admin/connectors/google-drive/auth/callback` (or `https://<INTERNAL_DEPLOYMENT_URL>/admin/connectors/google-drive/auth/callback` if you have setup Danswer for production use)
-![GoogleDriveScopes](/images/connectors/google_drive/DriveCredentials.png)
+
+<div align="center">
+  <img src="/images/connectors/google_drive/DriveCredentials.png" alt="GoogleDriveScopes" width="70%" />
+</div>
 
         - Click create and on the right hand side next to **Client secret**, there is an option to download the
         credentials as a JSON. Download the JSON for use in the next step.
-![GoogleDriveScopes](/images/connectors/google_drive/DriveDownloadCredentials.png)
+
+<div align="center">
+  <img src="/images/connectors/google_drive/DriveDownloadCredentials.png" alt="GoogleDriveScopes" width="70%" />
+</div>
 
 ### Indexing
     1. Navigate to the Admin Dashboard and select the **Google Drive** Connector.
