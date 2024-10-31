@@ -12,21 +12,17 @@ checkout the section [here](/connectors/google_drive/service_account).
     1. Create a **Google Cloud Project**
         - [https://console.cloud.google.com/projectcreate](https://console.cloud.google.com/projectcreate)
 
-    2. Enable the **Google Drive API**
+    2. Enable the **Google Drive API** and the **Admin SDK API**
         - On the left panel, open **APIs & services**
         - Go to **Enabled APIs and services**
         - On the top click **+ENABLE APIS AND SERVICES**
         - Search for **Google Drive API** and click **ENABLE**
         - Alternatively visit this [link](https://console.cloud.google.com/flows/enableapi?apiid=drive.googleapis.com),
         select your project and enable the **Google Drive API**
-
-        2.1. If you are using the **Enterprise Edition** of Danswer and you'd like to automatically sync user permissions, you must also:
-            - On the left panel, open **APIs & services**
-            - Go to **Enabled APIs and services**
-            - On the top click **+ENABLE APIS AND SERVICES**
-            - Search for **Cloud Identity** and make sure to select the option that is exactly named **Cloud Identity** and click **ENABLE**
-            - Alternatively visit this [link](https://console.cloud.google.com/flows/enableapi?apiid=cloudidentity.googleapis.com),
-            select your project and enable the **Cloud Identity API**
+        - Click on **+ENABLE APIS AND SERVICES** again.
+        - Search for **Admin SDK API** and click **ENABLE**
+        - Alternatively visit this [link](https://console.cloud.google.com/flows/enableapi?apiid=admin.googleapis.com),
+        select your project and enable the **Admin SDK API**
 
 ![GoogleDriveEnableAPI](/images/connectors/google_drive/GoogleDriveEnableAPI.png)
 
@@ -40,11 +36,17 @@ checkout the section [here](/connectors/google_drive/service_account).
 
     4. Set up Scopes
         - Add the scope `.../auth/drive.readonly` for `Google Drive API`
+        - Add the scope `.../auth/drive.metadata.readonly` for `Google Drive API`
+        - Add the scope `.../auth/admin.directory.user.readonly` for `Admin SDK API`
+        - Add the scope `.../auth/admin.directory.group.readonly` for `Admin SDK API`
 
-        4.1. If you are using the **Enterprise Edition** of Danswer and you'd like to automatically sync user permissions, you must also:
-            - Add the scope `.../auth/groups.metadata.readonly` for `Cloud Identity API`
-
-![GoogleDriveScopes](/images/connectors/google_drive/GoogleDriveScopes.png)
+    
+    
+<br/>
+### You should see something like this:
+<div align="center">
+  <img src="/images/connectors/google_drive/GoogleDriveScopes.png" alt="GoogleDriveScopes" width="60%" />
+</div>
 
     5. Set up Test users
         - This is only applicable for users without a Google Organization.
@@ -55,21 +57,33 @@ checkout the section [here](/connectors/google_drive/service_account).
 
     6. Create Credentials
         - Go to the **Credentials** tab and select **+ CREATE CREDENTIALS** -> **OAuth client ID**
-![GoogleDriveCredential](/images/connectors/google_drive/GoogleDriveCredential.png)
+
+
+<div align="center">
+  <img src="/images/connectors/google_drive/GoogleDriveCredential.png" alt="GoogleDriveScopes" width="90%" />
+</div>
+
+
         - Choose **Web application** and give it some name like `DanswerConnector`
         - Add a **Authorized JavaScript origins** for `http://localhost:3000` (or `https://<INTERNAL_DEPLOYMENT_URL>` if you have setup Danswer for production use)
         - Add a **Authorized redirect URIs** for `http://localhost:3000/admin/connectors/google-drive/auth/callback` (or `https://<INTERNAL_DEPLOYMENT_URL>/admin/connectors/google-drive/auth/callback` if you have setup Danswer for production use)
-![GoogleDriveScopes](/images/connectors/google_drive/DriveCredentials.png)
+
+<div align="center">
+  <img src="/images/connectors/google_drive/DriveCredentials.png" alt="GoogleDriveScopes" width="70%" />
+</div>
 
         - Click create and on the right hand side next to **Client secret**, there is an option to download the
         credentials as a JSON. Download the JSON for use in the next step.
-![GoogleDriveScopes](/images/connectors/google_drive/DriveDownloadCredentials.png)
+
+<div align="center">
+  <img src="/images/connectors/google_drive/DriveDownloadCredentials.png" alt="GoogleDriveScopes" width="70%" />
+</div>
 
 ### Indexing
     1. Navigate to the Admin Dashboard and select the **Google Drive** Connector.
     2. Select the credentials JSON from **step 6** above as shown in image below, then click the **Upload** button to save your credentials into Danswer. 
     3. Click on **Authenticate with Google Drive**
         - Completing the OAuth flow will allow Danswer to index the docs that the user has read access to.
-    4. Click the `Add` button! All Google Drive documents accessible by the user who completed step (3) will now be pulled into Danswer every **10** minutes.
+    4. Continue to the next step to select what you would like to index.
 
 ![GoogleDriveConnectorPage](/images/connectors/google_drive/GoogleDriveConnectorPage.png)
