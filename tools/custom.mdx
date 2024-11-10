@@ -7,7 +7,6 @@ First, navigate to the Admin console, and go to the **Tools** tab. Click the **N
 
 Next, specify a OpenAPI 3.0 or OpenAPI 3.1 schema that defines the APIs that you want to make available as part of this tool.
 
-
 Danswer provides dynamic context variables that can be utilized within your OpenAPI definition, enhancing the functionality and context-awareness of your custom tools. These variables are:
 
 - `CHAT_SESSION_ID`: Replaced with the chat session ID in which the tool call was made.
@@ -18,11 +17,11 @@ For example: `/persona/CHAT_SESSION_ID/messages/CHAT_MESSAGE_ID` with `CHAT_SESS
 
 To improve performance:
 
-- Add descriptive `summary`s for each operation (API). 
+- Add descriptive `summary`s for each operation (API).
 - Give each operation a descriptive `operationId`.
 - Add `description`s for parameter.
 
-For example, you could use the following to create a tool that allows an assistant to fetch and create assistants 
+For example, you could use the following to create a tool that allows an assistant to fetch and create assistants
 with Danswer:
 
 ```
@@ -168,4 +167,170 @@ with Danswer:
       }
    }
 }
+
 ```
+
+Custom tools provide powerful flexibility, allowing you to perform any processing on your end. This means you can integrate with custom image models, run specialized data processing to generate CSV files, or implement tailored search functionalities. By defining APIs that your assistant can use, you enable it to leverage these custom processes and present the results seamlessly.
+
+For example, you can define an API that performs searches and returns results. When creating a custom search tool, it's important to ensure that your search API returns results in the format of a list of `CustomToolSearchResult` models. Here's the model definition for reference:
+
+```python
+class CustomToolSearchResult(BaseModel):
+    document_id: str
+    content: str  # content of the search result
+    blurb: str  # used to display in the UI
+    title: str
+    link: str | None = None  # optional source link
+    updated_at: datetime | None = None
+```
+
+Here's an example of an OpenAPI schema for a custom search tool:
+
+```json
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Custom Search API",
+    "version": "1.0.0",
+    "description": "An API for performing custom searches and returning results"
+  },
+  "paths": {
+    "/search": {
+      "get": {
+        "summary": "Perform a custom search",
+        "operationId": "customSearch",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The search query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful search response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CustomToolSearchResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CustomToolSearchResult": {
+        "type": "object",
+        "required": ["document_id", "content", "blurb", "title"],
+        "properties": {
+          "document_id": {
+            "type": "string",
+            "description": "Unique identifier for the document"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content of the search result"
+          },
+          "blurb": {
+            "type": "string",
+            "description": "Short description used in the UI"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the search result"
+          },
+          "link": {
+            "type": "string",
+            "nullable": true,
+            "description": "Optional source link"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Timestamp of the last update"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+By using this custom tool, the assistant can perform searches specific to your application and present the results accordingly.
+
+Similarly, you can create custom tools that handle images. For instance, by defining an API that returns image data, you can hook into custom image generation models or retrieval systems. Here's an example:
+
+```yaml
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: Image API
+  description: An API that returns images
+paths:
+  /generate-image:
+    get:
+      summary: Generate or retrieve an image
+      operationId: generateImage
+      parameters:
+        - name: prompt
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Parameters or prompt for image generation
+      responses:
+        "200":
+          description: Successful image retrieval
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+```
+
+With this custom tool, the assistant can request images based on user input, enabling integration with your custom image processing pipelines.
+
+To handle CSV data, you can define APIs that perform data processing and return results in CSV format. This allows the assistant to retrieve and present processed data. Here's an example:
+
+```yaml
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: CSV Data API
+  description: An API that returns data in CSV format
+paths:
+  /data.csv:
+    get:
+      summary: Get processed data as CSV
+      operationId: getDataAsCSV
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Optional filter parameters
+      responses:
+        "200":
+          description: Successful CSV data retrieval
+          content:
+            text/csv:
+              schema:
+                type: string
+```
+
+By defining these custom tools, you empower the assistant to leverage your specific processing capabilities, whether it's custom searches, image generation, or data processing. This flexibility allows you to incorporate specialized functionality that meets your unique requirements.
+
+Make sure that your OpenAPI definitions accurately describe the APIs you want to expose as tools, and that the responses have the correct `content` types (e.g., `application/json`, `text/csv`, `image/png`, etc.).
