@@ -1,0 +1,79 @@
+---
+title: 'LLM Providers'
+description: 'A comprehensive guide to selecting and using LLM providers in Danswer'
+icon: 'campground'
+---
+
+## Danswer's Approach to LLM Providers
+
+Danswer is designed to be model-agnostic, offering you the flexibility to choose the Language Model (LLM) that best suits your needs. This approach ensures that you're not locked into a single provider and can leverage the strengths of different models for various tasks.
+
+
+## Model Overview
+
+Danswer offers integration with several popular LLM providers, with a focus on models from OpenAI and Anthropic. Here's an overview of key models:
+
+### OpenAI Models
+
+#### GPT-3.5-Turbo
+- **Strengths**: High speed, good quality for general tasks
+- **Best for**: Quick queries, general information retrieval
+- **Knowledge cutoff**: September 2021
+
+#### GPT-4
+- **Strengths**: High-quality responses, strong reasoning capabilities
+- **Best for**: Complex analysis, creative tasks, code generation
+- **Knowledge cutoff**: April 2023
+- **Note**: Capable of image analysis
+
+Here's the updated information on Anthropic models, including Claude 3.5 Sonnet and a recommendation:
+
+### Anthropic Models
+
+#### Claude-3 Opus
+- **Strengths**: Exceptional performance in reasoning and analysis tasks
+- **Best for**: Complex problem-solving, detailed explanations
+- **Note**: Offers high accuracy but may have slower response times
+
+#### Claude-3 Sonnet
+- **Strengths**: Balance of performance and speed
+- **Best for**: General-purpose tasks requiring good quality and reasonable speed
+- **Note**: Good all-around performer for most use cases
+
+#### Claude 3.5 Sonnet
+- **Strengths**: Enhanced capabilities over Claude-3 Sonnet
+- **Best for**: Advanced general-purpose tasks with improved performance
+- **Note**: Recommended for most use cases due to its superior balance of capabilities
+
+#### Claude-3 Haiku
+- **Strengths**: Fast responses, efficient for simpler tasks
+- **Best for**: Quick queries, real-time applications
+- **Note**: Sacrifices some complexity for speed
+
+For most use cases, Claude 3.5 Sonnet is recommended as it offers an excellent balance of advanced capabilities, performance, and speed, making it suitable for a wide range of applications.
+
+
+## Custom Providers
+Danswer allows you to add custom providers by integrating any model from the [LiteLLM providers list](https://docs.litellm.ai/docs/providers). This flexibility enables you to use specialized or proprietary models that best fit your organization's needs.
+
+
+
+## Choosing the Right Model
+
+Consider these factors when selecting a model:
+
+1. **Task Complexity**: More complex tasks benefit from advanced models like GPT-4 or Claude-3 Opus.
+2. **Response Speed**: For quick responses, consider faster models like GPT-3.5-Turbo or Claude-3 Haiku.
+3. **Cost Considerations**: More advanced models typically have higher usage costs.
+4. **Data Privacy**: For strict data policies, consider open-source models like Llama 2 that can be self-hosted.
+5. **Specific Strengths**: Some models excel in particular areas (e.g., coding, analysis, creativity).
+
+We recommend testing different models with your typical queries to determine which performs best for your specific use cases.
+
+## Leveraging Model Flexibility
+
+1. **Experiment**: Try different models for the same task to compare results.
+2. **Monitor Performance**: Track which models perform best for different types of queries.
+3. **Stay Updated**: Regularly check for updates and new model releases.
+4. **Custom Integration**: Explore the option of integrating specialized models from the LiteLLM providers list for unique use cases.
+
