@@ -104,6 +104,7 @@
             "connectors/discourse",
             "connectors/document360",
             "connectors/dropbox",
+            "connectors/discord",
             "connectors/file",
             "connectors/freshdesk",
             "connectors/github",
