@@ -81,7 +81,8 @@
               "group": "Gmail Connector",
               "pages": [
                 "connectors/gmail/overview",
-                "connectors/gmail/oauth"
+                "connectors/gmail/oauth",
+                "connectors/gmail/service_account"
               ]
             },
             {
