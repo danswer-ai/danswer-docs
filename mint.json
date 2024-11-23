@@ -59,38 +59,6 @@
       ]
     },
     {
-      "group": "Deploy Danswer",
-      "pages": [
-        {
-          "group": "Deploy with AWS",
-          "icon": "aws",
-          "pages": [
-            "production/aws/ec2",
-            "production/aws/eks",
-            "production/aws/ecs"
-          ]
-        },
-        "production/gcp",
-        "production/azure",
-        "production/digitalocean"
-      ]
-    },
-    {
-      "group": "Auth",
-      "pages": [
-        "basic_auth",
-        "google_oauth_setup",
-        "oidc_saml"
-      ]
-    },
-    {
-      "group": "Tools",
-      "pages": [
-        "tools/overview",
-        "tools/custom"
-      ]
-    },
-    {
       "group": "Connectors",
       "icon": "plug",
       "pages": [
@@ -114,7 +82,8 @@
               "group": "Gmail Connector",
               "pages": [
                 "connectors/gmail/overview",
-                "connectors/gmail/oauth"
+                "connectors/gmail/oauth",
+                "connectors/gmail/service_account"
               ]
             },
             {
@@ -147,6 +116,38 @@
             "connectors/zulip"
           ]
         }
+      ]
+    },
+    {
+      "group": "Deploy Danswer",
+      "pages": [
+        {
+          "group": "Deploy with AWS",
+          "icon": "aws",
+          "pages": [
+            "production/aws/ec2",
+            "production/aws/eks",
+            "production/aws/ecs"
+          ]
+        },
+        "production/gcp",
+        "production/azure",
+        "production/digitalocean"
+      ]
+    },
+    {
+      "group": "Auth",
+      "pages": [
+        "basic_auth",
+        "google_oauth_setup",
+        "oidc_saml"
+      ]
+    },
+    {
+      "group": "Tools",
+      "pages": [
+        "tools/overview",
+        "tools/custom"
       ]
     },
     {
