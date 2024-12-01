@@ -5,7 +5,7 @@
     "dark": "/logo/dark.png",
     "light": "/logo/light.png"
   },
-  "favicon": "/favicon.png",
+  "favicon": "/favicon.ico",
   "colors": {
     "primary": "#0069ED",
     "light": "#4D9CFF",
@@ -27,9 +27,7 @@
       "url": "https://discord.gg/TDJ59cGV2X"
     }
   ],
-  "openapi": [
-    "/apis/openapi.json"
-  ],
+  "openapi": ["/apis/openapi.json"],
   "navigation": [
     {
       "group": "Welcome to Danswer",
@@ -137,36 +135,24 @@
     },
     {
       "group": "Auth",
-      "pages": [
-        "basic_auth",
-        "google_oauth_setup",
-        "oidc_saml"
-      ]
+      "pages": ["basic_auth", "google_oauth_setup", "oidc_saml"]
     },
     {
       "group": "Tools",
-      "pages": [
-        "tools/overview",
-        "tools/custom"
-      ]
+      "pages": ["tools/overview", "tools/custom"]
     },
     {
       "group": "Backend APIs",
-      "pages": [
-        "backend_apis/ingestion"
-      ]
+      "pages": ["backend_apis/ingestion"]
     },
     {
       "group": "Cloud APIs",
-      "pages": [
-        "apis/answer_with_quote",
-        "apis/send_message_simple_api"
-      ]
+      "pages": ["apis/answer_with_quote", "apis/send_message_simple_api"]
     },
     {
       "group": "Enterprise",
       "pages": [
-        "enterprise_edition/overview", 
+        "enterprise_edition/overview",
         "enterprise_edition/configuration",
         "enterprise_edition/theming",
         "enterprise_edition/custom_analytics",
@@ -208,11 +194,11 @@
   },
   "analytics": {
     "posthog": {
-        "apiKey": "phc_ghlrcfXpgWq9XxZeVMfoJpfaISgFGoXhHYOEcBwdulK",
-        "apiHost": "https://us.i.posthog.com"
+      "apiKey": "phc_ghlrcfXpgWq9XxZeVMfoJpfaISgFGoXhHYOEcBwdulK",
+      "apiHost": "https://us.i.posthog.com"
     },
     "gtm": {
-        "tagId": "GTM-MFZGFSR5"
+      "tagId": "GTM-MFZGFSR5"
     }
   }
 }
