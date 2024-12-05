@@ -9,12 +9,17 @@ Before we get started, make sure you have an account with Google Cloud Platform 
 Feel free to reach out to us via the links on our [Contact Us](https://docs.danswer.dev/contact_us) page for more individual help.
 
 ## Getting an Instance
+
 Steps to create a VM instance from Google Cloud Console:
+
 1. Go to the [Google Cloud Console Dashboard](https://console.cloud.google.com/) to create a VM Instance ![Create VM INstance](/images/setup_guides/gcp/CreateVmInstance.png)
 2. Select an existing project or create a new one under your organization.
-3. For instance configuration for DANSWER, we recommend at least 16GB of RAM, 4-8vCPU cores, and 500GB of disk for a small-mid sized organization (< 5000 users). You can choose the machine type as per your requirements.
-For reference, in our Cloud offering we use a `e2-standard-4` with 500GB of EBS storage. For more details on GCP instances, you can refer to the [GCP documentation](https://cloud.google.com/compute/docs/instances).
-![Instance](/images/setup_guides/gcp/Instance.png)
+3. We recommend at least 16GB of RAM, 4-8vCPU cores, and 500GB of disk. The exact instance type to 
+choose depends on your document volume and query load, but a `e2-standard-4`/`e2-standard-8` is a 
+good starting point. For more details on GCP instances, you can refer to 
+the [GCP documentation](https://cloud.google.com/compute/docs/instances).
+For more information on sizing, refer to our [resourcing guide](https://docs.danswer.dev/resourcing).
+   ![Instance](/images/setup_guides/gcp/Instance.png)
 4. Make sure to allow HTTPS traffic in the firewall settings and valid scopes for the instance. ![Firewall](/images/setup_guides/gcp/Firewall.png)
 
 For the below guide, we will assume that you’ve chosen to use GCP Debian GNU/Linux machine with the recommended `e2-standard-4` instance.
@@ -45,6 +50,21 @@ The first record directs traffic to that domain to your GCP VM instance. The sec
 
 Next, we need to prepare the instance so we can actually get Danswer up and running. To do this, you'll
 need three things: `git`, `docker`, and `docker compose`. For Debian Linux 12, this can be done with the following:
+
+```bash
+sudo apt update
+sudo apt install -y ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+If using CentOS, Red Hat Linux, or similar, you can use the following:
 
 ```bash
 sudo yum update -y
@@ -98,9 +118,6 @@ AUTH_TYPE=basic
 # GOOGLE_OAUTH_CLIENT_SECRET=
 # SECRET=<RANDOMLY_GENERATED_UUID>
 
-GEN_AI_MODEL_PROVIDER=openai
-GEN_AI_MODEL_VERSION=gpt-4  # if it's an option, we recommend using gpt-4
-
 # Default values here are what Postgres uses by default, feel free to change.
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=password
@@ -115,18 +132,19 @@ DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
 Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/). To do this, we can simply run:
 
 ```bash
-./init-letsencrypt.sh
+sudo ./init-letsencrypt.sh
 ```
 
 <Info>
-  If are skipping the HTTPS setup, you should start things up with:
-  `docker-compose -f docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate`
-  instead of the above. You can then access Danswer from the IP address from earlier or from the
-  instance `External IP` provided on the instance's page in the GCP VM console.
+  If are skipping the HTTPS setup, you should start things up with: `sudo docker
+  compose -f docker-compose.dev.yml -p danswer-stack up -d --pull always`
+  instead of the above. You can then access Danswer from the IP address from
+  earlier or from the instance `External IP` provided on the instance's page in
+  the GCP VM console.
 </Info>
 
 Voila, you're all done! 🎉
 
 After waiting a few minutes (you can monitor the progress with
-`docker logs danswer-stack-api_server-1 -f`; once you see a log for
+`sudo docker logs danswer-stack-api_server-1 -f`; once you see a log for
 `INFO:     Application startup complete.` then everything should be good to go).
