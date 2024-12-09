@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Danswer Documentation",
+  "name": "Onyx Documentation",
   "logo": {
     "dark": "/logo/dark.png",
     "light": "/logo/light.png"
@@ -13,13 +13,13 @@
   },
   "topbarCtaButton": {
     "type": "github",
-    "url": "https://github.com/danswer-ai/danswer"
+    "url": "https://github.com/onyx-dot-app/onyx"
   },
   "anchors": [
     {
       "name": "Slack",
       "icon": "slack",
-      "url": "https://join.slack.com/t/danswer/shared_invite/zt-2lcmqw703-071hBuZBfNEOGUsLa5PXvQ"
+      "url": "https://join.slack.com/t/onyx-dot-app/shared_invite/zt-2sslpdbyq-iIbTaNIVPBw_i_4vrujLYQ"
     },
     {
       "name": "Discord",
@@ -30,7 +30,7 @@
   "openapi": ["/apis/openapi.json"],
   "navigation": [
     {
-      "group": "Welcome to Danswer",
+      "group": "Welcome to Onyx",
       "pages": [
         "introduction",
         "quickstart",
@@ -188,9 +188,9 @@
     }
   ],
   "footerSocials": {
-    "github": "https://github.com/danswer-ai/danswer",
-    "twitter": "https://twitter.com/DanswerAI",
-    "linkedin": "https://linkedin.com/company/danswerai"
+    "github": "https://github.com/onyx-dot-app/onyx",
+    "twitter": "https://x.com/onyx-dot-app",
+    "linkedin": "https://linkedin.com/company/onyx-dot-app"
   },
   "analytics": {
     "posthog": {
