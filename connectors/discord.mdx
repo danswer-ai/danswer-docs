@@ -1,0 +1,28 @@
+---
+title: Discord Connector
+description: 'Access knowledge from your Messages'
+---
+
+## How it works
+The Discord connector indexes all channels for all servers(guilds) mentioned.
+
+## Setting up
+### Authorization
+1. Login to your discord's developer portal https://discord.com/developers/applications
+2. Create a new application
+3. Head over to the `Installation` tab:
+    - Check only the `Guild Install` under the Installation contexts.
+    - Copy the install link. Easy to just use the `Discord Provided Link`
+4. Make sure you have `Manager server` permissions on that guild or server whose channels you want to index
+5. In a new tab, open the link copied in step 3. 
+6. Authorize the application to the server of your choice.
+7. In your developer portal, head over to the `Bot` section.
+8. Click on reset token to generate a new one. Copy & save this to use it for when you add your danswer connector
+
+
+### Indexing
+1. Navigate to the Connector Dashboard and select the **Discord** Connector.
+2. Enter the **Bot Token** under credentials
+3. Enter the server IDs and the channels you want to index. Make sure you add those to which the bot has been authorized
+
+__Note:__ If no channels are added, by default all text channels in the server(s) will be indexed
