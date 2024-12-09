@@ -1,0 +1,54 @@
+---
+title: Vertex AI
+description: 'Configure Onyx to use Vertex AI'
+---
+
+
+There are currently two supported approaches to use Vertex AI with Onyx:
+1. [Use the gcloud CLI to authenticate](#use-the-gcloud-cli-to-authenticate)
+2. [Set up a service account, and use the service account to authenticate](#use-a-service-account-to-authenticate)
+
+## Use the gcloud CLI to authenticate
+
+1. Install the [gcloud CLI](https://cloud.google.com/sdk/docs/install)
+2. Authenticate with the gcloud CLI using `gcloud auth application-default login` on the machine that Danswer is running on.
+3. Set up a `Custom LLM Provider` in the Admin Panel. See the screenshots below 
+for an example of what this should look like. Replace `YOUR_GCP_PROJECT_ID` 
+with your actual GCP project ID.
+
+<div className="flex gap-2">
+  <div>
+    ![VertexAILLMProvider](/images/gen_ai/vertex_ai/cli-1.png)
+  </div>
+  <div>
+    ![VertexAILLMProvider](/images/gen_ai/vertex_ai/cli-2.png)
+  </div>
+  <div>
+    ![VertexAILLMProvider](/images/gen_ai/vertex_ai/cli-3.png)
+  </div>
+</div>
+
+4. Start using Vertex AI with Onyx!
+
+
+## Use a service account to authenticate
+
+1. Go the [Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts) page in the GCP Console.
+2. Click `+ Create Service Account` and set one up with a name like `onyx-vertex-ai`. Give it access to the `Vertex AI Service Agent` role. Create!
+3. Click into the created service account, navigate to the `Keys` tab, then click `Add Key`. Select `JSON` as the key type, and click `Create`. This will download a JSON file to your machine.
+4. Set up a `Custom LLM Provider` in the Admin Panel. See the screenshots below 
+for an example of what this should look like. Replace `YOUR_SERVICE_ACCOUNT_CREDENTIAL` with the contents of the JSON file you downloaded in step 3.
+
+<div className="flex gap-2">
+  <div>
+    ![VertexAILLMProvider](/images/gen_ai/vertex_ai/cli-1.png)
+  </div>
+  <div>
+    ![VertexAILLMProvider](/images/gen_ai/vertex_ai/service-acc-1.png)
+  </div>
+  <div>
+    ![VertexAILLMProvider](/images/gen_ai/vertex_ai/cli-3.png)
+  </div>
+</div>
+
+5. Start using Vertex AI with Onyx!

@@ -44,6 +44,7 @@
             "gen_ai_configs/open_ai",
             "gen_ai_configs/anthropic",
             "gen_ai_configs/azure",
+            "gen_ai_configs/vertex_ai",
             "gen_ai_configs/huggingface",
             "gen_ai_configs/ollama",
             "gen_ai_configs/fastchat",
