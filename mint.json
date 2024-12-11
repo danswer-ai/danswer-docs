@@ -74,6 +74,7 @@
             "connectors/dropbox",
             "connectors/egnyte",
             "connectors/file",
+            "connectors/fireflies",
             "connectors/freshdesk",
             "connectors/github",
             "connectors/gitlab",
