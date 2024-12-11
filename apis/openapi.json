@@ -6536,7 +6536,8 @@
           "loopio",
           "sharepoint",
           "teams",
-          "freshdesk"
+          "freshdesk",
+          "fireflies"
         ],
         "title": "DocumentSource",
         "description": "An enumeration."
