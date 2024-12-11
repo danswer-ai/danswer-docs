@@ -73,6 +73,7 @@
             "connectors/document360",
             "connectors/dropbox",
             "connectors/file",
+            "connectors/fireflies",
             "connectors/freshdesk",
             "connectors/github",
             "connectors/gitlab",
