@@ -141,6 +141,21 @@
       "pages": ["basic_auth", "google_oauth_setup", "oidc_saml"]
     },
     {
+      "group": "Enterprise",
+      "pages": [
+        "enterprise_edition/overview",
+        "enterprise_edition/configuration"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/assistants",
+        "guides/providers",
+        "guides/embedding_providers"
+      ]
+    },
+    {
       "group": "Tools",
       "pages": ["tools/overview", "tools/custom"]
     },
