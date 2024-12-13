@@ -38,10 +38,10 @@ Follow these steps to manually and immediately delete a connector and its conten
 1. Ensure your Docker containers are running- you can refer to the [quickstart guide](/quickstart):
 
    ```
-   docker compose -f docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate
+   docker compose -f docker-compose.dev.yml -p onyx-stack up -d --build --force-recreate
    ```
 
-2. Identify the `<CONTAINER_ID>` of your API server container. It should contain the string `danswer-api`. You can list all running containers with:
+2. Identify the `<CONTAINER_ID>` of your API server container. It should contain the string `onyx-api`. You can list all running containers with:
 
    ```
    docker ps -a

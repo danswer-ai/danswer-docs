@@ -3984,11 +3984,11 @@
         }
       }
     },
-    "/danswer-api/doc-ingestion": {
+    "/onyx-api/doc-ingestion": {
       "post": {
         "summary": "Document Ingestion",
         "description": "Currently only attaches docs to existing connectors (cc-pairs).\nOr to the default ingestion connector that is accessible to all users\n\nThings to note:\n- The document id if not provided is automatically generated from the semantic identifier\n  so if the document source type etc is updated, it won't create a duplicate",
-        "operationId": "document_ingestion_danswer_api_doc_ingestion_post",
+        "operationId": "document_ingestion_onyx_api_doc_ingestion_post",
         "requestBody": {
           "content": {
             "application/json": {

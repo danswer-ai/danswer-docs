@@ -11,7 +11,7 @@ GCP Google Compute Engines, Azure Virtual Machines, DigitalOcean Droplets, etc.
 
 With all that said, we know that every company does things differently, and we'd love to help you figure out
 the ideal setup for your enterprise! Feel free to reach out to us via the links on our
-[Contact Us](https://docs.danswer.dev/contact_us) page for more individual help.
+[Contact Us](https://docs.onyx.app/contact_us) page for more individual help.
 
 ## Getting an Instance
 
@@ -80,7 +80,7 @@ git clone https://github.com/onyx-dot-app/onyx.git
 Next, let's set the necessary env variables:
 
 ```bash
-cd danswer/deployment/docker_compose
+cd onyx/deployment/docker_compose
 touch .env
 touch .env.nginx
 ```
@@ -88,9 +88,9 @@ touch .env.nginx
 In the `.env` file, you can copy past the following (filling in the missing fields as needed):
 
 ```
-WEB_DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+WEB_DOMAIN=<YOUR_DOMAIN>  # something like "onyx.app"
 
-# if your email is something like "chris@danswer.ai", then this should be "danswer.ai"
+# if your email is something like "chris@onyx.app", then this should be "onyx.app"
 # this prevents people outside your company from creating an account
 VALID_EMAIL_DOMAINS=<YOUR_COMPANIES_EMAIL_DOMAIN>
 
@@ -118,7 +118,7 @@ POSTGRES_PASSWORD=password
 In the `.env.nginx` file, put the following:
 
 ```
-DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+DOMAIN=<YOUR_DOMAIN>  # something like "onyx.app"
 ```
 
 Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/). To do this, we can simply run:
@@ -129,7 +129,7 @@ Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/)
 
 <Info>
   If are skipping the HTTPS setup, you should start things up with:
-  `docker-compose -f docker-compose.dev.yml -p danswer-stack up -d --build
+  `docker-compose -f docker-compose.dev.yml -p onyx-stack up -d --build
   --force-recreate` instead of the above. You can then access Onyx from the IP
   address from earlier or from the instance `Public IPv4 DNS` provided on the
   instance's page in the AWS console.
@@ -138,5 +138,5 @@ Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/)
 Voila, you're all done! 🎉
 
 After waiting a few minutes (you can monitor the progress with
-`docker logs danswer-stack-api_server-1 -f`; once you see a log for
+`docker logs onyx-stack-api_server-1 -f`; once you see a log for
 `INFO:     Application startup complete.` then everything should be good to go).

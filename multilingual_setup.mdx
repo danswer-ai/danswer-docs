@@ -6,7 +6,7 @@ icon: "language"
 
 For the majority of use cases, Onyx provides an easy way to configure the system for multilingual use.
 To skip the details and just go to setup, see the
-[**Configuration**](https://docs.danswer.dev/multilingual_setup#configuration) section below.
+[**Configuration**](https://docs.onyx.app/multilingual_setup#configuration) section below.
 
 ## How it works
 
@@ -26,12 +26,12 @@ to respond in the same language as the user query.
 > **Note**: The Onyx LLM prompts are still in English, just with added instructions if the user
 > configures multilingual settings (see below). If all of your documents and queries are in some other language,
 > it will be better to simply translate all of Onyx's prompts directly to that target language. You can do so
-> [here](https://github.com/onyx-dot-app/onyx/tree/main/backend/danswer/prompts).
+> [here](https://github.com/onyx-dot-app/onyx/tree/main/backend/onyx/prompts).
 
 ## Configuration
 
 Unless you are translating the LLM prompts yourself, the configuration for multilingual can be done entirely via
-environment variables. For Docker Compose, simply make an `.env` file in `danswer/deployment/docker_compose` and
+environment variables. For Docker Compose, simply make an `.env` file in `onyx/deployment/docker_compose` and
 populate it with the desired values before deploying.
 
 Update the values below to suit your particular needs, this example shows using Onyx with both French and English.

@@ -31,13 +31,13 @@ a filter if you want to constrain your search / conversation to only documents w
 For example:
 
 ```
-#DANSWER_METADATA={"link": "https://github.com/onyx-dot-app/onyx/blob/main/CONTRIBUTING.md", "primary_owners": ["yuhong@danswer.ai", "chris@danswer.ai"], "secondary_owners": ["founders@danswer.ai"], "doc_updated_at": "2023-11-30T13:06:08.589616-08:00", "file_display_name": "Desired File Name!", "tag_of_your_choice": "tag_value"}
+#DANSWER_METADATA={"link": "https://github.com/onyx-dot-app/onyx/blob/main/CONTRIBUTING.md", "primary_owners": ["yuhong@onyx.app", "chris@onyx.app"], "secondary_owners": ["founders@onyx.app"], "doc_updated_at": "2023-11-30T13:06:08.589616-08:00", "file_display_name": "Desired File Name!", "tag_of_your_choice": "tag_value"}
 ```
 
 Full file example:
 
 ```
-#DANSWER_METADATA={"link": "https://www.danswer.com/captcha", "file_display_name": "Captcha Setup"}
+#DANSWER_METADATA={"link": "https://www.onyx.com/captcha", "file_display_name": "Captcha Setup"}
 How to set up captcha
 Follow the example below to set up a captcha
 like you saw when you visited this page!
@@ -48,16 +48,16 @@ prevent web scrapers from reading it.
 As we can see, there are many web pages or internal tools that aren't directly scrape-able.
 In addition to handling local file uploads, the file connector is offered as an option for these tools which may have APIs for accessing the contents.
 
-Alternatively, if you are uploading a `.zip` filled with files, you can define a `.danswer_metadata.json` file and include that in the root of the zip file.
+Alternatively, if you are uploading a `.zip` filled with files, you can define a `.onyx_metadata.json` file and include that in the root of the zip file.
 If your zip file structure looks like:
 
 ```
 | file1.txt
 | file2.txt
-| .danswer_metadata.json
+| .onyx_metadata.json
 ```
 
-then your `.danswer_metadata.json` file might look like:
+then your `.onyx_metadata.json` file might look like:
 
 ```json
 [

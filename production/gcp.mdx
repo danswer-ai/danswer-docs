@@ -6,7 +6,7 @@ icon: "google"
 
 You can use GCP Google Compute Engines (VM Instance) to deploy Onyx. The steps are very similar to deploying on AWS EC2.
 Before we get started, make sure you have an account with Google Cloud Platform and have the necessary permissions to create a VM instance.
-Feel free to reach out to us via the links on our [Contact Us](https://docs.danswer.dev/contact_us) page for more individual help.
+Feel free to reach out to us via the links on our [Contact Us](https://docs.onyx.app/contact_us) page for more individual help.
 
 ## Getting an Instance
 
@@ -18,7 +18,7 @@ Steps to create a VM instance from Google Cloud Console:
    choose depends on your document volume and query load, but a `e2-standard-4`/`e2-standard-8` is a
    good starting point. For more details on GCP instances, you can refer to
    the [GCP documentation](https://cloud.google.com/compute/docs/instances).
-   For more information on sizing, refer to our [resourcing guide](https://docs.danswer.dev/resourcing).
+   For more information on sizing, refer to our [resourcing guide](https://docs.onyx.app/resourcing).
    ![Instance](/images/setup_guides/gcp/Instance.png)
 4. Make sure to allow HTTPS traffic in the firewall settings and valid scopes for the instance. ![Firewall](/images/setup_guides/gcp/Firewall.png)
 
@@ -91,7 +91,7 @@ git clone https://github.com/onyx-dot-app/onyx.git
 Next, let's set the necessary env variables:
 
 ```bash
-cd danswer/deployment/docker_compose
+cd onyx/deployment/docker_compose
 touch .env
 touch .env.nginx
 ```
@@ -99,9 +99,9 @@ touch .env.nginx
 In the `.env` file, you can copy past the following (filling in the missing fields as needed):
 
 ```
-WEB_DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+WEB_DOMAIN=<YOUR_DOMAIN>  # something like "onyx.app"
 
-# if your email is something like "chris@danswer.ai", then this should be "danswer.ai"
+# if your email is something like "chris@onyx.app", then this should be "onyx.app"
 # this prevents people outside your company from creating an account
 VALID_EMAIL_DOMAINS=<YOUR_COMPANIES_EMAIL_DOMAIN>
 
@@ -126,7 +126,7 @@ POSTGRES_PASSWORD=password
 In the `.env.nginx` file, put the following:
 
 ```
-DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+DOMAIN=<YOUR_DOMAIN>  # something like "onyx.app"
 ```
 
 Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/). To do this, we can simply run:
@@ -137,7 +137,7 @@ sudo ./init-letsencrypt.sh
 
 <Info>
   If are skipping the HTTPS setup, you should start things up with: `sudo docker
-  compose -f docker-compose.dev.yml -p danswer-stack up -d --pull always`
+  compose -f docker-compose.dev.yml -p onyx-stack up -d --pull always`
   instead of the above. You can then access Onyx from the IP address from
   earlier or from the instance `External IP` provided on the instance's page in
   the GCP VM console.
@@ -146,5 +146,5 @@ sudo ./init-letsencrypt.sh
 Voila, you're all done! 🎉
 
 After waiting a few minutes (you can monitor the progress with
-`sudo docker logs danswer-stack-api_server-1 -f`; once you see a log for
+`sudo docker logs onyx-stack-api_server-1 -f`; once you see a log for
 `INFO:     Application startup complete.` then everything should be good to go).

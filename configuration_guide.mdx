@@ -15,14 +15,14 @@ A few notable settings that are more frequently changed however are the followin
 - AUTH_TYPE (default value is `disabled`)
 - MULTILINGUAL_QUERY_EXPANSION (you can provide a comma separated list of languages for query rephrasing such as `English,French`)
 - LOG_LEVEL (default is `info`)
-- WEB_DOMAIN (your full url in production, including the protocol- e.g. `https://www.danswer.ai`)
+- WEB_DOMAIN (your full url in production, including the protocol- e.g. `https://www.onyx.app`)
 
 ## Docker Compose
 
 There are several ways to configure environment variables for the containers. For Docker Compose, there are many ways
 to pass environment variables to the container, any of the standard approaches will work. However
 **the preferred approach** for Onyx is to use the `.env` file. To do this, create a file called `.env` at
-`danswer/deployment/docker_compose/.env`. From there, populate it with the values you want to override:
+`onyx/deployment/docker_compose/.env`. From there, populate it with the values you want to override:
 
 ```
 # Configures basic email/password based login
@@ -238,7 +238,7 @@ Hostname or IP address of the Vespa server. Default is `index`.
 
 #### WEB_DOMAIN
 
-Fully qualified domain name used for the Onyx web interface. (e.g. https://www.danswer.com)
+Fully qualified domain name used for the Onyx web interface. (e.g. https://www.onyx.com)
 
 ### NLP Model Configurations
 

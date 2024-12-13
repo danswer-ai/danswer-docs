@@ -1,10 +1,10 @@
 <h2 align="center">
-<a href="https://www.danswer.ai/"> <img width="50%" src="https://github.com/danswer-owners/danswer/blob/1fabd9372d66cd54238847197c33f091a724803b/OnyxWithName.png?raw=true)" /></a>
+<a href="https://www.onyx.app/"> <img width="50%" src="https://github.com/onyx-owners/onyx/blob/1fabd9372d66cd54238847197c33f091a724803b/OnyxWithName.png?raw=true)" /></a>
 </h2>
 
 # Onyx Docs
 
-This repo generates the docs and setup guide for [Onyx](https://github.com/onyx-dot-app/onyx) found at [https://docs.danswer.dev/](https://docs.danswer.dev/).
+This repo generates the docs and setup guide for [Onyx](https://github.com/onyx-dot-app/onyx) found at [https://docs.onyx.app/](https://docs.onyx.app/).
 
 It uses Mintlify which is a no-code documentation generation tool.
 Instructions on setting up local preview are included below.
