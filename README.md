@@ -1,5 +1,11 @@
 <h2 align="center">
-<a href="https://www.onyx.app/"> <img width="50%" src="https://github.com/onyx-owners/onyx/blob/1fabd9372d66cd54238847197c33f091a724803b/OnyxWithName.png?raw=true)" /></a>
+<a href="https://www.onyx.app/">
+
+  
+  ![logotype](https://github.com/user-attachments/assets/ebfa90a2-2516-4d0f-8a60-9a188a051783)
+
+</a>
+
 </h2>
 
 # Onyx Docs
