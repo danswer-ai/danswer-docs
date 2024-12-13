@@ -1,18 +1,20 @@
 ---
 title: "Multilingual Setup"
-description: "How to set up Danswer to support languages other than English"
+description: "How to set up Onyx to support languages other than English"
 icon: "language"
 ---
 
-For the majority of use cases, Danswer provides an easy way to configure the system for multilingual use.
+For the majority of use cases, Onyx provides an easy way to configure the system for multilingual use.
 To skip the details and just go to setup, see the
-[**Configuration**](https://docs.danswer.dev/multilingual_setup#configuration) section below.
+[**Configuration**](https://docs.onyx.app/multilingual_setup#configuration) section below.
 
 ## How it works
-Danswer has two main flows that assume English as a default. To use Danswer in multilingual or non-english cases,
+
+Onyx has two main flows that assume English as a default. To use Onyx in multilingual or non-english cases,
 these must be handled.
+
 - The vector portion of the hybrid-search/reranking. This selects relevant documents to pass to the Large
-Language Model as context
+  Language Model as context
 - The prompts for the Large Language Model to instruct it on how to answer user queries.
 
 To address the first point, the English first embedding/reranking models can be swapped out for multilingual models.
@@ -21,18 +23,20 @@ Additionally query expansion is applied to rephrase the user query into the targ
 To address the second point, additional instructions are given to the LLM to respect the input language and
 to respond in the same language as the user query.
 
-> **Note**: The Danswer LLM prompts are still in English, just with added instructions if the user
-configures multilingual settings (see below). If all of your documents and queries are in some other language,
-it will be better to simply translate all of Danswer's prompts directly to that target language. You can do so
-[here](https://github.com/danswer-ai/danswer/tree/main/backend/danswer/prompts).
+> **Note**: The Onyx LLM prompts are still in English, just with added instructions if the user
+> configures multilingual settings (see below). If all of your documents and queries are in some other language,
+> it will be better to simply translate all of Onyx's prompts directly to that target language. You can do so
+> [here](https://github.com/onyx-dot-app/onyx/tree/main/backend/onyx/prompts).
 
 ## Configuration
+
 Unless you are translating the LLM prompts yourself, the configuration for multilingual can be done entirely via
-environment variables. For Docker Compose, simply make an `.env` file in `danswer/deployment/docker_compose` and
+environment variables. For Docker Compose, simply make an `.env` file in `onyx/deployment/docker_compose` and
 populate it with the desired values before deploying.
 
-Update the values below to suit your particular needs, this example shows using Danswer with both French and English.
+Update the values below to suit your particular needs, this example shows using Onyx with both French and English.
 The settings below have descriptions to help you configure values according to your use case.
+
 ```
 # Rephrase the user query in specified languages using LLM, use comma separated values
 MULTILINGUAL_QUERY_EXPANSION="English, French"
@@ -72,9 +76,10 @@ GEN_AI_MODEL_VERSION="gpt-4"
 
 An up to date template of multilingual settings is also provided directly in the code repository in the same
 directory as where the `.env` file should be placed.
-[See here for reference](https://github.com/danswer-ai/danswer/blob/main/deployment/docker_compose/env.multilingual.template).
+[See here for reference](https://github.com/onyx-dot-app/onyx/blob/main/deployment/docker_compose/env.multilingual.template).
 
 ## Example
+
 If you've configured everything correctly, you should now be able to get good answers across the different
 languages that you've set the system up for. See below for an example using French.
 

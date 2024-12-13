@@ -1,38 +1,40 @@
 ---
 title: Telemetry
-description: 'Help us improve Danswer'
+description: "Help us improve Onyx"
 ---
 
 ## Overview
+
 The term **telemetry** here refers to the collection of _anonymous data_ that is _limited in scope_ and for the
 purpose of improving the quality of a piece of software.
 
 This page describes our philosophy towards telemetry, what kind of data is collected and how to easily opt-out of
 all data collection.
 
-
 ## Why do we collect telemetry
+
 As a software that uses a combination of deep-learning models and LLMs as well as interfacing with a variety of
-external SaaS tools for data collection, Danswer's performance is strongly dependent on a multitude of factors that
+external SaaS tools for data collection, Onyx's performance is strongly dependent on a multitude of factors that
 we cannot predict. Telemetry helps us understand how the system is performing in real life situations and allows us to
 improve specific bottlenecks within the flow.
 
-We appreciate your help in making Danswer a better software!
-
+We appreciate your help in making Onyx a better software!
 
 ## What data is collected
-| Field                  | Description                           |
-| ---------------------- | ------------------------------------- |
-| Latency                | Because latency depends strongly on deployment choices including hardware, etc., this let's us know if/where the product is too slow for a significant number of users. |
-| Connector Failures     | This tells us if any data connectors are flaky and need additional retry logic etc. Only the connector type is reported. |
-| Random Deployment UUID | We use this to understand general usage and also to differentiate between widespread issues vs repeat issues. |
-| Number of active users | No other information about users are collected. This is used to understand the scale that each deployment is expected to handle. |
 
+| Field                  | Description                                                                                                                                                             |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Latency                | Because latency depends strongly on deployment choices including hardware, etc., this let's us know if/where the product is too slow for a significant number of users. |
+| Connector Failures     | This tells us if any data connectors are flaky and need additional retry logic etc. Only the connector type is reported.                                                |
+| Random Deployment UUID | We use this to understand general usage and also to differentiate between widespread issues vs repeat issues.                                                           |
+| Number of active users | No other information about users are collected. This is used to understand the scale that each deployment is expected to handle.                                        |
 
 ## How to opt-out of telemetry
+
 You can opt-out of usage data collection by setting the `DISABLE_TELEMETRY` environment variable to True.
 
 For example, with docker compose deployments, simply update your `.env` to include:
+
 ```
 DISABLE_TELEMETRY=True
 ```

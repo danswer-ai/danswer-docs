@@ -4,10 +4,10 @@ description: "How to set up Username/Password account creation"
 icon: "shield"
 ---
 
-Below details how to setup Danswer with basic username/password auth. While this is the easiest 
-way to get started, we recommend picking Google OAuth / OIDC / SAML in the long term (if possible). 
-If you have any questions, don't hesitate to [reach out to us](https://docs.danswer.dev/contact_us) - we're 
-more than happy to help you pick which auth approach is best for your organization. 
+Below details how to setup Onyx with basic username/password auth. While this is the easiest
+way to get started, we recommend picking Google OAuth / OIDC / SAML in the long term (if possible).
+If you have any questions, don't hesitate to [reach out to us](https://docs.onyx.app/contact_us) - we're
+more than happy to help you pick which auth approach is best for your organization.
 
 ## Env Variables
 
@@ -17,15 +17,15 @@ In your `.env` file, make sure you have the following value set:
 AUTH_TYPE=basic
 ```
 
-If you don't want to require email verification, then you're done! 
+If you don't want to require email verification, then you're done!
 
-After restarting Danswer, you should see the following screen appear on your next visit:
+After restarting Onyx, you should see the following screen appear on your next visit:
 
 ![SignUp](/images/basic_auth/Signup.png)
 
 ## Email Verification
 
-With Email verification enabled, users will not be able to interact with Danswer until
+With Email verification enabled, users will not be able to interact with Onyx until
 they have proven that they are the owner of the email address used to sign up. Specifically,
 when setup an email will be sent to all new sign ups with a "link to verify".
 
@@ -35,7 +35,7 @@ To setup email verification, you can add the following to your `.env` file:
 AUTH_TYPE=basic
 
 REQUIRE_EMAIL_VERIFICATION=true
-SMTP_USER=<EMAIL_TO_SEND_VERIFICATION_EMAILS> e.g. noreply@danswer.ai
+SMTP_USER=<EMAIL_TO_SEND_VERIFICATION_EMAILS> e.g. noreply@onyx.app
 SMTP_PASS=<PASSWORD_FOR_THE_EMAIL_ABOVE>
 
 # The below is only needed if not using a Google-powered email account
@@ -43,7 +43,7 @@ SMTP_SERVER=<YOUR_SMTP_SERVER>
 SMTP_PORT=<PORT_YOUR_SMTP_SERVER_LISTENS_ON>  # default value is 587
 ```
 
-The email account specified by `SMTP_USER` / `SMTP_PASS` will be used to send the verification 
+The email account specified by `SMTP_USER` / `SMTP_PASS` will be used to send the verification
 emails to new sign ups. If using a gmail-powered account, you will need to allow username / password
-login by third party services. To do this, you can follow the official guide from Google 
+login by third party services. To do this, you can follow the official guide from Google
 [here](https://support.google.com/accounts/answer/6010255?hl=en#zippy=%2Cif-less-secure-app-access-is-off-for-your-account%2Cif-less-secure-app-access-is-on-for-your-account).

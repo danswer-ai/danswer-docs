@@ -1,9 +1,10 @@
 ---
 title: R2 Connector
-description: 'Access documents stored in Cloudflare R2 buckets'
+description: "Access documents stored in Cloudflare R2 buckets"
 ---
 
 ## How it works
+
 The R2 connector pulls in all documents from the specified Cloudflare R2 bucket. It supports various file formats including PDF, DOC, DOCX, TXT, and more.
 
 Documents are updated every **1** day.
@@ -18,35 +19,29 @@ Documents are updated every **1** day.
 
 ![Manage API](/images/connectors/blob/r2/manageapi.png)
 
-
 4. Click "Create API token".
 
 ![Create API token](/images/connectors/blob/r2/newtoken.png)
 
-5. Give your token a name (e.g., "DanswerR2Connector") and select the appropriate permissions (Object Read only).
-![Read only](/images/connectors/blob/r2/readonly.png)
-
+5. Give your token a name (e.g., "OnyxR2Connector") and select the appropriate permissions (Object Read only).
+   ![Read only](/images/connectors/blob/r2/readonly.png)
 
 6. Click "Create API Token".
 7. On the next screen, you'll see your Access Key ID and Secret Access Key. Make sure to copy these immediately as you won't be able to access the Secret Access Key again.
 
 8. To find your Account ID, go to the Overview page in your Cloudflare dashboard. The Account ID is listed in the url as the final substring.
 
-![Danswer page 1](/images/connectors/blob/r2/id.png)
-
+![Onyx page 1](/images/connectors/blob/r2/id.png)
 
 ### Indexing
 
 1. Navigate to the Admin Dashboard and select the **R2** Connector.
 2. In **Step 1**, provide your R2 credentials:
 
-![Danswer page 2](/images/connectors/blob/r2/danswer1.png)
+![Onyx page 2](/images/connectors/blob/r2/Onyx1.png)
 
-
-
-
-* Provide your R2 Access Key ID, Secret Access Key, and Account ID for authentication.
-* These credentials will be used to access your R2 buckets.
+- Provide your R2 Access Key ID, Secret Access Key, and Account ID for authentication.
+- These credentials will be used to access your R2 buckets.
 
 **R2 Access Key ID:**
 **R2 Secret Access Key:**
@@ -56,7 +51,7 @@ Documents are updated every **1** day.
 
 4. In **Step 2**, specify which R2 bucket you want to make searchable:
 
-![Danswer page 2](/images/connectors/blob/r2/danswer2.png)
+![Onyx page 2](/images/connectors/blob/r2/Onyx2.png)
 
 5. Click "Connect" to begin indexing.
 

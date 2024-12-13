@@ -1,24 +1,27 @@
 ---
 title: Teams Connector
-description: 'Access knowledge from your Teams Posts'
+description: "Access knowledge from your Teams Posts"
 ---
 
 ## How it works
+
 The Teams connector will go through all requested sites belonging to an organization and index all the files available to that site.
 
 ## Setting up
+
 ### Authorization
+
     1. Log in to azure portal for your organization.
         - [This page](https://portal.azure.com/#home).
     2. Navigate to “app registrations” using the search bar.
     3. Click **New Registration**.
-    4. Name it something like “Danswer Teams Connector”, leave everything else as default, and click **Register**.
-    5. Under “Essentials” in the overview tab, you will find the client ID and Directory ID, copy paste those into the danswer connector.
+    4. Name it something like “Onyx Teams Connector”, leave everything else as default, and click **Register**.
+    5. Under “Essentials” in the overview tab, you will find the client ID and Directory ID, copy paste those into the onyx connector.
 
 
     6. Navigate to the “Certificates & secrets” tab in Azure Portal and click **New client secret**.
     7. Fill out he description, set the expiration to 24 months, and click **Add**.
-    8. Copy the secret value in the **Value** column and paste it into the Danswer connector.
+    8. Copy the secret value in the **Value** column and paste it into the Onyx connector.
     9. Navigate to the "Api Permissions" tab in the azure portal and click **add a permission**.
     10. Click **Microsoft Graph**, then click on **Application permissions**.
     11. Navigate to the "Team" permission group and select the checkbox for **Team.ReadBasic.All**.
@@ -27,10 +30,11 @@ The Teams connector will go through all requested sites belonging to an organiza
     14. Navigate to the “ChannelSettings” permission group and select the checkbox for **ChannelSettings.ReadWrite.All**.
     15. Navigate to the “ChannelMessage” permission group and select the checkbox for **ChannelMessage.Read.All**.
     16. Navigate to the “ChannelMember” permission group and select the checkbox for **ChannelMember.Read.All**.
-    17. Then, click **Add permissions** at the bottom. 
+    17. Then, click **Add permissions** at the bottom.
     18. Finally, click **Grant admin consent for \<Organization name\>** (located next to **Add a permission**) and click **Confirm**.
 
 ### Indexing
+
     1. Navigate to the Admin Dashboard and select the **Teams** Connector Tile.
     2. Provide the **Application (client) ID**, **Directory (tenant) ID** and **Client Secret Value** from steps above.
     3. Select a list of teams to pull from or leave blank and click **Connect** to pull everything.

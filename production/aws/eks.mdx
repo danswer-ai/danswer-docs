@@ -1,6 +1,6 @@
 ---
 title: "EKS"
-description: "Setup Danswer on AWS EKS"
+description: "Setup Onyx on AWS EKS"
 ---
 
 ## Prerequisites
@@ -15,7 +15,7 @@ description: "Setup Danswer on AWS EKS"
 Navigate to Elastic Kubernetes Service (EKS) and create a new cluster.
 
 For `Cluster service role`, create a new IAM role accepting all the defaults for the user. It's name can
-be something like `danswer-eks-cluster-role`.
+be something like `onyx-eks-cluster-role`.
 Make sure to click the refresh button if you don't see it as an option!
 
 For the `Kubernetes version`, select a version with standard support still offered and under `Upgrade policy`, select `Standard`. In the add-ons section, make sure to add the `Amazon EBS CSI Driver` add-on, as this is needed for the Persistent Volume Claims (PVCs) to be fulfilled. Also make sure to keep the other default add-ons!
@@ -26,16 +26,16 @@ Select defaults for the rest of the forms. Finally, review the complete cluster 
 
 ### Adding Nodes
 
-Next we need to add worker nodes to the cluster. This is where the Danswer services will reside.
+Next we need to add worker nodes to the cluster. This is where the Onyx services will reside.
 
 When the cluster is Active and while viewing the cluster, select the `Compute` tab and then `Add node group`.
 
 ![Adding a node group](/images/setup_guides/aws/eks/add_node_group.png)
 
-First, provide a `Name` for the group (something like `danswer-node-group`). For `Node IAM role`, either select
+First, provide a `Name` for the group (something like `onyx-node-group`). For `Node IAM role`, either select
 an existing role that your organization has setup or create a new role. Whichever route we choose, we have to make sure
 that the `AmazonEBSCSIDriverPolicy` is attached to the role, as this will be needed for our Persistent Volume Claims (PVCs)
-to be fulfilled. If creating a role, all the other defaults provided by AWS should work (with the addition of the `AmazonEBSCSIDriverPolicy`). Give the role a name like `danswer-eks-nodegroup-role`.
+to be fulfilled. If creating a role, all the other defaults provided by AWS should work (with the addition of the `AmazonEBSCSIDriverPolicy`). Give the role a name like `onyx-eks-nodegroup-role`.
 
 ![Configure group node](/images/setup_guides/aws/eks/configure_group_node.png)
 
@@ -55,7 +55,7 @@ Navigate to the `IAM Dashboard` found [here](https://console.aws.amazon.com/iam/
 
 ![Create user](/images/setup_guides/aws/eks/iam_dashboard.png)
 
-Give the user a name like `danswer-eks-user`. For the user permissions, click `Attach policies directly` and provide the following permissions:
+Give the user a name like `onyx-eks-user`. For the user permissions, click `Attach policies directly` and provide the following permissions:
 
 - `AmazonEKSClusterPolicy`
 - `AmazonEKSServicePolicy`
@@ -97,34 +97,37 @@ Additional material found on the [AWS EKS documentation](https://docs.aws.amazon
 You will want to create a [namespace](https://kubernetes.io/blog/2016/08/kubernetes-namespaces-use-cases-insights/) for this to install. Namespaces are logical separations of grouped services for resource and permission managament.
 
 ```shell
-kubectl create ns danswer
+kubectl create ns onyx
 ```
 
 Next, we need to make sure that the gp2 storage class is set to the default storage class. This can be done by running the following command:
 
 ```shell
-kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}' -n danswer
+kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}' -n onyx
 ```
 
-Navigate to the `danswer/deployment/kubernetes` directory in the repository that you have cloned down
+Navigate to the `onyx/deployment/kubernetes` directory in the repository that you have cloned down
 
 Afterwards, you can run the installation of the `yaml` files
 
 ```shell
-kubectl apply -f . -n danswer
+kubectl apply -f . -n onyx
 ```
 
 It may take a few minutes for the all the services to come online. To monitor the progress, run the following command:
+
 ```shell
-kubectl -n danswer get pods
+kubectl -n onyx get pods
 ```
 
 To check the status of the API server (usually the last to come online), run the following command:
+
 ```shell
-kubectl -n danswer get pods | grep api-server | awk '{print $1}' | xargs -I {} kubectl -n danswer logs {} -f
+kubectl -n onyx get pods | grep api-server | awk '{print $1}' | xargs -I {} kubectl -n onyx logs {} -f
 ```
 
 You can navigate find the nginx load balancer by running the following command and then navigating to the url provided.
+
 ```shell
-kubectl get svc -n danswer | grep nginx-service | awk '{print $4}'
+kubectl get svc -n onyx | grep nginx-service | awk '{print $4}'
 ```

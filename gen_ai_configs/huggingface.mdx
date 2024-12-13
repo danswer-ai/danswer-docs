@@ -1,12 +1,13 @@
 ---
 title: HuggingFace Inference API
-description: 'Configure Danswer to use HuggingFace APIs'
+description: "Configure Onyx to use HuggingFace APIs"
 ---
 
-Refer to [Model Configs](https://docs.danswer.dev/gen_ai_configs/overview#model-configs) for how to set the
+Refer to [Model Configs](https://docs.onyx.app/gen_ai_configs/overview#model-configs) for how to set the
 environment variables for your particular deployment.
 
 To use the HuggingFace Inference APIs, you must sign up for a `Pro Account` to get an API Key
+
 1. After signing up for `Pro Account`, go to your user settings:
 
 ![HFSettings](/images/gen_ai/HFSettings.png)
@@ -15,8 +16,7 @@ To use the HuggingFace Inference APIs, you must sign up for a `Pro Account` to g
 
 ![HFAccessToken](/images/gen_ai/HFAccessToken.png)
 
-
-## Set Danswer to use `Llama-2-70B` via next-token generation prompting
+## Set Onyx to use `Llama-2-70B` via next-token generation prompting
 
 On the `LLM` page in the Admin Panel add a `Custom LLM Provider` with the following settings:
 
@@ -24,6 +24,6 @@ On the `LLM` page in the Admin Panel add a `Custom LLM Provider` with the follow
 
 ![HFCustomLLMProvider2](/images/gen_ai/HFCustomLLMProvider2.png)
 
-**Update (November 2023)**: HuggingFace has stopped supporting very large models (>10GB) via the *Pro Plan*.
+**Update (November 2023)**: HuggingFace has stopped supporting very large models (>10GB) via the _Pro Plan_.
 The latest options are to rent dedicated hardware from them via Inference Endpoint or get an Enterprise Plan.
-The *Pro Plan* still supports smaller models but these produce worse results for Danswer.
+The _Pro Plan_ still supports smaller models but these produce worse results for Onyx.

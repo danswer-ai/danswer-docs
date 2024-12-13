@@ -1,17 +1,15 @@
 ---
 title: "Enterprise Edition Configuration"
-description: 'Enterprise-only configuration'
+description: "Enterprise-only configuration"
 ---
 
-
-## EE environment variables 
+## EE environment variables
 
 In additon to the extra features mentioned in the [overview page](/enterprise_edition/overview), you have access to additional configuraton options in the form of environment variables as an Entprprise Edition user.
 
-
 ### ENV_SEED_CONFIGURATION
 
-This variable allows you to start your Danswer instance with pre-configured options that persist across restarts.
+This variable allows you to start your Onyx instance with pre-configured options that persist across restarts.
 
 #### Configuration Options
 
@@ -19,7 +17,7 @@ This variable allows you to start your Danswer instance with pre-configured opti
 
 - `llms`: List of LLM configurations (name, provider, api_key, api_base, api_version, custom_config, default_model_name, fast_default_model_name)
 - `admin_user_emails`: List of email addresses for automatic admin role assignment
-- `seeded_name`: Pre-set name for your Danswer instance
+- `seeded_name`: Pre-set name for your Onyx instance
 - `seeded_logo_path`: Path to your logo within the `assets` folder
 
 #### Usage Example
@@ -45,10 +43,7 @@ export API_KEY_HASH_ROUNDS=600000
 
 Increasing this value enhances security but may impact performance. The default value provides a good balance for most use cases.
 
-
 ## Additional API Endpoints
-
-
 
 ### Standard Answers
 
@@ -58,9 +53,9 @@ This endpoint allows you to test the standard answers that would be returned for
 
 #### Request Body
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `message` | `string` | The message to test against the standard answers. |
+| Field                  | Type           | Description                                                          |
+| ---------------------- | -------------- | -------------------------------------------------------------------- |
+| `message`              | `string`       | The message to test against the standard answers.                    |
 | `slack_bot_categories` | `list[string]` | The Slack bot categories to use when searching for standard answers. |
 
 #### Response
@@ -110,7 +105,4 @@ curl -X POST 'http://localhost:8080/query/standard-answer' \
 
 This will test the standard answers for the message "wifi password" and the Slack bot category "General."
 
-If you have any questions, feel free to message us at founders@danswer.ai for clarification or join our [Slack](https://join.slack.com/t/danswer/shared_invite/zt-2lcmqw703-071hBuZBfNEOGUsLa5PXvQ) or [Discord](https://discord.gg/TDJ59cGV2X) communities.
-
-
-
+If you have any questions, feel free to message us at founders@onyx.app for clarification or join our [Slack](https://join.slack.com/t/onyx/shared_invite/zt-2lcmqw703-071hBuZBfNEOGUsLa5PXvQ) or [Discord](https://discord.gg/TDJ59cGV2X) communities.

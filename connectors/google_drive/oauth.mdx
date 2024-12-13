@@ -5,10 +5,11 @@ title: OAuth Setup
 This section walks through setting up the Google Drive connector using a OAuth-enabled Google App.
 Anyone can do this (even without a paid Google Workspace)!
 
-If you're an organization with a Google Workspace, and you'd rather use a Service Account to access Google Drive, 
-checkout the section [here](/connectors/google_drive/service_account). 
+If you're an organization with a Google Workspace, and you'd rather use a Service Account to access Google Drive,
+checkout the section [here](/connectors/google_drive/service_account).
 
 ### Authorization
+
     1. Create a **Google Cloud Project**
         - [https://console.cloud.google.com/projectcreate](https://console.cloud.google.com/projectcreate)
 
@@ -37,9 +38,9 @@ checkout the section [here](/connectors/google_drive/service_account).
     3. Set up the OAuth consent screen
         - Under **APIs & services**, select the **OAuth consent screen** tab
         - If you don't have a **Google Organization** select **External** for **User Type**
-        - Call the app Danswer (or whatever you want)
-        - For the required emails, use any email of your choice or `founders@danswer.ai`
-        if you wish for the Danswer team to help handle issues.
+        - Call the app Onyx (or whatever you want)
+        - For the required emails, use any email of your choice or `founders@onyx.app`
+        if you wish for the Onyx team to help handle issues.
         - Click **SAVE AND CONTINUE**
 
     4. Set up Scopes
@@ -48,17 +49,19 @@ checkout the section [here](/connectors/google_drive/service_account).
         - Add the scope `.../auth/admin.directory.user.readonly` for `Admin SDK API`
         - Add the scope `.../auth/admin.directory.group.readonly` for `Admin SDK API`
 
-    
-    
-<br/>
+<br />
 ### You should see something like this:
 <div align="center">
-  <img src="/images/connectors/google_drive/GoogleDriveScopes.png" alt="GoogleDriveScopes" width="60%" />
+  <img
+    src="/images/connectors/google_drive/GoogleDriveScopes.png"
+    alt="GoogleDriveScopes"
+    width="60%"
+  />
 </div>
 
     5. Set up Test users
         - This is only applicable for users without a Google Organization.
-            - Typically for a company, Danswer would be set up as an internal app so this step would not apply.
+            - Typically for a company, Onyx would be set up as an internal app so this step would not apply.
         - Add at least one test user email. Only the email accounts added here will be allowed to run the OAuth
         flow to index new documents.
         - Click **SAVE AND CONTINUE**, review the changes and click **BACK TO DASHBOARD**
@@ -66,23 +69,33 @@ checkout the section [here](/connectors/google_drive/service_account).
     6. Create Credentials
         - Go to the **Credentials** tab and select **+ CREATE CREDENTIALS** -> **OAuth client ID**
 
-
 <div align="center">
-  <img src="/images/connectors/google_drive/GoogleDriveCredential.png" alt="GoogleDriveScopes" width="90%" />
+  <img
+    src="/images/connectors/google_drive/GoogleDriveCredential.png"
+    alt="GoogleDriveScopes"
+    width="90%"
+  />
 </div>
 
-
-        - Choose **Web application** and give it some name like `DanswerConnector`
-        - Add a **Authorized JavaScript origins** for `http://localhost:3000` (or `https://<INTERNAL_DEPLOYMENT_URL>` if you have setup Danswer for production use)
-        - Add a **Authorized redirect URIs** for `http://localhost:3000/admin/connectors/google-drive/auth/callback` (or `https://<INTERNAL_DEPLOYMENT_URL>/admin/connectors/google-drive/auth/callback` if you have setup Danswer for production use)
+        - Choose **Web application** and give it some name like `OnyxConnector`
+        - Add a **Authorized JavaScript origins** for `http://localhost:3000` (or `https://<INTERNAL_DEPLOYMENT_URL>` if you have setup Onyx for production use)
+        - Add a **Authorized redirect URIs** for `http://localhost:3000/admin/connectors/google-drive/auth/callback` (or `https://<INTERNAL_DEPLOYMENT_URL>/admin/connectors/google-drive/auth/callback` if you have setup Onyx for production use)
 
 <div align="center">
-  <img src="/images/connectors/google_drive/DriveCredentials.png" alt="GoogleDriveScopes" width="70%" />
+  <img
+    src="/images/connectors/google_drive/DriveCredentials.png"
+    alt="GoogleDriveScopes"
+    width="70%"
+  />
 </div>
 
         - Click create and on the right hand side next to **Client secret**, there is an option to download the
         credentials as a JSON. Download the JSON for use in the next step.
 
 <div align="center">
-  <img src="/images/connectors/google_drive/DriveDownloadCredentials.png" alt="GoogleDriveScopes" width="70%" />
+  <img
+    src="/images/connectors/google_drive/DriveDownloadCredentials.png"
+    alt="GoogleDriveScopes"
+    width="70%"
+  />
 </div>

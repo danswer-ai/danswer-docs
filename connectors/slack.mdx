@@ -1,32 +1,36 @@
 ---
 title: Slack Connector
-description: 'Access knowledge from your Messages'
+description: "Access knowledge from your Messages"
 ---
 
 ## How it works
-The Slack connector indexes all public channels for a given workspace.
-- Upcoming: Support for private channels by tagging/adding the Danswer Slack Bot to private channels.
 
+The Slack connector indexes all public channels for a given workspace.
+
+- Upcoming: Support for private channels by tagging/adding the Onyx Slack Bot to private channels.
 
 ## Setting up
+
 ### Authorization
+
 1. **Note: You must be an admin of the Slack workspace to set up the connector**
 2. Navigate and sign in to [https://api.slack.com/apps](https://api.slack.com/apps).
 3. Create a new Slack app:
-    - Click the **Create New App** button in the top right.
-    - Select **From an app manifest** option.
-    - Select the relevant workspace from the dropdown and click **Next**.
+   - Click the **Create New App** button in the top right.
+   - Select **From an app manifest** option.
+   - Select the relevant workspace from the dropdown and click **Next**.
 
 ![SlackApp](/images/connectors/slack/SlackApp.png)
 
 4. Select the "YAML" tab, paste the following manifest into the text box, and click **Next**:
+
 ```
 display_information:
-  name: DanswerConnector
-  description: ReadOnly Connector for indexing Danswer
+  name: OnyxConnector
+  description: ReadOnly Connector for indexing Onyx
 features:
   bot_user:
-    display_name: DanswerConnector
+    display_name: OnyxConnector
     always_online: false
 oauth_config:
   scopes:
@@ -52,8 +56,8 @@ settings:
 
 ![SlackBotToken](/images/connectors/slack/SlackBotToken.png)
 
-
 ### Indexing
+
 1. Navigate to the Connector Dashboard and select the **Slack** Connector.
 2. Place the **Bot User OAuth Token** under **Step 1 Provide Credentials**
 
@@ -63,4 +67,4 @@ settings:
 
 ![SlackId](/images/connectors/slack/SlackId.png)
 
-__Note:__ The first indexing pulls all of the public channels and takes longer than future updates.
+**Note:** The first indexing pulls all of the public channels and takes longer than future updates.

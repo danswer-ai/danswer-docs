@@ -1,13 +1,13 @@
 ---
 title: "Deploy on Digital Ocean"
-description: "Setup Danswer on Digital Ocean"
+description: "Setup Onyx on Digital Ocean"
 icon: Digital-Ocean
 ---
 
-You can use a [DigitalOcean Droplet](https://www.digitalocean.com/products/droplets) to deploy Danswer.
-This is a simple and cost effective way to deploy Danswer and should meet the performance needs of smaller organizations looking to use Danswer.
+You can use a [DigitalOcean Droplet](https://www.digitalocean.com/products/droplets) to deploy Onyx.
+This is a simple and cost effective way to deploy Onyx and should meet the performance needs of smaller organizations looking to use Onyx.
 
-Feel free to reach out to us via the links on our [Contact Us](https://docs.danswer.dev/contact_us) page for more individual help.
+Feel free to reach out to us via the links on our [Contact Us](https://docs.onyx.app/contact_us) page for more individual help.
 
 ## Getting an Instance
 
@@ -69,9 +69,9 @@ Digital Ocean's nameservers are:
 
 These need to be set in the DNS provider's console.
 
-## Starting up Danswer
+## Starting up Onyx
 
-Because your Droplet is running Docker, we can use Docker Compose to start up Danswer.
+Because your Droplet is running Docker, we can use Docker Compose to start up Onyx.
 
 Once the Droplet agent is installed (and configured if necessary), you can access the Droplet Console from the DigitalOcean Control Panel.
 First, click the name of the Droplet you want to access to expand its detail window, then click the name again to go to its detail page. From the detail page, click the Access tab in the left menu.
@@ -82,13 +82,13 @@ When the console loads, you can use the command line to run commands on your Dro
 Clone the repo:
 
 ```bash
-git clone https://github.com/danswer-ai/danswer.git
+git clone https://github.com/onyx-dot-app/onyx.git
 ```
 
 Next, let's set the necessary env variables:
 
 ```bash
-cd danswer/deployment/docker_compose
+cd onyx/deployment/docker_compose
 touch .env
 touch .env.nginx
 ```
@@ -96,9 +96,9 @@ touch .env.nginx
 In the `.env` file, you can copy past the following (filling in the missing fields as needed):
 
 ```
-WEB_DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+WEB_DOMAIN=<YOUR_DOMAIN>  # something like "onyx.app"
 
-# if your email is something like "chris@danswer.ai", then this should be "danswer.ai"
+# if your email is something like "chris@onyx.app", then this should be "onyx.app"
 # this prevents people outside your company from creating an account
 VALID_EMAIL_DOMAINS=<YOUR_COMPANIES_EMAIL_DOMAIN>
 
@@ -126,7 +126,7 @@ POSTGRES_PASSWORD=password
 In the `.env.nginx` file, put the following:
 
 ```
-DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+DOMAIN=<YOUR_DOMAIN>  # something like "onyx.app"
 ```
 
 Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/). To do this, we can simply run:
@@ -137,13 +137,14 @@ Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/)
 
 <Info>
   If are skipping the HTTPS setup, you should start things up with:
-  `docker-compose -f docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate`
-  instead of the above. You can then access Danswer from the IP address from earlier or from the
-  instance `Public IPv4 DNS` provided on the instance's page in the DigitalOcean console.
+  `docker-compose -f docker-compose.dev.yml -p onyx-stack up -d --build
+  --force-recreate` instead of the above. You can then access Onyx from the IP
+  address from earlier or from the instance `Public IPv4 DNS` provided on the
+  instance's page in the DigitalOcean console.
 </Info>
 
 Voila, you're all done! 🎉
 
 After waiting a few minutes (you can monitor the progress with
-`docker logs danswer-stack-api_server-1 -f`; once you see a log for
+`docker logs onyx-stack-api_server-1 -f`; once you see a log for
 `INFO:     Application startup complete.` then everything should be good to go).

@@ -1,29 +1,29 @@
 ---
 title: Ingestion API
-description: 'Ingest Arbitrary Documents'
+description: "Ingest Arbitrary Documents"
 ---
 
 ### Typical uses for the Ingestion API
 
 A set of backend APIs are provided to take in and process arbitrary document data sent directly to
 the backend API server. This is generally used for:
-- Creating arbitrary documents that may not exist in any actual sources but contain useful information.
-- Programmatically passing in documents to Danswer. This is sometimes simpler than creating a connector.
-- Editing specific documents in Danswer when the Danswer admin either does not want to or does not have
-permission to update the original document in the source.
-- Supplementing existing connector functionalities. For example, passing in README file contents and
-attributing it to the GitHub or GitLab source type.
 
+- Creating arbitrary documents that may not exist in any actual sources but contain useful information.
+- Programmatically passing in documents to Onyx. This is sometimes simpler than creating a connector.
+- Editing specific documents in Onyx when the Onyx admin either does not want to or does not have
+  permission to update the original document in the source.
+- Supplementing existing connector functionalities. For example, passing in README file contents and
+  attributing it to the GitHub or GitLab source type.
 
 ### Example Document Ingestion
 
-This example creates a new Document in Danswer of the "Web" type. This document will now show up in
-Danswer's search flows like any other webpage pulled in by a Web connector.
+This example creates a new Document in Onyx of the "Web" type. This document will now show up in
+Onyx's search flows like any other webpage pulled in by a Web connector.
 
 ![IngestionPostman](/images/apis/IngestionPostman.png)
 
 ```
-curl --location 'localhost:8080/danswer-api/ingestion' \
+curl --location 'localhost:8080/onyx-api/ingestion' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer dn_qODmg9r8Nl9PR4R9GF_z1UA0smcwVIcj58Ei0zWA' \
 --data '{
@@ -32,18 +32,18 @@ curl --location 'localhost:8080/danswer-api/ingestion' \
     "sections": [
       {
         "text": "This is the contents of the document that will be processed and saved into the vector+keyword document index. ",
-        "link": "https://docs.danswer.dev/introduction#what-is-danswer"
+        "link": "https://docs.onyx.app/introduction#what-is-onyx"
       },
       {
         "text": "You can include multiple content sections each with their own link or combine them. ",
-        "link": "https://docs.danswer.dev/introduction#main-features"
+        "link": "https://docs.onyx.app/introduction#main-features"
       }
     ],
     "source": "web",
-    "semantic_identifier": "Danswer Ingestion Example",
+    "semantic_identifier": "Onyx Ingestion Example",
     "metadata": {
         "tag": "informational",
-        "topics": ["danswer", "api"]
+        "topics": ["onyx", "api"]
     },
     "doc_updated_at": "2024-04-25T08:20:00Z"
   },
@@ -51,35 +51,36 @@ curl --location 'localhost:8080/danswer-api/ingestion' \
 }'
 ```
 
-> Note: The Bearer auth token is generated on server startup in Danswer MIT. There is better API Key
-support as part of Danswer EE.
+> Note: The Bearer auth token is generated on server startup in Onyx MIT. There is better API Key
+> support as part of Onyx EE.
 
 See below for a breakdown of the different fields provided:
+
 - `id`: this is the unique ID of the document, if a document of this ID exists it will be updated/replaced.
-If not provided, a document ID is generated from the semantic_identifier field instead and returned in the
-response.
+  If not provided, a document ID is generated from the semantic_identifier field instead and returned in the
+  response.
 - `sections`: list of sections each containing textual content and an optional link. The document chunking
-tries to avoid splitting sections internally and favors splitting at section borders. Also the link of the
-document at query time is the link of the best matched section.
+  tries to avoid splitting sections internally and favors splitting at section borders. Also the link of the
+  document at query time is the link of the best matched section.
 - `source`: Source type, full list can be checked by searching for DocumentSource
-[here](https://github.com/danswer-ai/danswer/blob/main/backend/danswer/configs/constants.py)
+  [here](https://github.com/onyx-dot-app/onyx/blob/main/backend/onyx/configs/constants.py)
 - `semantic_identifier`: This is the "Title" of the document as shown in the UI (see image below)
 - `metadata`: Used for the "Tags" feature which is displayed in the UI. The values can be either strings
-or list of strings
+  or list of strings
 - `doc_updated_at`: The time that the document was last considered updated. By default there is a time
-based score decay around this value when the document is considered during search.
+  based score decay around this value when the document is considered during search.
 - `cc_pair_id`: This is the "Connector" ID seen on the Connector Status pages. For example, if running
-locally, it might be `http://localhost:3000/admin/connector/2`. This allows attaching the ingestion doc
-to existing connectors so they can be assigned to groups or deleted together with the connector. If not
-provided or set to `1` explicitly, it is considered part of the default catch-all connector.
+  locally, it might be `http://localhost:3000/admin/connector/2`. This allows attaching the ingestion doc
+  to existing connectors so they can be assigned to groups or deleted together with the connector. If not
+  provided or set to `1` explicitly, it is considered part of the default catch-all connector.
 
 For even more details, the code for the relevant object is found
-[here](https://github.com/danswer-ai/danswer/blob/main/backend/danswer/connectors/models.py),
+[here](https://github.com/onyx-dot-app/onyx/blob/main/backend/onyx/connectors/models.py),
 called "DocumentBase"
 
 ![IngestionUI](/images/apis/IngestionUI.png)
 
-
 ### Checking Ingestion Documents
+
 An API is also provided to fetch all of the documents that have been indexed via the Ingestion API
 ![IngestionDocs](/images/apis/IngestionDocs.png)

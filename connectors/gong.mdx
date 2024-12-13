@@ -1,27 +1,28 @@
 ---
 title: Gong Connector
-description: 'Access the latest call transcripts from Gong'
+description: "Access the latest call transcripts from Gong"
 ---
 
 ## How it works
+
 The Gong connector pulls in the transcripts of calls recorded via Gong. The Gong connector indexes the
 call title, call description, and contents of the actual transcript.
 
 New transcripts are pulled every **10** minutes.
 
-
 ## Setting up
+
 ### Authorization
+
     1. User must get an **Access Key** and **Access Key Secret** to pull in Gong transcripts
     2. As an admin, go to `Company Settings` on the right of the top options bar (see below)
-![GongMenu](/images/connectors/gong/GongMenu.png)
-    3. Next, find the **Ecosystem** block and select `API`
-![GongEcosystem](/images/connectors/gong/GongEcosystem.png)
-    4. Once there, select `API KEYS` (it's right next to `INTEGRATIONS`)
-    5. Click on `GET API KEY` and note down the ACCESS KEY and ACCESS KEY SECRET
+
+![GongMenu](/images/connectors/gong/GongMenu.png) 3. Next, find the **Ecosystem** block and select `API`
+![GongEcosystem](/images/connectors/gong/GongEcosystem.png) 4. Once there, select `API KEYS` (it's right next to `INTEGRATIONS`) 5. Click on `GET API KEY` and note down the ACCESS KEY and ACCESS KEY SECRET
 
 ### Indexing
-    1. In the Danswer UI, navigate to the Admin Dashboard and select the **Gong** Connector
+
+    1. In the Onyx UI, navigate to the Admin Dashboard and select the **Gong** Connector
     2. Provide the Access Key and Access Key Secret from the previous step
     3. Add a list of workspaces to index or leave empty to index all workspaces
     4. Click `Connect` to begin indexing Gong call transcripts

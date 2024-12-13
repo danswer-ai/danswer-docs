@@ -10,17 +10,16 @@ file name, file type, and contents of the file.
 
 New files are pulled every **10** minutes.
 
-
 ## Setup
 
 ### Configure your Egnyte Application + Onyx env variables
 
 <Info>
-  This is only necessary if self-hosting Onyx. If using [Onyx Cloud](https://cloud.onyx.app), you can skip
-  this step.
+  This is only necessary if self-hosting Onyx. If using [Onyx
+  Cloud](https://cloud.onyx.app), you can skip this step.
 </Info>
 
-    1. Create an Egnyte Application. Check out the 
+    1. Create an Egnyte Application. Check out the
     [Egnyte API documentation](https://developers.egnyte.com/docs/read/introduction) for more information.
     2. Set the following environment variables on your Onyx instance:
 
@@ -29,12 +28,13 @@ EGNYTE_DOMAIN=something like "app4onyx"
 EGNYTE_CLIENT_ID=
 EGNYTE_CLIENT_SECRET=
 ```
+
     3. Restart your Onyx instance as your normally would to apply the changes.
 
 ### Indexing
 
-    1. In the Danswer UI, navigate to the Admin Dashboard and select the **Egnyte** Connector
+    1. In the Onyx UI, navigate to the Admin Dashboard and select the **Egnyte** Connector
     2. Click the `Create New` button to go through the OAuth flow.
-    3. Once you've authorized the application, you'll be redirected back to Danswer.
+    3. Once you've authorized the application, you'll be redirected back to Onyx.
     4. Finish the setup, optionally specifying a folder path to index.
     5. Click `Connect` to begin indexing Egnyte files!

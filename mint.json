@@ -120,7 +120,7 @@
       ]
     },
     {
-      "group": "Deploy Danswer",
+      "group": "Deploy Onyx",
       "pages": [
         {
           "group": "Deploy with AWS",

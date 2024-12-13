@@ -4,27 +4,28 @@ description: "How to set up a Slack bot to automatically answer questions"
 icon: "slack"
 ---
 
-## DanswerBot Introduction
+## OnyxBot Introduction
 
-Danswer will connect to your Slack and listen for messages to answer.
+Onyx will connect to your Slack and listen for messages to answer.
 
-You can easily configure rules for what channels Danswer should respond in, what knowledge sets should back each
+You can easily configure rules for what channels Onyx should respond in, what knowledge sets should back each
 configured channel, and set filters to respond or not respond to different types of messages.
 
-When Danswer identifies valid questions, it will respond in the message thread with:
+When Onyx identifies valid questions, it will respond in the message thread with:
+
 - An LLM generated answer
 - Quotes of the most relevant excerpts
 - Sources with highlighted keywords
 
 ![SlackBot](/images/slack_bot/SlackBot.png)
 
-Danswer also provides a configuration page so you can create custom settings for each slack channel
+Onyx also provides a configuration page so you can create custom settings for each slack channel
 (or you can just use the default settings for all your channels).
 
 ![SlackBotConfig](/images/slack_bot/SlackBotConfig.png)
 
-Since we are using Web Sockets, Danswer is able to initiate the connection. This means that this is able
-to work even if you are running Danswer inside a firewall protected VPC.
+Since we are using Web Sockets, Onyx is able to initiate the connection. This means that this is able
+to work even if you are running Onyx inside a firewall protected VPC.
 
 ## Setting up
 
@@ -44,7 +45,7 @@ to work even if you are running Danswer inside a firewall protected VPC.
 
 ```
 display_information:
-  name: DanswerBot
+  name: OnyxBot
   description: I help answer questions!
 features:
   app_home:
@@ -52,10 +53,10 @@ features:
     messages_tab_enabled: true
     messages_tab_read_only_enabled: false
   bot_user:
-    display_name: DanswerBot
+    display_name: OnyxBot
     always_online: true
   slash_commands:
-    - command: /danswer
+    - command: /onyx
       description: Get back a private answer!
       usage_hint: Put your question here!
       should_escape: false
@@ -93,24 +94,26 @@ settings:
 
 5. Click the **Create** button.
 6. Generate an `App-level Token`; Under **Basic Information**, scroll to the **App-level tokens** section and click the button to generate an **App-level token**. ([learn more](https://api.slack.com/apis/connections/socket#token))
-<br />Add the `connections:write` scope to the app-level token and click **Generate**.
-Copy this somewhere safe for now, as you will need this later to initiate the Web Socket-based connection to Slack.
+   <br />
+   Add the `connections:write` scope to the app-level token and click **Generate**.
+   Copy this somewhere safe for now, as you will need this later to initiate the
+   Web Socket-based connection to Slack.
 7. In the app page, navigate to the **OAuth & Permissions** tab under the **Features** header.
 8. Under **OAuth Tokens for Your Workspace**, select `Install to Workspace` and Allow the app.
-![DanswerBotInstall](/images/slack_bot/DanswerBotInstall.png)
-9. Copy the **Bot User OAuth Token**, this will be needed later to enable us to respond to messages as DanswerBot.
+   ![OnyxBotInstall](/images/slack_bot/OnyxBotInstall.png)
+9. Copy the **Bot User OAuth Token**, this will be needed later to enable us to respond to messages as OnyxBot.
 
-### Setting Danswer to use it
+### Setting Onyx to use it
 
-Start by finding the admin page in the top right of the Danswer web UI.
-![DanswerAdminButton](/images/slack_bot/DanswerAdminButton.png)
+Start by finding the admin page in the top right of the Onyx web UI.
+![OnyxAdminButton](/images/slack_bot/OnyxAdminButton.png)
 
 On the left hand menu of the admin page, navigate to the bottom to **Bots**.
 
-Provide your Slack Tokens and Danswer will start to respond to your slack channels after a short startup delay.
+Provide your Slack Tokens and Onyx will start to respond to your slack channels after a short startup delay.
 ![SlackBotTokens](/images/slack_bot/SlackBotTokens.png)
 
 There are also a set of less often used / more advanced configuration options available via environment
 variables that can set things like how many "Reference Documents" to show per answer, etc.
 Refer to the available configs
-[here](https://github.com/danswer-ai/danswer/blob/main/backend/danswer/configs/danswerbot_configs.py)
+[here](https://github.com/onyx-dot-app/onyx/blob/main/backend/onyx/configs/onyxbot_configs.py)

@@ -1,22 +1,25 @@
 ---
 title: Productboard Connector
-description: 'Sync knowledge from Productboard'
+description: "Sync knowledge from Productboard"
 ---
 
 ## How it works
-The Productboard connector pulls in all the `Features`, `Components`, `Products`, 
-and `Objectives` into Danswer. At this time, the Productboard APIs does not
+
+The Productboard connector pulls in all the `Features`, `Components`, `Products`,
+and `Objectives` into Onyx. At this time, the Productboard APIs does not
 support pulling in `Releases` or `Notes`.
 
 Everything is updated every **10** minutes.
 
-
 ## Setting up
+
 ### Authorization
+
     1. Follow the `Getting a token` guide [here](https://developer.productboard.com/#section/Authentication/Public-API-Access-Token)
     to get an Access Token.
 
 ### Indexing
+
     1. Navigate to the Admin Dashboard and select the **Productboard** Connector
     2. In **Step 1**, provide your **Access Token**
     3. Click `Connect` to begin indexing

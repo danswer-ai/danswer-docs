@@ -1,23 +1,24 @@
 ---
 title: "Deploy on Azure"
-description: "Setup Danswer on Azure"
+description: "Setup Onyx on Azure"
 icon: "microsoft"
 ---
 
-Using a Azure Virtual Machine is the recommended way to deploy Danswer on Azure. It is simple and should meet the performance needs of 90% of organizations looking to use Danswer. The steps are very similar to deploying on AWS EC2. Before we get started, make sure you have an account with Azure and have the necessary permissions to create a VM instance.
+Using a Azure Virtual Machine is the recommended way to deploy Onyx on Azure. It is simple and should meet the performance needs of 90% of organizations looking to use Onyx. The steps are very similar to deploying on AWS EC2. Before we get started, make sure you have an account with Azure and have the necessary permissions to create a VM instance.
 
-Feel free to reach out to us via the links on our [Contact Us](https://docs.danswer.dev/contact_us) page for more individual help.
+Feel free to reach out to us via the links on our [Contact Us](https://docs.onyx.app/contact_us) page for more individual help.
 
 ## Getting an Instance
 
 Steps to create a VM instance from Azure Cloud Console:
-1. Go to the [Azure Console](https://portal.azure.com/#home). Click on the `Crate` option in the `Virtual machine` section. 
+
+1. Go to the [Azure Console](https://portal.azure.com/#home). Click on the `Crate` option in the `Virtual machine` section.
 
 ![Create VM Instance](/images/setup_guides/azure/create-vm.png)
 
 2. Select an existing subscription / resource group or create a new one under your organization.
-3. For instance configuration for Danswer, we recommend at least 16GB of RAM, 4-8vCPU cores, and 500GB of disk for a small-mid sized organization (< 5000 users). You can choose the machine type as per your requirements.
-If you're unsure, the D4s_v3 series is a good starting point.
+3. For instance configuration for Onyx, we recommend at least 16GB of RAM, 4-8vCPU cores, and 500GB of disk for a small-mid sized organization (< 5000 users). You can choose the machine type as per your requirements.
+   If you're unsure, the D4s_v3 series is a good starting point.
 
 ![Create VM Instance](/images/setup_guides/azure/create-vm-2.png)
 
@@ -25,7 +26,7 @@ If you're unsure, the D4s_v3 series is a good starting point.
 
 ![Create VM Instance](/images/setup_guides/azure/create-vm-3.png)
 
-For the below guide, we will assume that you’ve chosen to use Ubuntu Server. For other operating systems, the steps 
+For the below guide, we will assume that you’ve chosen to use Ubuntu Server. For other operating systems, the steps
 are similar but you may need to use different commands to install dependencies.
 
 ## Pointing your Domain to the Instance
@@ -51,7 +52,7 @@ The first record directs traffic to that domain to your GCP VM instance. The sec
 
 ## Installing Dependencies
 
-Next, we need to prepare the instance so we can actually get Danswer up and running. To do this, you'll
+Next, we need to prepare the instance so we can actually get Onyx up and running. To do this, you'll
 need three things: `git`, `docker`, and `docker compose`. For Ubuntu Server, this can be done with the following:
 
 ```bash
@@ -70,20 +71,20 @@ echo \
 sudo apt-get update
 ```
 
-## Starting up Danswer
+## Starting up Onyx
 
-Now that we have everything we need, we can startup Danswer.
+Now that we have everything we need, we can startup Onyx.
 
 First, let's clone the repo:
 
 ```bash
-git clone https://github.com/danswer-ai/danswer.git
+git clone https://github.com/onyx-dot-app/onyx.git
 ```
 
 Next, let's set the necessary env variables:
 
 ```bash
-cd danswer/deployment/docker_compose
+cd onyx/deployment/docker_compose
 touch .env
 touch .env.nginx
 ```
@@ -91,9 +92,9 @@ touch .env.nginx
 In the `.env` file, you can copy past the following (filling in the missing fields as needed):
 
 ```
-WEB_DOMAIN=<YOUR_DOMAIN>  # something like "https://www.danswer.ai"
+WEB_DOMAIN=<YOUR_DOMAIN>  # something like "https://www.onyx.app"
 
-# if your email is something like "chris@danswer.ai", then this should be "danswer.ai"
+# if your email is something like "chris@onyx.app", then this should be "onyx.app"
 # this prevents people outside your company from creating an account
 VALID_EMAIL_DOMAINS=<YOUR_COMPANIES_EMAIL_DOMAIN>
 
@@ -118,7 +119,7 @@ POSTGRES_PASSWORD=password
 In the `.env.nginx` file, put the following:
 
 ```
-DOMAIN=<YOUR_DOMAIN>  # something like "danswer.ai"
+DOMAIN=<YOUR_DOMAIN>  # something like "onyx.app"
 ```
 
 Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/). To do this, we can simply run:
@@ -129,13 +130,13 @@ Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/)
 
 <Info>
   If are skipping the HTTPS setup, you should start things up with:
-  `docker-compose -f docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate`
-  instead of the above. You can then access Danswer from the IP address from earlier.
+  `docker-compose -f docker-compose.dev.yml -p onyx-stack up -d --build
+  --force-recreate` instead of the above. You can then access Onyx from the IP
+  address from earlier.
 </Info>
 
 Voila, you're all done! 🎉
 
 After waiting a few minutes (you can monitor the progress with
-`docker logs danswer-stack-api_server-1 -f`; once you see a log for
+`docker logs onyx-stack-api_server-1 -f`; once you see a log for
 `INFO:     Application startup complete.` then everything should be good to go).
-

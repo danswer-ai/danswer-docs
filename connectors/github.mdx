@@ -1,16 +1,20 @@
 ---
 title: GitHub Connector
-description: 'Access knowledge from your GitHub Repositories'
+description: "Access knowledge from your GitHub Repositories"
 ---
 
 ## How it works
+
 The Github Connector picks up all of the Pull Requests and Issues in a specified repository.
+
 - It will index both Open and Closed PRs. This includes the Title and Summary.
 - It will index Issues and comments both Open and Closed
 - Includes certain other metadata such as the URL, creator, etc.
 
 ## Setting up
+
 ### Authorization
+
     1. This Connector uses a GitHub Access Token.
         - [This guide](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) shows the following steps in detail.
     2. Log in to GitHub.
@@ -18,11 +22,12 @@ The Github Connector picks up all of the Pull Requests and Issues in a specified
     4. On the bottom, go to **Developer settings** -> **Personal access tokens** -> **Tokens (classic)**
     5. Click on **Generate new token**
         - Be sure to give the Token `repo` access so that it can access the PRs.
-        - Set any expiration time. A new token will have to be provided to Danswer to continue updating the Danswer
+        - Set any expiration time. A new token will have to be provided to Onyx to continue updating the Onyx
         index once this one expires.
 
 ### Indexing
+
     1. Navigate to the Admin Dashboard and select the **GitHub** Connector
-    2. For [https://github.com/danswer-ai/danswer](https://github.com/danswer-ai/danswer), it would look like:
+    2. For [https://github.com/onyx-dot-app/onyx](https://github.com/onyx-dot-app/onyx), it would look like:
 
 ![GithubConnector](/images/connectors/github/GithubConnector.png)

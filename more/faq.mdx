@@ -1,14 +1,16 @@
 ---
 title: "FAQ"
-description: "Frequently asked questions about Danswer"
+description: "Frequently asked questions about Onyx"
 ---
 
 ## Contribution Questions
 
-### Why did my PR Vercel build fail? or how can I see the vercel logs for my failed PR deployment? 
+### Why did my PR Vercel build fail? or how can I see the vercel logs for my failed PR deployment?
+
 From the `/web` directory, run `npm run build` to see the error.
 
 ### When I change/upgrade authentication methods (e.g. OAuth or Email verification), no accounts are verified and thus can't log in?
+
 Presuming that all your existing users are ones you want to keep in the system,
 perform a one time database edit to mark all existing users as verified.
 
@@ -17,6 +19,7 @@ perform a one time database edit to mark all existing users as verified.
 There will be a friendlier way of handling this in future releases.
 
 ### I'm having trouble sending verification e-mails with Gmail's SMTP server.
+
 Gmail SMTP integration currently require that you use an "app password", not your regular user password, to send e-mails.
 
 See https://support.google.com/mail/answer/185833 for context.
@@ -28,22 +31,24 @@ Under Google Account Settings / Security:
 1. Ensure that two step verification is enabled (required for app passwords to be enabled).
 2. If you have a "Less secure apps" setting and it is off, ensure that it is on.
 3. Getting to the actual app password generation page is somewhat hidden. You can search for "App passwords" at the top of the page, or
-follow a direct link to https://myaccount.google.com/apppasswords.
+   follow a direct link to https://myaccount.google.com/apppasswords.
 4. For the SMTP_USER variable, enter the full e-mail address of the account you wish to send e-mails from ... e.g. "user@gmail.com" (without quotes).
 5. For the SMTP_PASS variable, enter the 16 character app password presented to you when you created it ... without spaces.
-(The default way in which the password is presented to you will copy the password with spaces. The spaces are not part of the app password!)
+   (The default way in which the password is presented to you will copy the password with spaces. The spaces are not part of the app password!)
 
 Note that inviting users currently does NOT send emails, but does allow users to sign up with an invited e-mail address.
 
 Verification e-mails are sent when:
+
 1. Verification emails are enabled in settings.
 2. The user attempts to create an account with an invited e-mail address and clicks on the verification link.
 
-### How do I use the API key in my requests to my Danswer instance's server endpoints?
-If you are trying to use any Danswer endpoint that requires authorization, such as the [Answer with Quote](/apis/answer_with_quote) endpoint, 
+### How do I use the API key in my requests to my Onyx instance's server endpoints?
+
+If you are trying to use any Onyx endpoint that requires authorization, such as the [Answer with Quote](/apis/answer_with_quote) endpoint,
 ensure that you both:
 
-1. Have an API key created with the correct permission level.  Both Basic and Admin keys can be created.
+1. Have an API key created with the correct permission level. Both Basic and Admin keys can be created.
 2. Send the Authorization header properly.
 
 ```

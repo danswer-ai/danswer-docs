@@ -1,16 +1,16 @@
 ---
 title: Production Setup
-description: "How to set up Danswer for an organization"
+description: "How to set up Onyx for an organization"
 icon: "server"
 ---
 
-Below, we discuss the simplest possible way to setup Danswer within your enterprise. We know that every company does things
+Below, we discuss the simplest possible way to setup Onyx within your enterprise. We know that every company does things
 differently, and we'd love to help you figure out the ideal setup for your enterprise! Feel free to reach out to us via
-the links on our [Contact Us](https://docs.danswer.dev/contact_us) page.
+the links on our [Contact Us](https://docs.onyx.app/contact_us) page.
 
 ## Getting a Machine
 
-The first step is to get a machine hosted in your VPC to run Danswer on.
+The first step is to get a machine hosted in your VPC to run Onyx on.
 
 - For AWS, this would be an EC2 instance.
 - For GCP, this would be a Google Compute Engine instance.
@@ -19,33 +19,33 @@ The first step is to get a machine hosted in your VPC to run Danswer on.
 - ...
 
 For resourcing, we recommend a machine with 8vCPU and
-16GB memory (although 4vCPU and 8GB memory can work in a pinch). 
-More details on this recommendation can be found in the [Resourcing](https://docs.danswer.dev/resourcing) section. 
-With this basic setup, all components needed to operate Danswer will run on this single machine.
+16GB memory (although 4vCPU and 8GB memory can work in a pinch).
+More details on this recommendation can be found in the [Resourcing](https://docs.onyx.app/resourcing) section.
+With this basic setup, all components needed to operate Onyx will run on this single machine.
 
 ## Setting Up the Domain
 
 Modify your internal DNS to include entries which point to the private IPv4 address for the instance created above.
 
-## Starting Danswer
+## Starting Onyx
 
 1. SSH into the machine setup in the `Getting a Machine` section.
 2. If not already setup, install docker following the relevant guide here: https://docs.docker.com/engine/install/
-3. Clone the [Danswer](https://github.com/danswer-ai/danswer) repo:
-   `git clone https://github.com/danswer-ai/danswer.git`
-4. Navigate to **danswer/deployment/docker_compose**
+3. Clone the [Onyx](https://github.com/onyx-dot-app/onyx) repo:
+   `git clone https://github.com/onyx-dot-app/onyx.git`
+4. Navigate to **onyx/deployment/docker_compose**
 5. Bring up your docker engine and run:
    - Setup your `.env` files
      - Make a copy of `env.prod.template` called `.env` (`cp env.prod.template .env`)
        - Fill in any relevant env variables to your setup, and delete the rest.
      - Make a copy of `env.nginx.template` called `.env.nginx` (`cp env.nginx.template .env.nginx`)
-       - Fill in the `DOMAIN` variable with the domain that people will use internally to access the Danswer UI - **NOTE:** this domain must be publicly accessible for this flow to work. If you're hosting it internally and
+       - Fill in the `DOMAIN` variable with the domain that people will use internally to access the Onyx UI - **NOTE:** this domain must be publicly accessible for this flow to work. If you're hosting it internally and
          not exposing it to the public internet then feel free to reach out to us to figure out the best way to set
          this up.
        - `EMAIL` is optional
    - Run `./init-letsencrypt.sh` to get a SSL certificate from LetsEncrypt. More info on how this works can be found [here](https://pentacent.medium.com/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71).
-   - To pull images from DockerHub and run Danswer:
-     - `docker compose -f docker-compose.prod.yml -p danswer-stack up -d --pull always`
-   - Alternatively, to build the containers from source and start Danswer, run:
-     - `docker compose -f docker-compose.prod.yml -p danswer-stack up -d --build --force-recreate`
+   - To pull images from DockerHub and run Onyx:
+     - `docker compose -f docker-compose.prod.yml -p onyx-stack up -d --pull always`
+   - Alternatively, to build the containers from source and start Onyx, run:
+     - `docker compose -f docker-compose.prod.yml -p onyx-stack up -d --build --force-recreate`
    - This may take 15+ minutes depending on your internet speed.

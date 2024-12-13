@@ -1,98 +1,95 @@
 ---
 title: "Quickstart"
-description: "How to deploy Danswer on your local machine"
+description: "How to deploy Onyx on your local machine"
 icon: "bolt"
 ---
-
 
 ## Requirements
 
     - git
     - Docker with compose (docker version >= 1.13.0)
-    - System requirements found [here](https://docs.danswer.dev/resourcing)
+    - System requirements found [here](https://docs.onyx.app/resourcing)
 
 ## Setup
 
-
 <Warning>
   The most common source of issues is under-resourcing. Before beginning, check
-  the system requirements [here](https://docs.danswer.dev/resourcing).
+  the system requirements [here](https://docs.onyx.app/resourcing).
 </Warning>
 
-    1. Clone the [Danswer](https://github.com/danswer-ai/danswer) repo:
+    1. Clone the [Onyx](https://github.com/onyx-dot-app/onyx) repo:
     ```bash
-    git clone https://github.com/danswer-ai/danswer.git
+    git clone https://github.com/onyx-dot-app/onyx.git
     ```
 
-    2. Navigate to **danswer/deployment/docker_compose**
+    2. Navigate to **onyx/deployment/docker_compose**
     ```bash
-    cd danswer/deployment/docker_compose
+    cd onyx/deployment/docker_compose
     ```
 
-    3. (Optional) [configure Danswer](/configuration_guide)
+    3. (Optional) [configure Onyx](/configuration_guide)
 
     4. Bring up your docker engine and run:
-        - To pull images from DockerHub and run Danswer:
+        - To pull images from DockerHub and run Onyx:
         ```bash
-        docker compose -f docker-compose.dev.yml -p danswer-stack up -d --pull always --force-recreate
+        docker compose -f docker-compose.dev.yml -p onyx-stack up -d --pull always --force-recreate
         ```
-        - Alternatively, to build the containers from source and start Danswer, run:
+        - Alternatively, to build the containers from source and start Onyx, run:
          ```bash
-        docker compose -f docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate
+        docker compose -f docker-compose.dev.yml -p onyx-stack up -d --build --force-recreate
         ```
         - This may take 15+ minutes depending on your internet speed.
-            - Additionally, once the images have been pulled / built, the initial startup of the `api_server` 
-            may take some time (we download embedding models from HuggingFace to power the search). If you see 
-            `This site can’t be reached` in your browser despite all containers being up and running, 
-            check the `api_server` logs and make sure you see `Application startup complete`. 
-            - If you see `Killed` in the logs, you may need to increase the amount of memory given to Docker. 
-            For recommendations, check the system requirements [here](https://docs.danswer.dev/resourcing).
+            - Additionally, once the images have been pulled / built, the initial startup of the `api_server`
+            may take some time (we download embedding models from HuggingFace to power the search). If you see
+            `This site can’t be reached` in your browser despite all containers being up and running,
+            check the `api_server` logs and make sure you see `Application startup complete`.
+            - If you see `Killed` in the logs, you may need to increase the amount of memory given to Docker.
+            For recommendations, check the system requirements [here](https://docs.onyx.app/resourcing).
 
 <Info>
   These commands are also used to redeploy if any **.env** variables are updated
 </Info>
 
-
-    5. Danswer will now be running on http://localhost:3000.
+    5. Onyx will now be running on http://localhost:3000.
 
 ## Generative AI API Key
 
-**Note:** On the initial visit, Danswer will prompt for an OpenAI API key.
+**Note:** On the initial visit, Onyx will prompt for an OpenAI API key.
 
 You can get an OpenAI API key at:
 [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys)
 
 <Info>
   You can also replace OpenAI with a model provider of your choice, see
-  [here](https://docs.danswer.dev/gen_ai_configs/overview) for more info
+  [here](https://docs.onyx.app/gen_ai_configs/overview) for more info
 </Info>
-
 
 ## Indexing Documents
 
-**This quickstart guide will index a publicly accessible website as this requires no additional authorization setup** 
+**This quickstart guide will index a publicly accessible website as this requires no additional authorization setup**
 
-    1. Navigate to the top right of Danswer's home screen and select **Admin Panel**
+    1. Navigate to the top right of Onyx's home screen and select **Admin Panel**
+
 ![AdminPanel](/images/quickstart/AdminPanel.png)
 
     2. In the Web Connector dashboard, pick any base URL to index.
         - This will index all pages under that base URL that is reachable from hyperlinks.
         - You can check the indexing status page to monitor the progress.
 
-![DanswerWebConnector](/images/quickstart/DanswerWebConnector.png)
+![OnyxWebConnector](/images/quickstart/OnyxWebConnector.png)
 
     3. After the pages are indexed, you can now navigate back to the homepage and start asking questions and getting
     answers! 🥳
 
-![DanswerSampleQA](/images/quickstart/DanswerSampleQA.png)
+![OnyxSampleQA](/images/quickstart/OnyxSampleQA.png)
 
 ## Shutting Down
 
 ```bash
-docker compose -f docker-compose.dev.yml -p danswer-stack down
+docker compose -f docker-compose.dev.yml -p onyx-stack down
 ```
 
 <Info>
-  add `-v` at the end to additionally delete the volumes (containing users and indexed
-  documents){" "}
+  add `-v` at the end to additionally delete the volumes (containing users and
+  indexed documents){" "}
 </Info>

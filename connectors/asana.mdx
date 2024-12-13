@@ -1,29 +1,33 @@
 ---
 title: Asana Connector
-description: 'Index tasks and comments from Asana projects'
+description: "Index tasks and comments from Asana projects"
 ---
 
 ## How it works
+
 The Asana connector pulls in tasks and their associated comments from specified projects or all projects in a workspace.
 
 ## Setting up
+
 ### Authorization
+
 1. Create an Asana Personal Access Token:
    - Log in to your Asana account and go to https://app.asana.com/0/my-apps
    - Click "Create New Personal Access Token"
-   - Give it a name (e.g., "Danswer Integration") and create the token
-   - Copy the token - you'll need to provide this to Danswer
+   - Give it a name (e.g., "Onyx Integration") and create the token
+   - Copy the token - you'll need to provide this to Onyx
 
 ### Indexing
+
 1. Navigate to the Admin Dashboard and select the **Asana** Connector
 2. Provide the following information:
 
    - **Asana API Token**: Paste the Personal Access Token you created earlier
-   
+
    - **Workspace ID**: Enter your Asana workspace ID. You can find this at https://app.asana.com/api/1.0/workspaces. It's a number that looks like 1234567890123456.
-   
+
    - **Project IDs** (optional): If you want to index specific projects, enter their IDs separated by commas. Leave this empty to index all projects in the workspace. Example: 1234567890123456,2345678901234567. You can find a project ID by clicking on a project in Asana. In the URL, it will look like https://app.asana.com/0/1208338159336610/1208338159510597, where "1208338159336610" is the project ID.
-   
+
    - **Team ID** (optional): If you want to index team-visible tasks in addition to public tasks, enter a team ID. Leave this empty if you don't need this feature.
 
 3. Click "Connect" to start the indexing process

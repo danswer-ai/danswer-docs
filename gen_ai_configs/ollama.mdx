@@ -1,21 +1,24 @@
 ---
 title: Ollama
-description: 'Configure Danswer to use Ollama'
+description: "Configure Onyx to use Ollama"
 ---
 
-Refer to [Model Configs](https://docs.danswer.dev/gen_ai_configs/overview#model-configs) for how to set the
+Refer to [Model Configs](https://docs.onyx.app/gen_ai_configs/overview#model-configs) for how to set the
 environment variables for your particular deployment.
 
 **Note**: While we support self hosted LLMs, you will get significantly better responses with a more powerful
 model like GPT-4.
 
 ## What is Ollama
+
 Ollama provides an easy way to host LLMs locally and to provide a REST API for the model.
 Refer to the following resources to get started:
+
 - https://ollama.ai/
 - https://github.com/jmorganca/ollama
 
 Once you start a model with a command like `ollama run llama2`, you can verify that the API works with a curl request:
+
 ```
 curl http://localhost:11434/api/generate -d '{
   "model": "llama2",
@@ -23,7 +26,7 @@ curl http://localhost:11434/api/generate -d '{
 }'
 ```
 
-## Set Danswer to use Ollama
+## Set Onyx to use Ollama
 
 On the `LLM` page in the Admin Panel add a `Custom LLM Provider` with the following settings:
 
@@ -31,12 +34,13 @@ On the `LLM` page in the Admin Panel add a `Custom LLM Provider` with the follow
 
 ![OllamaLLMProvider2](/images/gen_ai/OllamaLLMProvider2.png)
 
-**Note**: For the API Base, you should point Danswer to wherever Ollama is running. To point to 
-a Docker container running at http://localhost:11434, use host.docker.internal instead of localhost 
+**Note**: For the API Base, you should point Onyx to wherever Ollama is running. To point to
+a Docker container running at http://localhost:11434, use host.docker.internal instead of localhost
 (as shown in the screenshots).
 
-You may also want to update some of the environment variables depending on your model choice / how 
+You may also want to update some of the environment variables depending on your model choice / how
 you're running Ollama (e.g. on CPU vs GPU):
+
 ```
 # Let's also make some changes to accommodate the weaker locally hosted LLM
 QA_TIMEOUT=120  # Set a longer timeout, running models on CPU can be slow

@@ -1,39 +1,42 @@
 ---
 title: FastChat
-description: 'Configure Danswer to use FastChat model servers'
+description: "Configure Onyx to use FastChat model servers"
 ---
 
-Refer to [Model Configs](https://docs.danswer.dev/gen_ai_configs/overview#model-configs) for how to set the
+Refer to [Model Configs](https://docs.onyx.app/gen_ai_configs/overview#model-configs) for how to set the
 environment variables for your particular deployment.
 
 **Note**: While we support self hosted LLMs, you will get significantly better responses with a more powerful
 model like GPT-4.
 
 ## What is FastChat
-FastChat is a way to easily host LLMs on cli, using their web client, or as an API server. For the Danswer use
+
+FastChat is a way to easily host LLMs on cli, using their web client, or as an API server. For the Onyx use
 case we will focus on interfacing with the model through the API server. See here for more information:
 https://github.com/lm-sys/FastChat/blob/main/docs/openai_api.md
 
 In this case, we use LiteLLM's custom model server option. See here for more information:
 https://litellm.vercel.app/docs/providers/custom_openai_proxy
 
-## Set Danswer to use FastChat Server
+## Set Onyx to use FastChat Server
 
-On the `LLM` page in the Admin Panel add a `Custom LLM Provider` with the following settings. 
+On the `LLM` page in the Admin Panel add a `Custom LLM Provider` with the following settings.
 Note that the `Provider Name` is OpenAI, since FastChat provides an OpenAI compatible.
 
-*Hints*: 
-- To point to other Docker containers running locally (e.g. accessible at http://localhost), 
-use http://host.docker.internal.
-# Don't forget to include the /v1 in the API base.
+_Hints_:
 
+- To point to other Docker containers running locally (e.g. accessible at http://localhost),
+  use http://host.docker.internal.
+
+# Don't forget to include the /v1 in the API base.
 
 ![FastChatLLMProvider1](/images/gen_ai/FastChatLLMProvider1.png)
 
 ![FastChatLLMProvider2](/images/gen_ai/FastChatLLMProvider2.png)
 
-You may also want to update some of the environment variables depending on your model choice / how 
+You may also want to update some of the environment variables depending on your model choice / how
 you're running FastChat (e.g. on CPU vs GPU):
+
 ```
 # Let's also make some changes to accommodate the weaker locally hosted LLM
 QA_TIMEOUT=120  # Set a longer timeout, running models on CPU can be slow

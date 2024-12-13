@@ -1,19 +1,21 @@
 ---
 title: Custom Model Server
-description: 'Configure Danswer to use a Custom Model Server via requests'
+description: "Configure Onyx to use a Custom Model Server via requests"
 ---
 
-Danswer can also make requests to an arbitrary model server via REST requests. Optionally an access token can be passed
-in. To customize the request format and handling of the response, it may be necessary to update/rebuild the Danswer
+Onyx can also make requests to an arbitrary model server via REST requests. Optionally an access token can be passed
+in. To customize the request format and handling of the response, it may be necessary to update/rebuild the Onyx
 containers.
 
-## Extending Danswer to be compatible with your custom model server
+## Extending Onyx to be compatible with your custom model server
+
 There's a very minimal interface to be implemented which can support any arbitrary LLM Model Server.
-Simply update the code [here](https://github.com/danswer-ai/danswer/blob/main/backend/danswer/llm/custom_llm.py#L14)
-and [rebuild](https://docs.danswer.dev/quickstart#setup).
+Simply update the code [here](https://github.com/onyx-dot-app/onyx/blob/main/backend/onyx/llm/custom_llm.py#L14)
+and [rebuild](https://docs.onyx.app/quickstart#setup).
 
 The default implementation is compatible with the blog demo shown below.
 
-## Danswer with self hosted `Llama-2-13B-chat-GGML` using a custom FastAPI Server.
+## Onyx with self hosted `Llama-2-13B-chat-GGML` using a custom FastAPI Server.
+
 - See the [Medium blog post](https://medium.com/@yuhongsun96/host-a-llama-2-api-on-gpu-for-free-a5311463c183).
 - This demo uses Google Colab to access a free GPU but this is not suitable for long term deployments

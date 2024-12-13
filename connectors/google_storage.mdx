@@ -1,9 +1,10 @@
 ---
 title: Google Storage Connector
-description: 'Access documents stored in Google Cloud Storage buckets'
+description: "Access documents stored in Google Cloud Storage buckets"
 ---
 
 ## How it works
+
 The Google Cloud Storage connector pulls in all documents from the specified GCS bucket. It supports various file formats including PDF, DOC, DOCX, TXT, and more.
 
 Documents are updated every **1** day.
@@ -14,15 +15,15 @@ Documents are updated every **1** day.
 
 1. Log into your Google Cloud Console.
 2. Navigate to "IAM & Admin" > "Service Accounts".
-![Service Account Page](/images/connectors/blob/google/serviceaccount.png)
+   ![Service Account Page](/images/connectors/blob/google/serviceaccount.png)
 
 3. Click "Create Service Account".
-![New Service Account](/images/connectors/blob/google/serviceaccount.png)
+   ![New Service Account](/images/connectors/blob/google/serviceaccount.png)
 
-4. Set a name for the new service account (e.g., "danswer-gcs-connector") and click "Create".
+4. Set a name for the new service account (e.g., "onyx-gcs-connector") and click "Create".
 
 5. For the role, select "Storage Object Viewer" or another appropriately permissive role and click "Continue".
-![Role](/images/connectors/blob/google/serviceaccountrole.png)
+   ![Role](/images/connectors/blob/google/serviceaccountrole.png)
 
 6. Click "Done" to finish creating the service account.
 7. On the Service Accounts page, find your newly created account and click on it.
@@ -30,29 +31,25 @@ Documents are updated every **1** day.
 
 ![New Key](/images/connectors/blob/google/newkey.png)
 
-
 9. Choose "JSON" as the key type and click "Create".
-
 
 10. A JSON file will be downloaded to your computer. This file contains your credentials.
 
-
 11. Open the JSON file and note down the following information:
-   - `project_id`
-   - `client_id` (this will be used as your Access Key ID)
-   - `private_key` (this will be used as your Secret Access Key)
+
+- `project_id`
+- `client_id` (this will be used as your Access Key ID)
+- `private_key` (this will be used as your Secret Access Key)
 
 ### Indexing
 
 1. Navigate to the Admin Dashboard and select the **Google Cloud Storage** Connector.
 2. In **Step 1**, provide your GCS credentials:
 
+![Onyx page1](/images/connectors/blob/google/onyx1.png)
 
-![Danswer page1](/images/connectors/blob/google/danswer1.png)
-
-
-* Provide your GCS Project ID, Access Key ID, and Secret Access Key for authentication.
-* These credentials will be used to access your GCS buckets.
+- Provide your GCS Project ID, Access Key ID, and Secret Access Key for authentication.
+- These credentials will be used to access your GCS buckets.
 
 **GCS Project ID:**
 **Access Key ID:**
@@ -62,7 +59,7 @@ Documents are updated every **1** day.
 
 4. In **Step 2**, specify which GCS bucket you want to make searchable:
 
-![Danswer page1](/images/connectors/blob/google/danswer2.png)
+![Onyx page1](/images/connectors/blob/google/onyx2.png)
 
 5. Click "Connect" to begin indexing.
 

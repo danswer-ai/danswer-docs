@@ -1,20 +1,20 @@
 ---
 title: Resourcing
-description: "Recommended CPU / RAM / Disk to run Danswer"
+description: "Recommended CPU / RAM / Disk to run Onyx"
 icon: "desktop"
 ---
 
 ## Running Locally
 
-When running locally through Docker, we recommend making at least 4vCPU cores and 10GB of RAM available to Docker 
+When running locally through Docker, we recommend making at least 4vCPU cores and 10GB of RAM available to Docker
 (16GB is preferred). This can be controlled in the **Resources** section of the Docker Desktop settings menu.
 
 ## Single Cloud Instance
 
 We generally recommend setting everything up on a single instance
 (e.g. an AWS EC2 instance, a Google Compute Engine instance, an Azure VM, etc.) via Docker Compose as it's
-the simplest way to get started. For a step-by-step guide on how to do this, checkout our 
-[EC2 deployment guide](https://docs.danswer.dev/production/aws/ec2).
+the simplest way to get started. For a step-by-step guide on how to do this, checkout our
+[EC2 deployment guide](https://docs.onyx.app/production/aws/ec2).
 
 For most use cases a single reasonably sized instance should be more than enough to guarantee excellent
 performance. A single instance should be able to effectively serve a small-medium sized organization
@@ -24,16 +24,16 @@ If you go with this approach, we recommend:
 
 - **CPU:** >= 4 vCPU cores (we recommend 8 vCPU cores if possible)
 - **Memory:** >= 10 GB of RAM (for best performance, 16 is recommended)
-    - Note: If you are switching embedding models, you will need >= 11 GB RAM as both sets of models need
+  - Note: If you are switching embedding models, you will need >= 11 GB RAM as both sets of models need
     to be loaded in simultaneously
 - **Disk:** >= 50 GB + ~2.5x the size of the indexed documents. Disk is generally very cheap, so
   we would recommend getting extra disk beyond this recommendation to be safe.
   - Note: Vespa does not allow writes when disk usage is >75%, so make sure to always have some headroom here
-  - Note: old, unused docker images often take up a bunch of space when performing frequent upgrades of Danswer.
-  - Note: Vespa, used by Danswer for document indexing, requires Haswell (2013) or later CPUs. For older CPUs, use the `vespaengine/vespa-generic-intel-x86_64` image in your `docker-compose.yml`. This generic image is slower but ensures compatibility. For details, see [Vespa CPU Support](https://docs.vespa.ai/en/cpu-support.html).
-  To clean up these unused images, run: `docker system prune --all`.
+  - Note: old, unused docker images often take up a bunch of space when performing frequent upgrades of Onyx.
+  - Note: Vespa, used by Onyx for document indexing, requires Haswell (2013) or later CPUs. For older CPUs, use the `vespaengine/vespa-generic-intel-x86_64` image in your `docker-compose.yml`. This generic image is slower but ensures compatibility. For details, see [Vespa CPU Support](https://docs.vespa.ai/en/cpu-support.html).
+    To clean up these unused images, run: `docker system prune --all`.
 
-For reference, we have chosen to give each Danswer Cloud customer a `m7g.xlarge` instance by default,
+For reference, we have chosen to give each Onyx Cloud customer a `m7g.xlarge` instance by default,
 which has 4vCPU cores + 16GB of RAM + 200GB of disk space. We're comfortable using 4vCPU cores in a
 production setting since we have dedicated GPU instances that run the embedding / cross-encoder models.
 If you do not plan on setting that up, we would recommend going with 8vCPU cores (if possible) for a
@@ -41,7 +41,7 @@ production deployment.
 
 ## Kubernetes / AWS ECS
 
-If you prefer to give each component it's own dedicated resources for more efficient 
+If you prefer to give each component it's own dedicated resources for more efficient
 scaling, we recommend giving each container access to at least the following resources:
 
 `api_server` - 1 CPU, 2Gi Memory
@@ -52,11 +52,9 @@ scaling, we recommend giving each container access to at least the following res
 
 `postgres` - 500m CPU, 2Gi Memory
 
-`vespa` - >=4 CPU, >= 4Gi Memory. This is the bare minimum, and we would generally recommend 
-higher than this. The resources required here also scales linearly with the number of documents indexed. 
-For reference, with 50GB of documents, we would generally recommend at least 10 CPU, 20Gi Memory + 
+`vespa` - >=4 CPU, >= 4Gi Memory. This is the bare minimum, and we would generally recommend
+higher than this. The resources required here also scales linearly with the number of documents indexed.
+For reference, with 50GB of documents, we would generally recommend at least 10 CPU, 20Gi Memory +
 tuning the `VESPA_SEARCHER_THREADS` environment variable.
 
 `nginx` - 250m CPU, 128Mi Memory
-
-

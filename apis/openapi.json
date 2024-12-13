@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Danswer Backend",
+    "title": "Onyx Backend",
     "version": "0.3-dev"
   },
   "paths": {
@@ -3984,11 +3984,11 @@
         }
       }
     },
-    "/danswer-api/doc-ingestion": {
+    "/onyx-api/doc-ingestion": {
       "post": {
         "summary": "Document Ingestion",
         "description": "Currently only attaches docs to existing connectors (cc-pairs).\nOr to the default ingestion connector that is accessible to all users\n\nThings to note:\n- The document id if not provided is automatically generated from the semantic identifier\n  so if the document source type etc is updated, it won't create a duplicate",
-        "operationId": "document_ingestion_danswer_api_doc_ingestion_post",
+        "operationId": "document_ingestion_onyx_api_doc_ingestion_post",
         "requestBody": {
           "content": {
             "application/json": {
@@ -4063,9 +4063,7 @@
     },
     "/auth/oauth/authorize": {
       "get": {
-        "tags": [
-          "auth"
-        ],
+        "tags": ["auth"],
         "summary": "Oauth:Google.Database.Authorize",
         "operationId": "oauth_google_database_authorize_auth_oauth_authorize_get",
         "parameters": [
@@ -4108,9 +4106,7 @@
     },
     "/auth/oauth/callback": {
       "get": {
-        "tags": [
-          "auth"
-        ],
+        "tags": ["auth"],
         "summary": "Oauth:Google.Database.Callback",
         "description": "The response varies based on the authentication backend used.",
         "operationId": "oauth_google_database_callback_auth_oauth_callback_get",
@@ -4197,9 +4193,7 @@
     },
     "/auth/logout": {
       "post": {
-        "tags": [
-          "auth"
-        ],
+        "tags": ["auth"],
         "summary": "Auth:Database.Logout",
         "operationId": "auth_database_logout_auth_logout_post",
         "responses": {
@@ -4931,10 +4925,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "document_id",
-          "semantic_identifier"
-        ],
+        "required": ["document_id", "semantic_identifier"],
         "title": "AbridgedSearchDoc",
         "description": "A subset of the info present in `SearchDoc`"
       },
@@ -4949,10 +4940,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "query",
-          "filters"
-        ],
+        "required": ["query", "filters"],
         "title": "AdminSearchRequest"
       },
       "AdminSearchResponse": {
@@ -4966,9 +4954,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "documents"
-        ],
+        "required": ["documents"],
         "title": "AdminSearchResponse"
       },
       "ApiKey": {
@@ -4979,9 +4965,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "api_key"
-        ],
+        "required": ["api_key"],
         "title": "ApiKey"
       },
       "ApiKeyDescriptor": {
@@ -5005,11 +4989,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "api_key_id",
-          "api_key_display",
-          "user_id"
-        ],
+        "required": ["api_key_id", "api_key_display", "user_id"],
         "title": "ApiKeyDescriptor"
       },
       "AuthStatus": {
@@ -5020,20 +5000,12 @@
           }
         },
         "type": "object",
-        "required": [
-          "authenticated"
-        ],
+        "required": ["authenticated"],
         "title": "AuthStatus"
       },
       "AuthType": {
         "type": "string",
-        "enum": [
-          "disabled",
-          "basic",
-          "google_oauth",
-          "oidc",
-          "saml"
-        ],
+        "enum": ["disabled", "basic", "google_oauth", "oidc", "saml"],
         "title": "AuthType",
         "description": "An enumeration."
       },
@@ -5048,10 +5020,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "auth_type",
-          "requires_verification"
-        ],
+        "required": ["auth_type", "requires_verification"],
         "title": "AuthTypeResponse"
       },
       "AuthUrl": {
@@ -5062,9 +5031,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "auth_url"
-        ],
+        "required": ["auth_url"],
         "title": "AuthUrl"
       },
       "BaseFilters": {
@@ -5113,11 +5080,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "docs_indexed",
-          "has_successful_run",
-          "source"
-        ],
+        "required": ["docs_indexed", "has_successful_run", "source"],
         "title": "BasicCCPairInfo"
       },
       "BasicCreateChatMessageRequest": {
@@ -5146,10 +5109,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "chat_session_id",
-          "message"
-        ],
+        "required": ["chat_session_id", "message"],
         "title": "BasicCreateChatMessageRequest",
         "description": "Before creating messages, be sure to create a chat_session and get an id\nNote, for simplicity this option only allows for a single linear chain of messages"
       },
@@ -5192,9 +5152,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "files"
-        ],
+        "required": ["files"],
         "title": "Body_upload_files_manage_admin_connector_file_upload_post"
       },
       "BoostDoc": {
@@ -5221,13 +5179,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "document_id",
-          "semantic_id",
-          "link",
-          "boost",
-          "hidden"
-        ],
+        "required": ["document_id", "semantic_id", "link", "boost", "hidden"],
         "title": "BoostDoc"
       },
       "BoostUpdateRequest": {
@@ -5242,10 +5194,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "document_id",
-          "boost"
-        ],
+        "required": ["document_id", "boost"],
         "title": "BoostUpdateRequest"
       },
       "CCPairFullInfo": {
@@ -5319,15 +5268,11 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "well_answered_postfilter"
-                  ]
+                  "enum": ["well_answered_postfilter"]
                 },
                 {
                   "type": "string",
-                  "enum": [
-                    "questionmark_prefilter"
-                  ]
+                  "enum": ["questionmark_prefilter"]
                 }
               ]
             },
@@ -5343,9 +5288,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "channel_names"
-        ],
+        "required": ["channel_names"],
         "title": "ChannelConfig"
       },
       "ChatBasicResponse": {
@@ -5389,9 +5332,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "chat_message_id"
-        ],
+        "required": ["chat_message_id"],
         "title": "ChatFeedbackRequest"
       },
       "ChatMessageDetail": {
@@ -5436,12 +5377,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "message_id",
-          "message",
-          "message_type",
-          "time_sent"
-        ],
+        "required": ["message_id", "message", "message_type", "time_sent"],
         "title": "ChatMessageDetail"
       },
       "ChatMessageIdentifier": {
@@ -5452,9 +5388,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "message_id"
-        ],
+        "required": ["message_id"],
         "title": "ChatMessageIdentifier"
       },
       "ChatRenameRequest": {
@@ -5469,9 +5403,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "chat_session_id"
-        ],
+        "required": ["chat_session_id"],
         "title": "ChatRenameRequest"
       },
       "ChatSessionCreationRequest": {
@@ -5536,12 +5468,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "name",
-          "persona_id",
-          "time_created"
-        ],
+        "required": ["id", "name", "persona_id", "time_created"],
         "title": "ChatSessionDetails"
       },
       "ChatSessionSnapshot": {
@@ -5572,11 +5499,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "messages",
-          "time_created"
-        ],
+        "required": ["id", "messages", "time_created"],
         "title": "ChatSessionSnapshot"
       },
       "ChatSessionsResponse": {
@@ -5590,9 +5513,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "sessions"
-        ],
+        "required": ["sessions"],
         "title": "ChatSessionsResponse"
       },
       "CheckDocSetPublicRequest": {
@@ -5606,9 +5527,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "document_set_ids"
-        ],
+        "required": ["document_set_ids"],
         "title": "CheckDocSetPublicRequest"
       },
       "CheckDocSetPublicResponse": {
@@ -5619,9 +5538,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "is_public"
-        ],
+        "required": ["is_public"],
         "title": "CheckDocSetPublicResponse"
       },
       "ChunkInfo": {
@@ -5636,10 +5553,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "content",
-          "num_tokens"
-        ],
+        "required": ["content", "num_tokens"],
         "title": "ChunkInfo"
       },
       "CitationInfo": {
@@ -5654,10 +5568,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "citation_num",
-          "document_id"
-        ],
+        "required": ["citation_num", "document_id"],
         "title": "CitationInfo"
       },
       "ConnectorBase": {
@@ -5713,11 +5624,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "connector",
-          "credential"
-        ],
+        "required": ["id", "connector", "credential"],
         "title": "ConnectorCredentialPairDescriptor"
       },
       "ConnectorCredentialPairIdentifier": {
@@ -5732,10 +5639,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "connector_id",
-          "credential_id"
-        ],
+        "required": ["connector_id", "credential_id"],
         "title": "ConnectorCredentialPairIdentifier"
       },
       "ConnectorCredentialPairMetadata": {
@@ -5750,9 +5654,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "is_public"
-        ],
+        "required": ["is_public"],
         "title": "ConnectorCredentialPairMetadata"
       },
       "ConnectorIndexingStatus": {
@@ -5918,10 +5820,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "chat_session_id",
-          "message"
-        ],
+        "required": ["chat_session_id", "message"],
         "title": "CreateChatMessageRequest",
         "description": "Before creating messages, be sure to create a chat_session and get an id"
       },
@@ -5933,9 +5832,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "chat_session_id"
-        ],
+        "required": ["chat_session_id"],
         "title": "CreateChatSessionID"
       },
       "CreatePersonaRequest": {
@@ -6069,10 +5966,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "credential_json",
-          "admin_public"
-        ],
+        "required": ["credential_json", "admin_public"],
         "title": "CredentialBase"
       },
       "CredentialSnapshot": {
@@ -6115,7 +6009,7 @@
         ],
         "title": "CredentialSnapshot"
       },
-      "DanswerContext": {
+      "OnyxContext": {
         "properties": {
           "content": {
             "type": "string",
@@ -6135,31 +6029,24 @@
           }
         },
         "type": "object",
-        "required": [
-          "content",
-          "document_id",
-          "semantic_identifier",
-          "blurb"
-        ],
-        "title": "DanswerContext"
+        "required": ["content", "document_id", "semantic_identifier", "blurb"],
+        "title": "OnyxContext"
       },
-      "DanswerContexts": {
+      "OnyxContexts": {
         "properties": {
           "contexts": {
             "items": {
-              "$ref": "#/components/schemas/DanswerContext"
+              "$ref": "#/components/schemas/OnyxContext"
             },
             "type": "array",
             "title": "Contexts"
           }
         },
         "type": "object",
-        "required": [
-          "contexts"
-        ],
-        "title": "DanswerContexts"
+        "required": ["contexts"],
+        "title": "OnyxContexts"
       },
-      "DanswerQuote": {
+      "OnyxQuote": {
         "properties": {
           "quote": {
             "type": "string",
@@ -6194,23 +6081,21 @@
           "semantic_identifier",
           "blurb"
         ],
-        "title": "DanswerQuote"
+        "title": "OnyxQuote"
       },
-      "DanswerQuotes": {
+      "OnyxQuotes": {
         "properties": {
           "quotes": {
             "items": {
-              "$ref": "#/components/schemas/DanswerQuote"
+              "$ref": "#/components/schemas/OnyxQuote"
             },
             "type": "array",
             "title": "Quotes"
           }
         },
         "type": "object",
-        "required": [
-          "quotes"
-        ],
-        "title": "DanswerQuotes"
+        "required": ["quotes"],
+        "title": "OnyxQuotes"
       },
       "DeletionAttemptSnapshot": {
         "properties": {
@@ -6227,11 +6112,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "connector_id",
-          "credential_id",
-          "status"
-        ],
+        "required": ["connector_id", "credential_id", "status"],
         "title": "DeletionAttemptSnapshot"
       },
       "DirectQARequest": {
@@ -6266,10 +6147,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "messages",
-          "persona_id"
-        ],
+        "required": ["messages", "persona_id"],
         "title": "DirectQARequest"
       },
       "DisplayPriorityRequest": {
@@ -6283,9 +6161,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "display_priority_map"
-        ],
+        "required": ["display_priority_map"],
         "title": "DisplayPriorityRequest"
       },
       "DocumentBase": {
@@ -6355,13 +6231,9 @@
           }
         },
         "type": "object",
-        "required": [
-          "sections",
-          "semantic_identifier",
-          "metadata"
-        ],
+        "required": ["sections", "semantic_identifier", "metadata"],
         "title": "DocumentBase",
-        "description": "Used for Danswer ingestion api, the ID is inferred before use if not provided"
+        "description": "Used for Onyx ingestion api, the ID is inferred before use if not provided"
       },
       "DocumentInfo": {
         "properties": {
@@ -6375,10 +6247,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "num_chunks",
-          "num_tokens"
-        ],
+        "required": ["num_chunks", "num_tokens"],
         "title": "DocumentInfo"
       },
       "DocumentSearchRequest": {
@@ -6405,11 +6274,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "message",
-          "search_type",
-          "retrieval_options"
-        ],
+        "required": ["message", "search_type", "retrieval_options"],
         "title": "DocumentSearchRequest"
       },
       "DocumentSet": {
@@ -6472,11 +6337,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "name",
-          "description",
-          "cc_pair_ids"
-        ],
+        "required": ["name", "description", "cc_pair_ids"],
         "title": "DocumentSetCreationRequest"
       },
       "DocumentSetUpdateRequest": {
@@ -6498,11 +6359,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "description",
-          "cc_pair_ids"
-        ],
+        "required": ["id", "description", "cc_pair_ids"],
         "title": "DocumentSetUpdateRequest"
       },
       "DocumentSource": {
@@ -6566,11 +6423,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "model_name",
-          "model_dim",
-          "normalize"
-        ],
+        "required": ["model_name", "model_dim", "normalize"],
         "title": "EmbeddingModelDetail"
       },
       "ErrorModel": {
@@ -6591,9 +6444,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "detail"
-        ],
+        "required": ["detail"],
         "title": "ErrorModel"
       },
       "FileUploadResponse": {
@@ -6607,9 +6458,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "file_paths"
-        ],
+        "required": ["file_paths"],
         "title": "FileUploadResponse"
       },
       "FullModelVersionResponse": {
@@ -6624,9 +6473,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "current_model_name"
-        ],
+        "required": ["current_model_name"],
         "title": "FullModelVersionResponse"
       },
       "GoogleAppCredentials": {
@@ -6636,9 +6483,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "web"
-        ],
+        "required": ["web"],
         "title": "GoogleAppCredentials"
       },
       "GoogleAppWebCredentials": {
@@ -6831,9 +6676,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "query"
-        ],
+        "required": ["query"],
         "title": "GptSearchRequest"
       },
       "GptSearchResponse": {
@@ -6847,9 +6690,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "matching_document_chunks"
-        ],
+        "required": ["matching_document_chunks"],
         "title": "GptSearchResponse"
       },
       "HTTPValidationError": {
@@ -6883,9 +6724,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "values"
-        ],
+        "required": ["values"],
         "title": "HelperResponse"
       },
       "HiddenUpdateRequest": {
@@ -6900,10 +6739,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "document_id",
-          "hidden"
-        ],
+        "required": ["document_id", "hidden"],
         "title": "HiddenUpdateRequest"
       },
       "IdReturn": {
@@ -6914,9 +6750,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "title": "IdReturn"
       },
       "IndexAttemptSnapshot": {
@@ -6969,12 +6803,7 @@
       },
       "IndexingStatus": {
         "type": "string",
-        "enum": [
-          "not_started",
-          "in_progress",
-          "success",
-          "failed"
-        ],
+        "enum": ["not_started", "in_progress", "success", "failed"],
         "title": "IndexingStatus",
         "description": "An enumeration."
       },
@@ -7007,9 +6836,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "document"
-        ],
+        "required": ["document"],
         "title": "IngestionDocument"
       },
       "IngestionResult": {
@@ -7024,19 +6851,12 @@
           }
         },
         "type": "object",
-        "required": [
-          "document_id",
-          "already_existed"
-        ],
+        "required": ["document_id", "already_existed"],
         "title": "IngestionResult"
       },
       "InputType": {
         "type": "string",
-        "enum": [
-          "load_state",
-          "poll",
-          "event"
-        ],
+        "enum": ["load_state", "poll", "event"],
         "title": "InputType",
         "description": "An enumeration."
       },
@@ -7048,9 +6868,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "is_visible"
-        ],
+        "required": ["is_visible"],
         "title": "IsVisibleRequest"
       },
       "MaxSelectedDocumentTokens": {
@@ -7061,9 +6879,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "max_tokens"
-        ],
+        "required": ["max_tokens"],
         "title": "MaxSelectedDocumentTokens"
       },
       "MessageSnapshot": {
@@ -7092,21 +6908,12 @@
           }
         },
         "type": "object",
-        "required": [
-          "message",
-          "message_type",
-          "documents",
-          "time_created"
-        ],
+        "required": ["message", "message_type", "documents", "time_created"],
         "title": "MessageSnapshot"
       },
       "MessageType": {
         "type": "string",
-        "enum": [
-          "system",
-          "user",
-          "assistant"
-        ],
+        "enum": ["system", "user", "assistant"],
         "title": "MessageType",
         "description": "An enumeration."
       },
@@ -7128,9 +6935,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "authorization_url"
-        ],
+        "required": ["authorization_url"],
         "title": "OAuth2AuthorizeResponse"
       },
       "ObjectCreationIdResponse": {
@@ -7148,9 +6953,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "title": "ObjectCreationIdResponse"
       },
       "OneShotQAResponse": {
@@ -7164,7 +6967,7 @@
             "title": "Rephrase"
           },
           "quotes": {
-            "$ref": "#/components/schemas/DanswerQuotes"
+            "$ref": "#/components/schemas/OnyxQuotes"
           },
           "citations": {
             "items": {
@@ -7197,7 +7000,7 @@
             "title": "Chat Message Id"
           },
           "contexts": {
-            "$ref": "#/components/schemas/DanswerContexts"
+            "$ref": "#/components/schemas/OnyxContexts"
           }
         },
         "type": "object",
@@ -7205,11 +7008,7 @@
       },
       "OptionalSearchSetting": {
         "type": "string",
-        "enum": [
-          "always",
-          "never",
-          "auto"
-        ],
+        "enum": ["always", "never", "auto"],
         "title": "OptionalSearchSetting",
         "description": "An enumeration."
       },
@@ -7357,9 +7156,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "final_prompt_template"
-        ],
+        "required": ["final_prompt_template"],
         "title": "PromptTemplateResponse"
       },
       "QADocsResponse": {
@@ -7398,18 +7195,12 @@
           }
         },
         "type": "object",
-        "required": [
-          "top_documents",
-          "recency_bias_multiplier"
-        ],
+        "required": ["top_documents", "recency_bias_multiplier"],
         "title": "QADocsResponse"
       },
       "QAFeedbackType": {
         "type": "string",
-        "enum": [
-          "like",
-          "dislike"
-        ],
+        "enum": ["like", "dislike"],
         "title": "QAFeedbackType",
         "description": "An enumeration."
       },
@@ -7434,20 +7225,12 @@
           }
         },
         "type": "object",
-        "required": [
-          "total_queries",
-          "total_likes",
-          "total_dislikes",
-          "date"
-        ],
+        "required": ["total_queries", "total_likes", "total_dislikes", "date"],
         "title": "QueryAnalyticsResponse"
       },
       "QueryFlow": {
         "type": "string",
-        "enum": [
-          "search",
-          "question-answer"
-        ],
+        "enum": ["search", "question-answer"],
         "title": "QueryFlow",
         "description": "An enumeration."
       },
@@ -7463,20 +7246,12 @@
           }
         },
         "type": "object",
-        "required": [
-          "reasoning",
-          "answerable"
-        ],
+        "required": ["reasoning", "answerable"],
         "title": "QueryValidationResponse"
       },
       "RecencyBiasSetting": {
         "type": "string",
-        "enum": [
-          "favor_recent",
-          "base_decay",
-          "no_decay",
-          "auto"
-        ],
+        "enum": ["favor_recent", "base_decay", "no_decay", "auto"],
         "title": "RecencyBiasSetting",
         "description": "An enumeration."
       },
@@ -7488,9 +7263,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "new_name"
-        ],
+        "required": ["new_name"],
         "title": "RenameChatSessionResponse"
       },
       "RetrievalDetails": {
@@ -7538,9 +7311,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "top_documents"
-        ],
+        "required": ["top_documents"],
         "title": "RetrievalDocs"
       },
       "RunConnectorRequest": {
@@ -7563,9 +7334,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "connector_id"
-        ],
+        "required": ["connector_id"],
         "title": "RunConnectorRequest"
       },
       "SavedSearchDoc": {
@@ -7787,22 +7556,12 @@
           }
         },
         "type": "object",
-        "required": [
-          "message_id",
-          "document_id",
-          "document_rank",
-          "click"
-        ],
+        "required": ["message_id", "document_id", "document_rank", "click"],
         "title": "SearchFeedbackRequest"
       },
       "SearchFeedbackType": {
         "type": "string",
-        "enum": [
-          "endorse",
-          "reject",
-          "hide",
-          "unhide"
-        ],
+        "enum": ["endorse", "reject", "hide", "unhide"],
         "title": "SearchFeedbackType",
         "description": "An enumeration."
       },
@@ -7824,19 +7583,12 @@
           }
         },
         "type": "object",
-        "required": [
-          "top_documents",
-          "llm_indices"
-        ],
+        "required": ["top_documents", "llm_indices"],
         "title": "SearchResponse"
       },
       "SearchType": {
         "type": "string",
-        "enum": [
-          "keyword",
-          "semantic",
-          "hybrid"
-        ],
+        "enum": ["keyword", "semantic", "hybrid"],
         "title": "SearchType",
         "description": "An enumeration."
       },
@@ -7852,9 +7604,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "text"
-        ],
+        "required": ["text"],
         "title": "Section"
       },
       "SimpleDoc": {
@@ -7899,9 +7649,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "query"
-        ],
+        "required": ["query"],
         "title": "SimpleQueryRequest"
       },
       "SlackBotConfig": {
@@ -7921,11 +7669,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "id",
-          "channel_config",
-          "response_type"
-        ],
+        "required": ["id", "channel_config", "response_type"],
         "title": "SlackBotConfig"
       },
       "SlackBotConfigCreationRequest": {
@@ -7971,15 +7715,11 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "well_answered_postfilter"
-                  ]
+                  "enum": ["well_answered_postfilter"]
                 },
                 {
                   "type": "string",
-                  "enum": [
-                    "questionmark_prefilter"
-                  ]
+                  "enum": ["questionmark_prefilter"]
                 }
               ]
             },
@@ -7999,18 +7739,12 @@
           }
         },
         "type": "object",
-        "required": [
-          "channel_names",
-          "response_type"
-        ],
+        "required": ["channel_names", "response_type"],
         "title": "SlackBotConfigCreationRequest"
       },
       "SlackBotResponseType": {
         "type": "string",
-        "enum": [
-          "quotes",
-          "citations"
-        ],
+        "enum": ["quotes", "citations"],
         "title": "SlackBotResponseType",
         "description": "An enumeration."
       },
@@ -8026,10 +7760,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "bot_token",
-          "app_token"
-        ],
+        "required": ["bot_token", "app_token"],
         "title": "SlackBotTokens"
       },
       "SourceTag": {
@@ -8047,11 +7778,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "tag_key",
-          "tag_value",
-          "source"
-        ],
+        "required": ["tag_key", "tag_value", "source"],
         "title": "SourceTag"
       },
       "StarterMessage": {
@@ -8070,11 +7797,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "name",
-          "description",
-          "message"
-        ],
+        "required": ["name", "description", "message"],
         "title": "StarterMessage"
       },
       "StatusResponse": {
@@ -8092,9 +7815,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "title": "StatusResponse"
       },
       "StatusResponse_int_": {
@@ -8113,9 +7834,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "title": "StatusResponse[int]"
       },
       "StatusResponse_list_int__": {
@@ -8137,9 +7856,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "title": "StatusResponse[list[int]]"
       },
       "Tag": {
@@ -8154,10 +7871,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "tag_key",
-          "tag_value"
-        ],
+        "required": ["tag_key", "tag_value"],
         "title": "Tag"
       },
       "TagResponse": {
@@ -8171,19 +7885,12 @@
           }
         },
         "type": "object",
-        "required": [
-          "tags"
-        ],
+        "required": ["tags"],
         "title": "TagResponse"
       },
       "TaskStatus": {
         "type": "string",
-        "enum": [
-          "PENDING",
-          "STARTED",
-          "SUCCESS",
-          "FAILURE"
-        ],
+        "enum": ["PENDING", "STARTED", "SUCCESS", "FAILURE"],
         "title": "TaskStatus",
         "description": "An enumeration."
       },
@@ -8207,9 +7914,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "message"
-        ],
+        "required": ["message"],
         "title": "ThreadMessage"
       },
       "UserAnalyticsResponse": {
@@ -8225,10 +7930,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "total_active_users",
-          "date"
-        ],
+        "required": ["total_active_users", "date"],
         "title": "UserAnalyticsResponse"
       },
       "UserByEmail": {
@@ -8239,9 +7941,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "user_email"
-        ],
+        "required": ["user_email"],
         "title": "UserByEmail"
       },
       "UserGroup": {
@@ -8311,11 +8011,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "name",
-          "user_ids",
-          "cc_pair_ids"
-        ],
+        "required": ["name", "user_ids", "cc_pair_ids"],
         "title": "UserGroupCreate"
       },
       "UserGroupUpdate": {
@@ -8337,10 +8033,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "user_ids",
-          "cc_pair_ids"
-        ],
+        "required": ["user_ids", "cc_pair_ids"],
         "title": "UserGroupUpdate"
       },
       "UserInfo": {
@@ -8410,19 +8103,13 @@
           }
         },
         "type": "object",
-        "required": [
-          "email",
-          "role"
-        ],
+        "required": ["email", "role"],
         "title": "UserRead",
         "description": "Base User model."
       },
       "UserRole": {
         "type": "string",
-        "enum": [
-          "basic",
-          "admin"
-        ],
+        "enum": ["basic", "admin"],
         "title": "UserRole",
         "description": "An enumeration."
       },
@@ -8434,9 +8121,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "role"
-        ],
+        "required": ["role"],
         "title": "UserRoleResponse"
       },
       "ValidationError": {
@@ -8465,11 +8150,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
+        "required": ["loc", "msg", "type"],
         "title": "ValidationError"
       },
       "VersionResponse": {
@@ -8480,9 +8161,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "backend_version"
-        ],
+        "required": ["backend_version"],
         "title": "VersionResponse"
       }
     },
