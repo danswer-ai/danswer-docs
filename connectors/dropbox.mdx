@@ -1,33 +1,33 @@
 ---
 title: Dropbox Connector (Beta)
-description: 'Access knowledge from Dropbox'
+description: "Access knowledge from Dropbox"
 ---
 
 ## How it works
-The Dropbox connector ingests all documents from your Dropbox account into Danswer.
+
+The Dropbox connector ingests all documents from your Dropbox account into Onyx.
 
 The connector recursively pulls all files from the root directory of your Dropbox account. It is currently not possible to pull files only from specific directories.
 
 The connector will only pull once upon initialization. If you would like to pull more documents, you must generate a new access token (step 6 below), put that token into the connector, and re-initialize the connector.
 
 ## Setting up
+
 ### Authorization
+
     1. Head over to https://www.dropbox.com/developers/apps and click the `Create app` button on the top right
-    2. Select `Scoped access` and `Full Dropbox` as the type of access. Give your app a name like 'Danswer Connector' and click `Create app`
-![DropboxStep1](/images/connectors/dropbox/dropbox-connector-1.png)
-    3. Click on the `Permissions` tab
-![DropboxStep2](/images/connectors/dropbox/dropbox-connector-2.png)
-    4. Check the `files.content.read` and `sharing.write` permissions so the files can be read and links for the documents can be created
-![DropboxStep3](/images/connectors/dropbox/dropbox-connector-3.png)
-    5. Click `Submit` to save the changes
-![DropboxStep4](/images/connectors/dropbox/dropbox-connector-4.png)
-    6. Navigate to the `Settings` tab and scroll down to the `OAuth 2` section. Click `Generate` to generate an access token
-    <Warning>You must complete steps 3-5 before generating an access token. Changing permissions will not affect permissions on existing access tokens, and Danswer will be unable to index your Dropbox</Warning>
-![DropboxStep5](/images/connectors/dropbox/dropbox-connector-5.png)
-    7. Copy the access token
-    <Info>Refresh the page if you need to regenerate your access token</Info>
+    2. Select `Scoped access` and `Full Dropbox` as the type of access. Give your app a name like 'Onyx Connector' and click `Create app`
+
+![DropboxStep1](/images/connectors/dropbox/dropbox-connector-1.png) 3. Click on the `Permissions` tab
+![DropboxStep2](/images/connectors/dropbox/dropbox-connector-2.png) 4. Check the `files.content.read` and `sharing.write` permissions so the files can be read and links for the documents can be created
+![DropboxStep3](/images/connectors/dropbox/dropbox-connector-3.png) 5. Click `Submit` to save the changes
+![DropboxStep4](/images/connectors/dropbox/dropbox-connector-4.png) 6. Navigate to the `Settings` tab and scroll down to the `OAuth 2` section. Click `Generate` to generate an access token
+<Warning>You must complete steps 3-5 before generating an access token. Changing permissions will not affect permissions on existing access tokens, and Onyx will be unable to index your Dropbox</Warning>
+![DropboxStep5](/images/connectors/dropbox/dropbox-connector-5.png) 7. Copy the access token
+<Info>Refresh the page if you need to regenerate your access token</Info>
 
 ### Indexing
-    1. In the Danswer UI, navigate to the Admin Dashboard and select the **Dropbox** Connector
+
+    1. In the Onyx UI, navigate to the Admin Dashboard and select the **Dropbox** Connector
     2. Provide the access token from the previous step
     3. Click `Connect` to begin indexing your Dropbox files

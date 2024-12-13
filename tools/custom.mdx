@@ -1,14 +1,13 @@
 ---
 title: "Custom Tools"
-description: "How to create custom tools with Danswer"
+description: "How to create custom tools with Onyx"
 ---
 
 First, navigate to the Admin console, and go to the **Tools** tab. Click the **New Tool** button.
 
 Next, specify a OpenAPI 3.0 or OpenAPI 3.1 schema that defines the APIs that you want to make available as part of this tool.
 
-
-Danswer provides dynamic context variables that can be utilized within your OpenAPI definition, enhancing the functionality and context-awareness of your custom tools. These variables are:
+Onyx provides dynamic context variables that can be utilized within your OpenAPI definition, enhancing the functionality and context-awareness of your custom tools. These variables are:
 
 - `CHAT_SESSION_ID`: Replaced with the chat session ID in which the tool call was made.
 
@@ -18,12 +17,12 @@ For example: `/persona/CHAT_SESSION_ID/messages/CHAT_MESSAGE_ID` with `CHAT_SESS
 
 To improve performance:
 
-- Add descriptive `summary`s for each operation (API). 
+- Add descriptive `summary`s for each operation (API).
 - Give each operation a descriptive `operationId`.
 - Add `description`s for parameter.
 
-For example, you could use the following to create a tool that allows an assistant to fetch and create assistants 
-with Danswer:
+For example, you could use the following to create a tool that allows an assistant to fetch and create assistants
+with Onyx:
 
 ```
 {
@@ -31,7 +30,7 @@ with Danswer:
    "info":{
       "version":"1.0.0",
       "title":"Assistants API",
-      "description":"An API for managing assistants within Danswer"
+      "description":"An API for managing assistants within Onyx"
    },
    "servers":[
       {

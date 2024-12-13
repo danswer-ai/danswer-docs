@@ -1,35 +1,34 @@
 ---
 title: System Overview
-description: 'Explanation of different system components and flows'
+description: "Explanation of different system components and flows"
 icon: "sitemap"
 ---
 
-This page discusses how Danswer works from a high level. The aim is to give transparency into our designs.
-That way you can have peace of mind in using Danswer.
+This page discusses how Onyx works from a high level. The aim is to give transparency into our designs.
+That way you can have peace of mind in using Onyx.
 
 Alternatively if you're looking to customize the system or become an open source contributors, this is a great place
 to start.
 
 ## System Architecture
 
-![DanswerArchitecture](/images/system_overview/DanswerArchitecture.png)
+![OnyxArchitecture](/images/system_overview/OnyxArchitecture.png)
 
-Whether deploying Danswer on a single instance or a container orchestration platform, the flow of data is the same.
+Whether deploying Onyx on a single instance or a container orchestration platform, the flow of data is the same.
 Documents are pulled and processed via connectors and then persisted in Vespa/Postgres which run in containers within
 your system.
 
-The only time sensitive data leaves your Danswer setup is when it makes a call to an LLM to generate an answer.
+The only time sensitive data leaves your Onyx setup is when it makes a call to an LLM to generate an answer.
 The communications to the LLM are encrypted. The data persistence at the LLM API depends on the terms of the
 LLM hosting service you are using.
 
-We also note that Danswer has some very limited and anonymous telemetry to help us improve the system by identifying
+We also note that Onyx has some very limited and anonymous telemetry to help us improve the system by identifying
 bottlenecks and flaky data connectors.
 You can turn off the telemetry with by setting the DISABLE_TELEMETRY env variable to True.
 
-
 ## Embedding Flow
 
-![DanswerEmbeddingFlow](/images/system_overview/DanswerEmbeddingFlow.png)
+![OnyxEmbeddingFlow](/images/system_overview/OnyxEmbeddingFlow.png)
 
 Each document is split into smaller sections called "Chunks".
 
@@ -38,17 +37,16 @@ relevant sections of the document. Additionally this is significantly more cost 
 charge per token. Finally by embedding chunks rather than full documents, we are able to retain more detail as each
 vector embedding is only capable of encoding a limited amount of information.
 
-The addition of mini-chunks takes this concept even further. By embedding at different sizes, Danswer can retrieve both
+The addition of mini-chunks takes this concept even further. By embedding at different sizes, Onyx can retrieve both
 high level context and details. Mini-chunks can also be turned on/off via environment variables as generating
 multiple vectors per chunk can slow down document indexing if deployed on less capable hardware.
 
 In choosing our embedding model, we use the latest state-of-the-art biencoder that is small enough to run on CPU
 while maintaining subsecond document retrieval times.
 
-
 ## Query Flow
 
-![DanswerQueryFlow](/images/system_overview/DanswerQueryFlow.png)
+![OnyxQueryFlow](/images/system_overview/OnyxQueryFlow.png)
 
 This flow is often updated as we're constantly striving to push the capabilities of the retrieval pipeline with the
 most recent advancements coming out of research and the opensource community. Also note that many of the parameters of

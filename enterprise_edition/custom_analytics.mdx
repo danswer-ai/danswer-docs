@@ -1,23 +1,23 @@
 ---
 title: "Bring Your Own Analytics"
-description: 'Add your own analytics provider to Danswer'
+description: "Add your own analytics provider to Onyx"
 ---
 
-As part of the Enterprise Edition, we provide the ability to bring your own analytics provider. 
+As part of the Enterprise Edition, we provide the ability to bring your own analytics provider.
 This allows you to get session replays, usage metrics, etc. in the platform you're alraedy familiar with.
 
 To enable this, there are a few steps:
 
-1. Set the `CUSTOM_ANALYTICS_SECRET_KEY` environment variable to some random string (e.g. `2uIfMPVgHCTD57HU`). 
-Make sure you have the value saved temporarily somewhere.
-2. Re-deploy Danswer.
+1. Set the `CUSTOM_ANALYTICS_SECRET_KEY` environment variable to some random string (e.g. `2uIfMPVgHCTD57HU`).
+   Make sure you have the value saved temporarily somewhere.
+2. Re-deploy Onyx.
 3. Go to the `Custom Analytics` tab in the Admin Panel.
-4. Enter in the Javascript snippet provided by your Analytics provider. This snippet would normally be placed within the 
-`<head>` tags at the base of your project. For the `Secret Key`, use the value you saved in step 1.
+4. Enter in the Javascript snippet provided by your Analytics provider. This snippet would normally be placed within the
+   `<head>` tags at the base of your project. For the `Secret Key`, use the value you saved in step 1.
 
 ![Admin](/images/enterprise_edition/custom_analytics/admin-page.png)
 
-For reference, [here](https://posthog.com/docs/product-analytics/installation#option-1-add-the-javascript-snippet-to-your-html-span-classbg-gray-accent-light-darkbg-gray-accent-dark-text-gray-font-semibold-align-middle-text-sm-p-1-roundedrecommendedspan) 
-is the page on the Posthog docs which describes the script referred to above. 
+For reference, [here](https://posthog.com/docs/product-analytics/installation#option-1-add-the-javascript-snippet-to-your-html-span-classbg-gray-accent-light-darkbg-gray-accent-dark-text-gray-font-semibold-align-middle-text-sm-p-1-roundedrecommendedspan)
+is the page on the Posthog docs which describes the script referred to above.
 
-*NOTE*: the `<script>` tag MUST be removed before being copied into the text box. 
+_NOTE_: the `<script>` tag MUST be removed before being copied into the text box.

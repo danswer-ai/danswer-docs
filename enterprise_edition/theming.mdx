@@ -1,9 +1,9 @@
 ---
 title: "Theming"
-description: 'Customize the look of Danswer'
+description: "Customize the look of Onyx"
 ---
 
-As part of the Enterprise Edition, we provide the ability to easily customize the look of Danswer. This comes in two forms:
+As part of the Enterprise Edition, we provide the ability to easily customize the look of Onyx. This comes in two forms:
 
 1. Adding in your own custom application name / logo.
 2. Customizing every color in the UI.
@@ -15,53 +15,52 @@ a name of your choice, as well as an optional logo.
 
 #### Advanced Options
 
-Danswer also has some advanced customization options
+Onyx also has some advanced customization options
 
 1. **Chat Header Content**
    Custom Markdown content that will be displayed as a banner at the top of the Chat page.
-   
-  ![Chat Header](/images/customization/chat_header.png)
+
+![Chat Header](/images/customization/chat_header.png)
 
 2. **Popup Header**
    The title for the popup that will be displayed for each user on their initial visit to the application. If left blank AND Custom Popup Content is specified, will use "Welcome to [Application Name]!" where application name is your filled in application name.
-  ![Popup Header](/images/customization/popup_header.png)
-   
+   ![Popup Header](/images/customization/popup_header.png)
 
 3. **Popup Content**
    Custom Markdown content that will be displayed as a popup on initial visit to the application.
-   
-  ![Popup Content](/images/customization/welcome_popup.png)
 
+![Popup Content](/images/customization/welcome_popup.png)
 
 4. **Chat Footer Text**
    Custom Markdown content that will be displayed at the bottom of the Chat page.
-   
-  ![Chat Footer](/images/customization/chat_footer.png)
 
+![Chat Footer](/images/customization/chat_footer.png)
 
 5. **Chat Footer Logotype**
    Add a custom logotype by uploading a new image and clicking the Update button. This logotype is the text-based logo that will be rendered at the bottom right of the chat screen.
-   
-  ![Chat Footer Logotype](/images/customization/chat_logotype.png)
 
+![Chat Footer Logotype](/images/customization/chat_logotype.png)
 
 ### Customizing Colors
 
-Danswer uses [Tailwind CSS](https://tailwindcss.com/) for theming. The color palette is defined in two main files:
+Onyx uses [Tailwind CSS](https://tailwindcss.com/) for theming. The color palette is defined in two main files:
+
 1. `web/tailwind-themes/tailwind.config.js`: This file contains the base Tailwind configuration, including color definitions.
 2. `web/src/app/globals.css`: This file defines CSS variables for colors, which are then used in the Tailwind config.
 
-To customize the color palette of Danswer, you can:
+To customize the color palette of Onyx, you can:
+
 1. Navigate to `web/src/app/globals.css`
 2. Customize the base color palette (for example, create different accent colors, background colors, etc.)
 
 To choose specific colors for a given set of UI elements, you can:
+
 1. Navigate to `web/tailwind-themes/tailwind.config.js`.
 2. Override any values specified in the base `tailwind.config.js` file.
 
 Alternatively, to customize all these colors, you can:
 
-1. Navigate to `web/tailwind-themes`. 
+1. Navigate to `web/tailwind-themes`.
 2. Create a new folder with the name of your organization.
 3. Create a `tailwind.config.js` file in this new folder.
 4. Override any values specified in the base `tailwind.config.js` file.
@@ -83,5 +82,5 @@ module.exports = {
 };
 ```
 
-**NOTE:** for these changes to apply, you will need to build Danswer from source. If testing locally, you will need to restart the 
+**NOTE:** for these changes to apply, you will need to build Onyx from source. If testing locally, you will need to restart the
 NextJS application to apply the changes.

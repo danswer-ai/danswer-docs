@@ -1,25 +1,27 @@
 ---
 title: HubSpot Connector
-description: 'Access the latest Tickets from HubSpot'
+description: "Access the latest Tickets from HubSpot"
 ---
 
 ## How it works
+
 The HubSpot connector pulls in all of the Tickets and their title, content, associated emails and notes.
 If other sources of information such as Knowledge Bases, Documents, etc. are desired, this connector can
-be extended to support those. Reach out to the Danswer team if you need this.
+be extended to support those. Reach out to the Onyx team if you need this.
 
 Tickets are updated every **10** minutes.
 
-
 ## Setting up
+
 ### Authorization
+
     1. Create a Private App Integration (see below).
-![HubSpotApp](/images/connectors/hubspot/HubSpotApp.png)
-    2. Under **Scopes** (top bar), select the `Tickets` scope.
-![HubSpotScope](/images/connectors/hubspot/HubSpotScope.png)
-    3. Copy the Access Token that is shown when the App is created.
+
+![HubSpotApp](/images/connectors/hubspot/HubSpotApp.png) 2. Under **Scopes** (top bar), select the `Tickets` scope.
+![HubSpotScope](/images/connectors/hubspot/HubSpotScope.png) 3. Copy the Access Token that is shown when the App is created.
 
 ### Indexing
+
     1. Navigate to the Admin Dashboard and select the **HubSpot** Connector
     2. In **Step 1**, provide the Access Token from before
     3. Click `Connect` to begin indexing HubSpot Tickets

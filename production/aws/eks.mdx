@@ -1,6 +1,6 @@
 ---
 title: "EKS"
-description: "Setup Danswer on AWS EKS"
+description: "Setup Onyx on AWS EKS"
 ---
 
 ## Prerequisites
@@ -26,7 +26,7 @@ Select defaults for the rest of the forms. Finally, review the complete cluster 
 
 ### Adding Nodes
 
-Next we need to add worker nodes to the cluster. This is where the Danswer services will reside.
+Next we need to add worker nodes to the cluster. This is where the Onyx services will reside.
 
 When the cluster is Active and while viewing the cluster, select the `Compute` tab and then `Add node group`.
 
@@ -115,16 +115,19 @@ kubectl apply -f . -n danswer
 ```
 
 It may take a few minutes for the all the services to come online. To monitor the progress, run the following command:
+
 ```shell
 kubectl -n danswer get pods
 ```
 
 To check the status of the API server (usually the last to come online), run the following command:
+
 ```shell
 kubectl -n danswer get pods | grep api-server | awk '{print $1}' | xargs -I {} kubectl -n danswer logs {} -f
 ```
 
 You can navigate find the nginx load balancer by running the following command and then navigating to the url provided.
+
 ```shell
 kubectl get svc -n danswer | grep nginx-service | awk '{print $4}'
 ```

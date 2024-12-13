@@ -29,9 +29,9 @@ Under OAuth Consent screen select either Internal or External
 
 On the next page:
 
-- Provide an app name (can go with `Danswer`)
-- Provide any email you own (or founders@danswer.ai if you want us to handle questions from your Danswer users)
-- Upload the Danswer logo (or leave blank)
+- Provide an app name (can go with `Onyx`)
+- Provide any email you own (or founders@danswer.ai if you want us to handle questions from your Onyx users)
+- Upload the Onyx logo (or leave blank)
 - The **Developer contact information** can be any email you own (or again, founders@danswer.ai)
 
 ![GoogleApp](/images/google_oauth_setup/GoogleApp.png)
@@ -48,7 +48,7 @@ Still under **APIs & Services**, go to **Credentials** on the left hand bar
 
 Click on **+CREATE CREDENTIALS** and choose `OAuth client ID`
 
-Select `Web application` then call it `Danswer`
+Select `Web application` then call it `Onyx`
 
 Add a `Authorized JavaScript origins` as:
 
@@ -60,7 +60,7 @@ Add a `Authorized redirect URIs` as:
 
 Click **CREATE** and save the Client ID and Client Secret for use in the next section
 
-## Turning on OAuth in Danswer
+## Turning on OAuth in Onyx
 
 OAuth is controlled by 3 environment variables, regardless of deployment choice
 (non-containerized, docker compose, kubernetes). To turn the feature on set:
@@ -68,12 +68,12 @@ OAuth is controlled by 3 environment variables, regardless of deployment choice
 - `AUTH_TYPE=google_oauth`
 - `OAUTH_CLIENT_ID=<your client id from above>`
 - `OAUTH_CLIENT_SECRET=<your client secret from above>`
-- If setting up in production, then: 
+- If setting up in production, then:
   - `WEB_DOMAIN=<your domain including protocol e.g. https://www.danswer.ai>`
 
 ### Non Containerized
 
-Simply set the above environment variables when running the different Danswer processes.
+Simply set the above environment variables when running the different Onyx processes.
 
 - The backend api server uses the 3 environment variables
 - The frontend hits the api server to determine what user authentication setting is configured and serves the relevant pages.

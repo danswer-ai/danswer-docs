@@ -1,12 +1,14 @@
 ---
 title: Jira Connector
-description: 'Access the latest issue and project updates from Jira'
+description: "Access the latest issue and project updates from Jira"
 ---
 
 ## How it works
-The Jira connector pulls in all tickets from the specified projects every **10** minutes. 
+
+The Jira connector pulls in all tickets from the specified projects every **10** minutes.
 
 For every jira issue this connector will pull:
+
 - Title
 - Description
 - Common fields (like assignee, reporter, status etc.)
@@ -14,15 +16,18 @@ For every jira issue this connector will pull:
 - Comments
 
 ## Setting up
+
 ### Authorization
+
     1. **Jira Cloud**: follow the guide described [here](https://docs.searchunify.com/Content/Content-Sources/Atlassian-Jira-Confluence-Authentication-Create-API-Token.htm) to get an access token.
     2. **Jira Server**: follow the guide described [here](https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html) to get a personal access token.
 
 ### Indexing
+
     1. Navigate to the Admin Dashboard and select the **Jira** Connector
     2. Provide credentials
 
-    >#### Cloud 
+    >#### Cloud
     >Provide the **Access Token** and the **Username** it belongs to:
     >![JiraConnectorAuth](/images/connectors/jira/JiraCloudAuth.png)
 
@@ -36,4 +41,4 @@ For every jira issue this connector will pull:
 
 ![JiraIndex](/images/connectors/jira/JiraIndex.png)
 
-    4. Click the `Connect` button! All your Jira tickets in that space will now be pulled into Danswer every **10** minutes.
+    4. Click the `Connect` button! All your Jira tickets in that space will now be pulled into Onyx every **10** minutes.

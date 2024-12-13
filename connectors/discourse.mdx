@@ -1,37 +1,45 @@
 ---
 title: Discourse Connector
-description: 'Access knowledge from your Discourse **Topics**'
+description: "Access knowledge from your Discourse **Topics**"
 ---
 
 ## How it works
-The Discourse connector indexes documents from your Discourse **Topics**. 
+
+The Discourse connector indexes documents from your Discourse **Topics**.
 
 ## Setting up
+
 ### Authorization
+
     1. Log into your Discourse account
         <Info> This Discourse user must have admin priveleges </Info>
     2. Click the **Admin** menu from the home page.
     3. Open the **Advanced** sub-menu and select **API keys**.
 
-<img src="/images/connectors/discourse/discourse_1.gif" width="400" height="auto" alt="NavigateToAPIKeys" title="NavigateToAPIKeys" />
+<img
+  src="/images/connectors/discourse/discourse_1.gif"
+  width="400"
+  height="auto"
+  alt="NavigateToAPIKeys"
+  title="NavigateToAPIKeys"
+/>
 
-    4. Click **New API Key**, name it "Danswer". Select "All Users" for **User Level** and "Read-only" for **Scope**.
+    4. Click **New API Key**, name it "Onyx". Select "All Users" for **User Level** and "Read-only" for **Scope**.
 
 ![FillOutAPIKey](/images/connectors/discourse/discourse_2.gif)
 
-    5. Click **Save**. Copy the key and put it into Danswer.
+    5. Click **Save**. Copy the key and put it into Onyx.
 
 ![CreateAndCopyAPIKey](/images/connectors/discourse/discourse_3.gif)
 
     5. for the API Key Username, enter the username of the Discourse account which has access to the information you'd like to index.
 
 ### Indexing
+
     1. Input a name for a connector (if you plan on creating multiple Discourse connectors, this will be used by you to tell between them)
     2. Provide your Discourse's base url.
 
-![FillOutDanswer](/images/connectors/discourse/discourse_4.gif)
+![FillOutOnyx](/images/connectors/discourse/discourse_4.gif)
 
     3. Enter the **Topics** you wish to index. If left blank, all topics available will be indexed.
     4. Click connector to begin indexing the indicated **topics**.
-
-

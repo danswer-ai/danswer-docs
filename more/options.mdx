@@ -1,19 +1,13 @@
 ---
 title: Additional Options
-description: 'Additional optional use cases'
+description: "Additional optional use cases"
 ---
-
-
 
 ## Force Deletion of Connectors
 
-
-
 If you must delete a connector and related information before the process of waiting for the background jobs to run, you can run a `deletion` script using the instructions that follow.
 
-
 <Warning>This is not default behavior. Use sparingly</Warning>
-
 
 #### How to find a connector ID?
 
@@ -29,34 +23,34 @@ If you must delete a connector and related information before the process of wai
 
 ![Zoomed in Connector ID](/images/more/zoomConnectorID.png)
 
-
 #### Deleting Locally
-
-
 
 1. Gather the ID of the connector you wish to delete.
 
-2. Navigate to the base folder of your Danswer repository.
+2. Navigate to the base folder of your Onyx repository.
 
 3. Run `python3 backend/scripts/force_delete_connector_by_id.py <CONNECTOR_ID>`
 
-#### Deleting in Docker Compose 
+#### Deleting in Docker Compose
 
 Follow these steps to manually and immediately delete a connector and its contents within a container:
 
 1. Ensure your Docker containers are running- you can refer to the [quickstart guide](/quickstart):
+
    ```
    docker compose -f docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate
    ```
 
 2. Identify the `<CONTAINER_ID>` of your API server container. It should contain the string `danswer-api`. You can list all running containers with:
+
    ```
    docker ps -a
    ```
 
-3. Gather the ID `<CONNECTOR_ID>` of the connector you wish to delete. 
+3. Gather the ID `<CONNECTOR_ID>` of the connector you wish to delete.
 
 4. Run the deletion script inside the Docker container:
+
    ```
    docker exec -it <CONTAINER_ID> python scripts/force_delete_connector_by_id.py <CONNECTOR_ID>
    ```
@@ -64,16 +58,17 @@ Follow these steps to manually and immediately delete a connector and its conten
    Replace `<CONTAINER_ID>` with your actual API container ID, and `<CONNECTOR_ID>` with the ID of the connector you want to delete.
 
    For example:
+
    ```
    docker exec -it 92492089ada1 python scripts/force_delete_connector_by_id.py 10
    ```
 
 5. The script will execute inside the container, accessing the necessary resources and performing the deletion.
 
-
 #### Troubleshooting
 
 - If you encounter permission issues, you may need to run the docker-compose command with sudo:
+
   ```
   sudo docker-compose exec <CONTAINER_ID> python /app/scripts/force_delete_connector_by_id.py `CONNECTOR_ID`
   ```

@@ -1,14 +1,17 @@
 ---
 title: Zulip Connector
-description: 'Capture discussions from Zulip Streams and Topics'
+description: "Capture discussions from Zulip Streams and Topics"
 ---
 
 ## How it works
+
 The Zulip connector pulls in all streams and topics according to the permissions assigned to the bot user.
 
 ## Setting up
+
 ### Authorization
-    1. Danswer interfaces with Zulip as a Zulip Bot which is authenticated using the `zuliprc` config format.
+
+    1. Onyx interfaces with Zulip as a Zulip Bot which is authenticated using the `zuliprc` config format.
     For more context directly from Zulip, refer to the following docs:
         - https://zulip.com/api/running-bots
         - https://zulip.com/api/configuring-python-bindings
@@ -20,9 +23,10 @@ The Zulip connector pulls in all streams and topics according to the permissions
 
 ![ZulipRC](/images/connectors/zulip/ZulipRC.png)
 
-    Keep this copied text to provide to Danswer in the next step
+    Keep this copied text to provide to Onyx in the next step
 
 ### Indexing
+
     1. Navigate to the Admin Dashboard and select the **Zulip** Connector
     2. In **Step 1**, paste in the copied `zuliprc` value
     3. Grab your Zulip Realm/URL info, see below:
@@ -31,4 +35,4 @@ The Zulip connector pulls in all streams and topics according to the permissions
 
     4. In **Step 2**, provide the values for the Realm and URL
 
-![DanswerZulipConfig](/images/connectors/zulip/DanswerZulipConfig.png)
+![OnyxZulipConfig](/images/connectors/zulip/OnyxZulipConfig.png)
