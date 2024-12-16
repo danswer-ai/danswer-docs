@@ -1,0 +1,173 @@
+## Setting Up Amazon Aurora PostgreSQL
+
+Follow these steps to set up an Amazon Aurora PostgreSQL cluster with basic configuration.
+
+### 1. Create an Aurora PostgreSQL Cluster
+
+- Navigate to the **Amazon RDS** console.
+- Click on **Create database**.
+- Select **Amazon Aurora** as the engine type.
+- Choose **Aurora PostgreSQL-Compatible Edition**.
+- Select the desired **PostgreSQL version**.
+- Configure the **DB cluster identifier**, **Master username**, and **Master password**.
+- Choose the appropriate **Instance size**, **VPC**, **Subnet group**, **Security group**, and **Availability Zone** as per your requirements.
+- Adjust any additional settings such as backups, maintenance windows, and encryption if needed.
+- Review your configurations and click **Create database** to launch the cluster.
+
+### 2. Configure Database Settings (Optional)
+
+- Modify any advanced settings if necessary.
+- Ensure that your cluster meets your application's requirements.
+
+---
+
+## Enabling IAM Authentication for Aurora PostgreSQL
+
+After setting up your Aurora PostgreSQL cluster, you can enable IAM authentication to enhance security by using AWS IAM credentials for database access.
+
+### 1. Enable IAM Database Authentication
+
+- Navigate to your Aurora cluster in the RDS console.
+- Click on **Modify**.
+- In the **Database authentication** section, enable **IAM database authentication**.
+- Click **Continue** and then **Apply immediately** to save changes.
+
+### 2. Create and Configure a Database User
+
+Connect to your database using the master user credentials. Then, execute the following SQL commands:
+
+```sql
+CREATE ROLE mydbuser LOGIN;
+GRANT rds_iam TO mydbuser;
+ALTER ROLE mydbuser WITH NOINHERIT;
+```
+
+This creates `mydbuser`, who will authenticate using IAM tokens instead of a static password.
+
+### 3. Retrieve the Cluster Resource ID
+
+Run the following AWS CLI command to get the `DbClusterResourceId`:
+
+```bash
+aws rds describe-db-clusters \
+  --db-cluster-identifier <your-cluster-name> \
+  --region <your-region>
+```
+
+From the output, note the `"DbClusterResourceId"` value for your cluster.
+
+### 4. Create or Update an IAM Policy for `rds-db:connect`
+
+Attach the following IAM policy to the IAM principal (user or role) that will connect to the database:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "rds-db:connect",
+      "Resource": "arn:aws:rds-db:<region>:<account_id>:dbuser:<DbClusterResourceId>/mydbuser"
+    }
+  ]
+}
+```
+
+Replace the placeholders with your specific values:
+
+- `<region>`: Your AWS region.
+- `<account_id>`: Your AWS account ID.
+- `<DbClusterResourceId>`: The resource ID retrieved in the previous step.
+- `mydbuser`: The database user you created.
+
+### 5. Obtain the RDS CA Certificate Bundle
+
+Download the RDS CA certificate bundle appropriate for your region. For example:
+
+- [rds-combined-ca-bundle.pem](https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem)
+- Or region-specific bundles like `us-east-2-bundle.pem`.
+
+Save it locally, e.g.:
+
+```
+us-east-2-bundle.pem
+```
+
+This certificate is required for SSL verification when connecting to the database.
+
+### 6. Generate a Short-Lived IAM Authentication Token
+
+Use the AWS CLI to generate an IAM authentication token:
+
+```bash
+TOKEN=$(aws rds generate-db-auth-token \
+  --hostname <cluster-endpoint> \
+  --port 5432 \
+  --username mydbuser \
+  --region <your-region>)
+```
+
+### 7. Set Environment Variables for Your Application
+
+Set the following environment variables to configure IAM authentication and SSL:
+
+```bash
+export USE_IAM_AUTH=true
+export AWS_REGION="<your-region>"
+export POSTGRES_HOST="<cluster-endpoint>"
+export POSTGRES_PORT="5432"
+export POSTGRES_DB="<db-name>"
+export POSTGRES_USER="mydbuser"
+
+# If using IAM roles or AWS credentials:
+export AWS_ACCESS_KEY_ID="<your-access-key-id>"
+export AWS_SECRET_ACCESS_KEY="<your-secret-access-key>"
+# For temporary credentials, also export:
+# export AWS_SESSION_TOKEN="<your-session-token>"
+
+# Provide the path to the CA bundle for SSL verification
+export SSL_ROOT_CERT="/path/to/us-east-2-bundle.pem"
+```
+
+Your application should:
+
+- Load these environment variables.
+- Use `USE_IAM_AUTH=true` to trigger token-based authentication.
+- Configure SSL using the provided CA bundle.
+
+### 8. Test the Connection Using `psql` (Optional)
+
+To manually test the connection:
+
+```bash
+psql "host=<cluster-endpoint> \
+      port=5432 \
+      dbname=<db-name> \
+      user=mydbuser \
+      sslmode=verify-full \
+      sslrootcert=us-east-2-bundle.pem \
+      password=$TOKEN"
+```
+
+This should establish a secure SSL connection using IAM authentication.
+
+### 9. Ensure Proper Permissions and Migrations (If Needed)
+
+If your application requires database migrations (e.g., using Alembic), ensure that `mydbuser` has the necessary permissions:
+
+```sql
+GRANT CREATE ON DATABASE <db-name> TO mydbuser;
+GRANT USAGE ON SCHEMA public TO mydbuser;
+GRANT CREATE ON SCHEMA public TO mydbuser;
+```
+
+### 10. Configure SSL in Your Application
+
+- For synchronous connections using `psycopg2`, use `sslmode=verify-full` and provide the `sslrootcert`.
+- For asynchronous connections using `asyncpg`, create an `ssl.SSLContext` using the CA bundle.
+
+---
+
+By following these steps—first setting up the Aurora PostgreSQL database and then enabling IAM authentication—you can successfully connect to your database using secure, passwordless (token-based) authentication.
+
+For more information, refer to the [AWS Documentation on IAM Database Authentication](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html).
