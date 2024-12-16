@@ -128,7 +128,8 @@
           "pages": [
             "production/aws/ec2",
             "production/aws/eks",
-            "production/aws/ecs"
+            "production/aws/ecs",
+            "production/aws/rds"
           ]
         },
         "production/gcp",
