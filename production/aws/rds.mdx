@@ -178,23 +178,20 @@ This mounts the certificate into the container at `/app/certs`.
 ### 7. Update Environment Variables for Onyx with IAM Auth
 
 ```bash
-export USE_IAM_AUTH=true
 export AWS_REGION="<your-region>"
 export POSTGRES_HOST="<rds-endpoint>"
 export POSTGRES_PORT="5432"
 export POSTGRES_DB="<db-name>"
 export POSTGRES_USER="mydbuser"
 
-# If using IAM roles or AWS credentials:
+# Since ware using IAM roles or AWS credentials:
+export USE_IAM_AUTH=true
 export AWS_ACCESS_KEY_ID="<your-access-key-id>"
 export AWS_SECRET_ACCESS_KEY="<your-secret-access-key>"
-# For temporary credentials, also export:
-# export AWS_SESSION_TOKEN="<your-session-token>"
-
-export SSL_ROOT_CERT="/app/bundle.pem"
 ```
 
-Ensure that `SSL_ROOT_CERT` points to the path where the certificate is mounted inside the container (`/app/bundle.pem` for Docker Compose or `/app/certs` for Kubernetes).
+Ensure that your certificate is properly mounted inside the container (`/app/bundle.pem` for Docker Compose). You will need to comment out the relavant lines in the Docker Compose or Kubernetes yaml files.
+This will be necessary to do in the background and api services.
 
 Onyx will now use IAM authentication tokens and SSL verification.
 
