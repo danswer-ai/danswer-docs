@@ -131,3 +131,161 @@ You can navigate find the nginx load balancer by running the following command a
 ```shell
 kubectl get svc -n onyx | grep nginx-service | awk '{print $4}'
 ```
+
+
+
+## Setting Up Managed Services
+
+Instead of running Redis and PostgreSQL in containers within your EKS cluster, we'll set up Amazon RDS for PostgreSQL and Amazon ElastiCache for Redis. This provides managed, scalable, and highly available database services.
+
+### Setting Up Amazon RDS for PostgreSQL
+
+1. **Navigate to the Amazon RDS Console**: Go to the [Amazon RDS Console](https://console.aws.amazon.com/rds/home).
+
+2. **Create a New Database**:
+
+   - Click on **"Create database"**.
+   - Under **Engine options**, select **"PostgreSQL"**.
+   - Choose the latest engine version (e.g., **PostgreSQL 15.7**).
+
+
+3. **Specify DB Details**:
+
+   - **Templates**: Select **"Production"** for a high-availability setup.
+   - **DB instance identifier**: Enter a name like `danswer-postgres`.
+   - **Master username and password**:
+     - **Master username**: Choose a username (e.g., `admin`).
+     - **Master password**: Set a secure password or use the **"Auto generate a password"** option. If you set your own password, **note it down**. If you use the auto-generate option, make sure to **securely store the generated password**. You'll need this password later.
+
+   *![RDS Creation](/images/setup_guides/aws/eks/rds_creation.png)*
+
+4. **Configure Instance**:
+
+   - **DB instance class**: Choose an instance type suitable for your workload, such as `db.t3.medium` (2 vCPUs, 4 GiB RAM).
+   - **Storage Type**: Select **General Purpose SSD (gp3)**.
+   - **Allocated storage**: Set to at least **200 GiB** (adjust based on your needs).
+
+   ![RDS Naming](/images/setup_guides/aws/eks/rds_naming.png)*
+
+5. **Connectivity**:
+
+   - **Virtual Private Cloud (VPC)**: Select the same VPC used by your EKS cluster.
+   - **Subnet group**: Use a subnet group that includes the same subnets as your EKS nodes.
+   - **Public access**: Set to **"No"** to keep the database private within your VPC.
+   - **VPC security group (firewall)**:
+     - Select or create a security group that allows inbound traffic from your EKS nodes on port `5432`.
+
+   ![RDS Security](/images/setup_guides/aws/eks/rds_security.png)
+
+6. **Database Authentication**:
+
+   - Ensure **"Password authentication"** is enabled.
+
+7. **Create Database**:
+
+
+8. **Retrieve the Endpoint**:
+
+   - Once the database is available, go to the **"Databases"** section.
+   - Click on your database and find the **"Endpoint & port"** section.
+   - **Note down the endpoint URL**; you'll use it to configure your application.
+
+
+### Setting Up Amazon ElastiCache for Redis
+
+1. **Navigate to the ElastiCache Console**: Go to the [Amazon ElastiCache Console](https://console.aws.amazon.com/elasticache/home).
+
+2. **Create a Redis Cluster**:
+
+   - Click on **"Create"** and select **"Redis OSS"**.
+
+3. **Cluster Details**:
+
+   - **Cluster name**: Enter a name like `danswer-redis`.
+   - **Engine version**: Choose the latest version (e.g., **Redis 7.1**).
+   - **Cluster mode**: Click on "Design your own cache" and then select "Cluster cache" to configure your Redis cluster according to your specific requirements.
+
+- ![Redis Creation](/images/setup_guides/aws/eks/redis_creation.png)
+
+
+
+4. **Security**:
+
+
+   - **VPC security groups**:
+     - Select or create a security group that allows inbound traffic from your EKS nodes on port `6379`.
+   - **Encryption in transit**:
+     - **Enable** to secure data in transit.
+     - **Transit encryption mode**: Choose **"Required"** to enforce TLS connections.
+   - **At-rest encryption**: Enable if you need encryption of data at rest.
+
+   ![Redis Security](/images/setup_guides/aws/eks/redis_security.png)
+
+
+5. **Create Cluster**:
+
+   - Review all configurations and click **"Create"**.
+
+6. **Retrieve the Endpoint**:
+
+   - Once the cluster is available, go to the cluster details.
+   - **Note down the Primary Endpoint**; you'll use it to configure your EKS cluster.
+
+
+### Updating Kubernetes Configuration
+
+With your managed services set up, you'll need to update your application's Kubernetes configuration to use them. The `cloud_kubernetes` directory already contains the necessary modifications for using managed services. You just need to update the configuration with your specific managed service details.
+
+1. **Navigate to Cloud Kubernetes Configuration**:
+
+   ```shell
+   cd danswer/deployment/cloud_kubernetes
+   ```
+
+2. **Update Environment Configuration**:
+
+   Edit the `env-configmap.yaml` file to include your RDS and Redis endpoints:
+
+   ```yaml
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: env-configmap
+   data:
+     # PostgreSQL Configuration
+     POSTGRES_HOST: "<your-rds-endpoint>"    # e.g., danswer-postgres.xxxxxx.us-east-1.rds.amazonaws.com
+     POSTGRES_PORT: "5432"
+     POSTGRES_USER: "<your-db-username>"     # e.g., admin
+     POSTGRES_DB: "postgres"
+     # Redis Configuration
+     REDIS_HOST: "<your-redis-endpoint>"     # e.g., danswer-redis.xxxxxx.ng.0001.use1.cache.amazonaws.com
+     REDIS_PORT: "6379"
+     REDIS_SSL: "true"
+   ```
+
+
+3. **Create Kubernetes Secrets for Sensitive Data**:
+
+   Store database passwords and Redis AUTH tokens securely using Kubernetes Secrets:
+
+   ```shell
+   kubectl create secret generic postgres-secret \
+     --from-literal=POSTGRES_PASSWORD='<your-db-password>' \
+     --namespace danswer
+
+   kubectl create secret generic redis-secret \
+     --from-literal=REDIS_PASSWORD='<your-redis-password>' \
+     --namespace danswer
+   ```
+
+
+4. **Deploy the Updated Configuration**:
+
+   Apply the configurations from the `cloud_kubernetes` directory:
+
+   ```shell
+   kubectl apply -f . -n danswer
+   ```
+
+
+   Note: The deployment files in `cloud_kubernetes` are already set up to use these secrets and managed services. You don't need to modify them further.
