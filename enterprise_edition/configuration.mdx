@@ -19,12 +19,13 @@ This variable allows you to start your Onyx instance with pre-configured options
 - `admin_user_emails`: List of email addresses for automatic admin role assignment
 - `seeded_name`: Pre-set name for your Onyx instance
 - `seeded_logo_path`: Path to your logo within the `assets` folder
+- `enterprise_settings`: Object containing enterprise-specific settings, including:
+  - `custom_nav_items`: List of custom navigation items for the user dropdown menu. Each item requires:
+    - `title`: The text to display for the navigation item
+    - `link`: The URL the item should link to
+    - `icon`: The name of the icon to display (e.g., "Book", "Phone")
 
 #### Usage Example
-
-```bash
-export ENV_SEED_CONFIGURATION='{"admin_user_emails": ["email@gmail.com"], "seeded_name": "Acme Corp", "seeded_logo_path": "assets/logo.png"}'
-```
 
 This configuration sets up admin email, instance name, and logo path.
 
