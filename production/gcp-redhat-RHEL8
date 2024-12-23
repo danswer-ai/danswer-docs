@@ -1,0 +1,219 @@
+---
+title: "Deploy on GCP, Red Hat - RHEL8"
+description: "Setup Danswer on GCP-RHEL8"
+icon: "google"
+---
+
+You can use GCP Google Compute Engines (VM Instance) to deploy Danswer. The steps are very similar to deploying on AWS EC2.
+Before we get started, make sure you have an account with Google Cloud Platform and have the necessary permissions to create a VM instance.
+Feel free to reach out to us via the links on our [Contact Us](https://docs.danswer.dev/contact_us) page for more individual help.
+
+## Creating an Instance on Google Cloud Platform
+Steps to create a VM instance from Google Cloud Console:
+1. Go to the [Google Cloud Console Dashboard](https://console.cloud.google.com/) to create a VM Instance ![Create VM INstance](/images/setup_guides/gcp/CreateVmInstance.png)
+2. Select an existing project or create a new one under your organization.
+3. For instance configuration for DANSWER, we recommend at least 16GB of RAM, 4-8vCPU cores, and 500GB of disk for a small-mid sized organization (< 5000 users). You can choose the machine type as per your requirements.
+For reference, in our Cloud offering we use a `e2-standard-4` with 500GB of EBS storage. For more details on GCP instances, you can refer to the [GCP documentation](https://cloud.google.com/compute/docs/instances).
+![Instance](/images/setup_guides/gcp/Instance.png)
+4. Make sure to allow HTTPS traffic in the firewall settings and valid scopes for the instance. ![Firewall](/images/setup_guides/gcp/Firewall.png)
+
+Section Summary Notes:
+-Name your instance something memorable, such as 'danswer-redhat' or your preference.
+-Region/Zone - your choice or the closest/most economical for your use case.
+-Machine Configuration: E2
+-Machine Type: e2-standard-4 (4 vCPU, 2 core, 16 GB Memory)
+-Boot Disk:
+  Change: Red Hat Enterprise Linux
+	Version: Red Hat Enterprise Linux 8
+	Pay as your go?
+	Size: 40 GB (this could/should be larger depending on your use case)
+	GM Encryption Key
+-Access Scopes - allow default access
+-Firewall: Allow HTTP and HTTPS traffic.
+-Networking IP - promote to static ip (presuming you want this to be accessed later)
+-For the below guide, we will assume that you’ve chosen to use GCP Red Hat Enterprise Linux 8 machine with the recommended `e2-standard-4` instance.
+For more details, you can follow the steps in the [GCP documentation](https://cloud.google.com/compute/docs/quickstart) to create a [VM instance](https://cloud.google.com/compute/docs/instances/create-start-instance).
+
+## Installing Dependencies
+1. YOUR INSTANCE IS NOW CREATED - SSH IN by clicking in the Google Console GUI (end of row)
+Authorize (if you/your company requires this)
+
+2. Command Line Interface (CLI) - Now at the prompt for danswer-redhat (your name may be different as made earlier)
+REFERENCE DOCUMENT IF NEEDED: https://docs.docker.com/engine/install/rhel/
+
+3. Copy and Paste the following:
+```bash
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine \
+                  podman \
+                  runc
+```
+
+4. Continue to copy and paste the following:
+```bash
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+PROMPT: > y
+answer yes to prompts
+
+5. Start and Test Docker:
+```bash
+sudo systemctl start docker
+sudo docker run hello-world	(testing it works)
+```
+Optionally/or: systemctl status docker
+q (to quit)
+
+6. Confirm Docker Installation of Docker Compose
+REFERENCE DOCUMENT IF NEEDED: https://docs.danswer.dev/production/gcp
+```bash
+docker compose 
+```
+
+7. Install Git
+```bash
+sudo yum install git
+```
+
+PROMPT: > y
+
+## Starting up Danswer
+
+Now that we have everything we need we can startup Danswer.
+
+First, let's clone the repo:
+
+```bash
+git clone https://github.com/danswer-ai/danswer.git
+```
+
+Next, let's set the necessary env variables:
+
+```bash
+cd danswer/deployment/docker_compose
+touch .env
+touch .env.nginx
+```
+
+```bash
+ls -lah		
+```
+This command is confirming the files were created.
+
+```bash
+sudo yum install nano
+```
+This command is optional, the author prefers to use nano to edit.
+
+PROMPT: > y
+
+In the `.env` file, you can copy past the following (filling in the missing fields as needed):
+```bash
+nano .env
+```
+
+```bash
+WEB_DOMAIN="12.123.234.10.nip.io"  # something like "danswer.ai"
+# if your email is something like "chris@danswer.ai", then this should be "danswer.ai"
+# this prevents people outside your company from creating an account
+VALID_EMAIL_DOMAINS=grafana.com
+AUTH_TYPE=basic
+# if you want to enable email verification, uncomment the following
+# REQUIRE_EMAIL_VERIFICATION=true
+# SMTP_USER=<GMAIL_ACCOUNT_EMAIL_YOU_WANT_TO_SEND_VERIFICATION_EMAILS_WITH>
+# SMTP_PASS=<GMAIL_ACCOUNT_PW_YOU_WANT_TO_SEND_VERIFICATION_EMAILS_WITH>
+# if you've gone through the Google OAuth setup guide, then comment out
+# the above and uncomment the following
+# AUTH_TYPE=google_oauth
+# GOOGLE_OAUTH_CLIENT_ID=
+# GOOGLE_OAUTH_CLIENT_SECRET=
+# SECRET=<RANDOMLY_GENERATED_UUID>
+GEN_AI_MODEL_PROVIDER=openai
+GEN_AI_MODEL_VERSION=gpt-4  # if it's an option, we recommend using gpt-4
+# Default values here are what Postgres uses by default, feel free to change.
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD="joti46@jfei&"
+ctrl-x
+yes
+enter
+```
+NOTE: The domain nip.io/sslip.io is a free wildcard service that you use with your static IP.  Use this only if you don't have a dedicated IP address from your business or testing.
+
+```bash
+nano .env.nginx
+```
+
+```bash
+DOMAIN="12.123.234.10.nip.io"  # something like "danswer.ai"
+```
+NOTE: Ctrl-x, (y)es, Enter
+
+Add user to docker goup:
+REFERENCE DOCUMENT IF NEEDED: https://docs.docker.com/engine/install/linux-postinstall/
+```bash
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+Optional check to validate the docker group is there:
+```bash
+groups
+```
+
+```bash
+docker run hello-world
+```
+
+Now at the prompt, <name>@danswer-redhat:
+```bash
+docker_compose
+```
+
+Next, let's get our SSL certificate from [letsencrypt](https://letsencrypt.org/). To do this, we can simply run:
+
+```bash
+./init-letsencrypt.sh
+```
+
+Note: You may get a warn(ing) about attribute version in docker-compose.prod.yml, this can be ignored at this point
+Note: nginx takes time (couple of minutes) to load in some cases
+Note: docker system prune --all     (if you're running low on space)
+
+Additional Notes below based on your use case:
+<Info>
+  If are skipping the HTTPS setup, you should start things up with:
+  `docker-compose -f docker-compose.dev.yml -p danswer-stack up -d --build --force-recreate`
+  instead of the above. You can then access Danswer from the IP address from earlier or from the
+  instance `External IP` provided on the instance's page in the GCP VM console.
+</Info>
+
+## Pointing your Domain to the Instance
+
+Next, we should point your domain to the VM instance we just created. To do this, we need to go to your DNS and add two records.
+For this guide, I'll be assuming your DNS provider is GoDaddy, but it should be almost exactly the same for any DNS provider.
+
+<Info>
+  If you don't have a domain to use yet, then you can either buy one from a DNS
+  provider like [GoDaddy](https://www.godaddy.com/) or just skip HTTPS for now.
+</Info>
+
+First, we need to grab the External IP address of the instance. You can get that from the VM Instance list page on GCP Console.
+![Instance](/images/setup_guides/gcp/InstanceIp.png)
+
+Finally, we need to head to the DNS provider and add two entries into the DNS:
+
+![Instance](/images/setup_guides/gcp/ARecord.png)
+![Instance](/images/setup_guides/gcp/CnameRecord.png)
+
+The first record directs traffic to that domain to your GCP VM instance. The second record will handle
+`www.<YOUR_DOMAIN>` and ensure that this also takes the user to your VM instance.
