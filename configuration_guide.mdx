@@ -124,6 +124,10 @@ Set to `true` to enable the forgot password feature. Only enable this if you hav
 
 These variables configure the generative AI capabilities of Onyx. These are covered in more depth at the [generative AI configs](/gen_ai_configs/overview).
 
+
+#### DISABLE_AGENTIC
+Disables agentic search evaluation for search queries.
+
 #### GEN_AI_MODEL_PROVIDER
 
 Specifies the provider of the generative AI model (e.g., `openai`, `anthropic`, `huggingface`).
@@ -292,6 +296,9 @@ Port on which the model server is listening.
 
 <
 Various other configuration options.
+
+#### MAX_WORKERS
+Maximum number of concurrent workers when sending multiple requests at once to LLM providers
 
 #### DISABLE_TELEMETRY
 
